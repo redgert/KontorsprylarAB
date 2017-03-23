@@ -19,8 +19,8 @@ namespace ProjectOne_Class_library
         public string Country { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
-
-        public User(int userID, string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email)
+        public int IsAdmin { get; set; }
+        public User(int userID, string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email, int isAdmin)
         {
             UserID = userID;
             Username = username;
@@ -33,8 +33,9 @@ namespace ProjectOne_Class_library
             Country = country;
             PhoneNumber = phonenumber;
             Email = email;
+            IsAdmin = isAdmin;
         }
-        public User(int userID, string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string email)
+        public User(int userID, string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string email, int isAdmin)
         {
             UserID = userID;
             Username = username;
@@ -47,6 +48,7 @@ namespace ProjectOne_Class_library
             Country = country;
             PhoneNumber = null;
             Email = email;
+            IsAdmin = isAdmin;
         }
     }
 }
