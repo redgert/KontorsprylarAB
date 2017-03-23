@@ -78,6 +78,48 @@ namespace ProjectOne_Class_library
 
             return newUserID;
         }
+        //Get User with matching username and password
+        public User GetUser(string username, string password)
+        {
+            User tempUser = null;
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+            try
+            {
+                myConnection.Open();
+                //Select all information from the user with the matching username and password
+                SqlCommand myCommand = new SqlCommand($"select * from Users where Users.Username='{username}' AND Users.UserPassword='{password}'", myConnection);
+
+                SqlDataReader myReader;
+
+                myReader = myCommand.ExecuteReader();
+
+                while(myReader.Read())
+                {
+                    try
+                    {
+                        //Create new User based on all information in User Table SQL
+                        tempUser = new User(Convert.ToInt32(myReader["UserID"]), myReader["FirstName"].ToString(), myReader["LastName"].ToString(), myReader["Street"].ToString(), myReader["Zip"].ToString(), myReader["City"].ToString(), myReader["Country"].ToString(), myReader["Email"].ToString(), Convert.ToInt32(myReader["IsAdmin"]));
+                    }
+                    catch (Exception)
+                    {
+
+                        throw;
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            //return the created User to be able to use information as session
+            return tempUser;
+        }
     }
     
 }

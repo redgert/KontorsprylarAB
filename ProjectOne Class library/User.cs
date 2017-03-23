@@ -9,8 +9,8 @@ namespace ProjectOne_Class_library
     public class User
     {
         public int UserID { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        //public string Username { get; set; }
+        //public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Street { get; set; }
@@ -20,11 +20,11 @@ namespace ProjectOne_Class_library
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public int IsAdmin { get; set; }
-        public User(int userID, string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email, int isAdmin)
+        public User(int userID, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email, int isAdmin)
         {
             UserID = userID;
-            Username = username;
-            Password = password;
+            //Username = username;
+            //Password = password;
             FirstName = firstname;
             LastName = lastname;
             Street = street;
@@ -35,11 +35,11 @@ namespace ProjectOne_Class_library
             Email = email;
             IsAdmin = isAdmin;
         }
-        public User(int userID, string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string email, int isAdmin)
+        public User(int userID, string firstname, string lastname, string street, string zip, string city, string country, string email, int isAdmin)
         {
             UserID = userID;
-            Username = username;
-            Password = password;
+            //Username = username;
+            //Password = password;
             FirstName = firstname;
             LastName = lastname;
             Street = street;
