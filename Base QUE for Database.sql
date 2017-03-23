@@ -2,12 +2,19 @@
 
 use master;
 
+GO
+
 drop database Sofia;
+
+GO
 
 create database Sofia;
 
+GO
+
 use Sofia;
 
+GO 
 CREATE TABLE Users
 (
 UserID int identity(1,1) Primary key,
@@ -34,10 +41,22 @@ OrderStatus varchar(50) NOT NULL,
 OrderDate smalldatetime NOT NULL
 );
 
+CREATE TABLE Vat
+(
+VatID int identity(1,1) Primary key,
+
+TagOfficeSupply int NOT NULL,
+TagBooks int NOT NULL
+);
+
+
+
+
 CREATE TABLE Products
 (
 ProductID int identity(1,1) PRIMARY KEY,
 Price int NOT NULL,
+VatTag int FOREIGN KEY references Vat(VatID),
 Stock int NOT NULL,
 ShortDescription varchar(50) NOT NULL,
 LongDescription varchar(1000) NOT NULL
@@ -54,9 +73,10 @@ Price int NOT NULL
 
 GO
 
+
+
 CREATE PROCEDURE CreateUser
 
-@UserID int,
 @Username nvarchar(50),
 @PassWord nvarchar(50),
 @FirstName nvarchar(50),
@@ -64,13 +84,14 @@ CREATE PROCEDURE CreateUser
 @Street nvarchar(50),
 @City nvarchar(50),
 @Zip nvarchar(50),
+@Country nvarchar(50),
 @PhoneNumber nvarchar(50),
 @Email nvarchar(50),
 @IsAdmin bit,
 @OutputID int output
 AS
-insert into Users(UserID, Username, UserPassword, FirstName, LastName, Street, City, Zip, PhoneNumber, Email, IsAdmin) 
-values (@UserID, @Username, @PassWord, @FirstName, @LastName, @Street, @City, @Zip, @PhoneNumber, @Email, @IsAdmin)
+insert into Users(Username, UserPassword, FirstName, LastName, Street, City, Zip,Country, PhoneNumber, Email, IsAdmin) 
+values (@Username, @PassWord, @FirstName, @LastName, @Street, @City, @Zip, @Country, @PhoneNumber, @Email, @IsAdmin)
 
 set @OutputID = SCOPE_IDENTITY();
 GO
@@ -88,4 +109,35 @@ values (@UserID, @OrderStatus, @OrderDate)
 set @OutputOrderID = SCOPE_IDENTITY();
 
 GO
+
+--Insert into  Users (Username, UserPassword, FirstName, LastName, Street, City, Zip, Country, PhoneNumber, Email, IsAdmin) 
+--values ('KungG','Gurra16', 'Karl Gustav','Bernadotte','Slottet','Stockholm','11111', 'Sweden', '0701111111','Kalle@kungahuset.se',0)
+
+----select * from  Users
+
+--insert into Products (Price,Stock,VatTag, ShortDescription,LongDescription) values (150,30,2,'Bibeln','Världens mest sålda bok, men typ den minst lästa')
+
+--insert into Orders (UserID,OrderStatus,OrderDate) values (3,'Mottagen','2017-03-23 14:53:00')
+
+
+
+--CREATE PROCEDURE RetrievePrice
+
+--@Price int,
+--@Quantity int,
+
+--@TotalPrice int output
+
+--AS
+
+--set @TotalPrice = select SUM (@Price*@Quantity);
+
+--GO
+--insert into ProductLists (OrderID,ProductID,Quantity,Price) values (2,2,3,10)
+
+
+
+--select * from  Users
+--select* from Orders
+--select * from Products
 
