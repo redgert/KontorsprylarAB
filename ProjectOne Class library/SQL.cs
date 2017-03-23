@@ -12,6 +12,7 @@ namespace ProjectOne_Class_library
     {
         const string CON_STR = "Data Source=.;Initial Catalog=Sofia;Integrated Security=True";
 
+        //TODO Call GetUser withint AddNewUser to check if already existing
         //Adding new user containing all information needed, by default new user is not admin (bit = 0).
         public int AddNewUser(string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email, int bit=0)
         {
@@ -88,6 +89,7 @@ namespace ProjectOne_Class_library
             {
                 myConnection.Open();
                 //Select all information from the user with the matching username and password
+                //TODO Add parameters to check username and password
                 SqlCommand myCommand = new SqlCommand($"select * from Users where Users.Username='{username}' AND Users.UserPassword='{password}'", myConnection);
 
                 SqlDataReader myReader;
@@ -98,6 +100,7 @@ namespace ProjectOne_Class_library
                 {
                     try
                     {
+                        //TODO Add Phonenumber if not Null or default
                         //Create new User based on all information in User Table SQL
                         tempUser = new User(Convert.ToInt32(myReader["UserID"]), myReader["FirstName"].ToString(), myReader["LastName"].ToString(), myReader["Street"].ToString(), myReader["Zip"].ToString(), myReader["City"].ToString(), myReader["Country"].ToString(), myReader["Email"].ToString(), Convert.ToInt32(myReader["IsAdmin"]));
                     }
@@ -122,6 +125,7 @@ namespace ProjectOne_Class_library
         }
 
         //TODO Add method to add product and get product
+
 
     }
     
