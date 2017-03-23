@@ -41,12 +41,22 @@ OrderStatus varchar(50) NOT NULL,
 OrderDate smalldatetime NOT NULL
 );
 
+CREATE TABLE Vat
+(
+VatID int identity(1,1) Primary key,
+
+TagOfficeSupply int NOT NULL,
+TagBooks int NOT NULL
+);
+
+
+
 
 CREATE TABLE Products
 (
 ProductID int identity(1,1) PRIMARY KEY,
 Price int NOT NULL,
-VatTag int NOT NULL,
+VatTag int FOREIGN KEY references Vat(VatID),
 Stock int NOT NULL,
 ShortDescription varchar(50) NOT NULL,
 LongDescription varchar(1000) NOT NULL
@@ -63,16 +73,7 @@ Price int NOT NULL
 
 GO
 
-CREATE TABLE Vat
-(
-VatID int identity(1,1) Primary key,
-ProductID int FOREIGN KEY REFERENCES Products(ProductID) NOT NULL,
-TagOfficeSupply int NOT NULL,
-TagBooks int NOT NULL
-);
 
-
-GO
 
 CREATE PROCEDURE CreateUser
 
@@ -109,14 +110,14 @@ set @OutputOrderID = SCOPE_IDENTITY();
 
 GO
 
-Insert into  Users (Username, UserPassword, FirstName, LastName, Street, City, Zip, Country, PhoneNumber, Email, IsAdmin) 
-values ('KungG','Gurra16', 'Karl Gustav','Bernadotte','Slottet','Stockholm','11111', 'Sweden', '0701111111','Kalle@kungahuset.se',0)
+--Insert into  Users (Username, UserPassword, FirstName, LastName, Street, City, Zip, Country, PhoneNumber, Email, IsAdmin) 
+--values ('KungG','Gurra16', 'Karl Gustav','Bernadotte','Slottet','Stockholm','11111', 'Sweden', '0701111111','Kalle@kungahuset.se',0)
 
---select * from  Users
+----select * from  Users
 
-insert into Products (Price,Stock,VatTag, ShortDescription,LongDescription) values (150,30,2,'Bibeln','Världens mest sålda bok, men typ den minst lästa')
+--insert into Products (Price,Stock,VatTag, ShortDescription,LongDescription) values (150,30,2,'Bibeln','Världens mest sålda bok, men typ den minst lästa')
 
-insert into Orders (UserID,OrderStatus,OrderDate) values (3,'Mottagen','2017-03-23 14:53:00')
+--insert into Orders (UserID,OrderStatus,OrderDate) values (3,'Mottagen','2017-03-23 14:53:00')
 
 
 
@@ -136,6 +137,7 @@ insert into Orders (UserID,OrderStatus,OrderDate) values (3,'Mottagen','2017-03-
 
 
 
-select * from  Users
-select* from Orders
-select * from Products
+--select * from  Users
+--select* from Orders
+--select * from Products
+
