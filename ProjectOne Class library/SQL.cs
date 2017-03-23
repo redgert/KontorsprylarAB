@@ -120,6 +120,9 @@ namespace ProjectOne_Class_library
             //return the created User to be able to use information as session
             return tempUser;
         }
+
+        //TODO Add method to add product and get product
+
     }
     
 }
