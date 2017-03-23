@@ -8,11 +8,12 @@ using System.Data;
 
 namespace ProjectOne_Class_library
 {
-    class SQL
+    public class SQL
     {
         const string CON_STR = "Data Source=.;Initial Catalog=Sofia;Integrated Security=True";
 
-        public int AddNewUser(string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email, int bit)
+        //Adding new user containing all information needed, by default new user is not admin (bit = 0).
+        public int AddNewUser(string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email, int bit=0)
         {
             int newUserID = 0;
 
@@ -62,6 +63,7 @@ namespace ProjectOne_Class_library
                 myCommand.Parameters.Add(addBit);
 
                 myCommand.ExecuteNonQuery();
+                newUserID = Convert.ToInt32(addUserID.Value);
 
             }
             catch
