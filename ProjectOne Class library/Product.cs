@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectOne_Class_library
 {
-    class Product
+    public class Product
     {
         public int ProductID { get; set; }
         public double Price { get; set; }

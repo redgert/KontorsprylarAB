@@ -12,12 +12,11 @@ namespace ProjectOne_Class_library
     {
         const string CON_STR = "Data Source=.;Initial Catalog=Sofia;Integrated Security=True";
 
-        //TODO Call GetUser withint AddNewUser to check if already existing
         //Adding new user containing all information needed, by default new user is not admin (bit = 0).
-        public int AddNewUser(string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email, int bit=0)
+        public int AddNewUser(string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email, int bit = 0)
         {
             int newUserID = 0;
-
+            //Check if User Exists, If it exists, GetUser() will return a user, not null
             User temp = GetUser(username, password);
             if (temp == null)
             {
@@ -28,7 +27,7 @@ namespace ProjectOne_Class_library
                     myConnection.Open();
                     SqlCommand myCommand = new SqlCommand("CreateUser", myConnection);
                     myCommand.CommandType = CommandType.StoredProcedure;
-
+                    #region Parameters
                     SqlParameter addUserID = new SqlParameter("@OutputID", SqlDbType.Int);
                     addUserID.Direction = ParameterDirection.Output;
                     SqlParameter addUserName = new SqlParameter("@Username", SqlDbType.VarChar);
@@ -66,10 +65,9 @@ namespace ProjectOne_Class_library
                     myCommand.Parameters.Add(addPhoneNumber);
                     myCommand.Parameters.Add(addEmail);
                     myCommand.Parameters.Add(addBit);
-
+                    #endregion
                     myCommand.ExecuteNonQuery();
                     newUserID = Convert.ToInt32(addUserID.Value);
-
                 }
                 catch
                 {
@@ -80,12 +78,12 @@ namespace ProjectOne_Class_library
                     myConnection.Close();
                 }
             }
-
             return newUserID;
         }
         //Get User with matching username and password
         public User GetUser(string username, string password)
         {
+            //Default value null, returned if not existing or matching username and password
             User tempUser = null;
             SqlConnection myConnection = new SqlConnection(CON_STR);
 
@@ -107,7 +105,7 @@ namespace ProjectOne_Class_library
 
                 myReader = myCommand.ExecuteReader();
 
-                while(myReader.Read())
+                while (myReader.Read())
                 {
                     try
                     {
@@ -134,15 +132,15 @@ namespace ProjectOne_Class_library
             return tempUser;
         }
 
-        public void GetAllProducts()
+        public List<Product> GetAllProducts()
         {
             List<Product> products = new List<Product>();
 
-            SqlConnection myConnection = new SqlConnection();
+            SqlConnection myConnection = new SqlConnection(CON_STR);
             try
             {
                 myConnection.Open();
-                SqlCommand myCommand = new SqlCommand("SELECT * FROM products", myConnection);
+                SqlCommand myCommand = new SqlCommand("SELECT * FROM products where Active=1", myConnection);
                 SqlDataReader myReader = myCommand.ExecuteReader();
 
                 while (myReader.Read())
@@ -152,18 +150,93 @@ namespace ProjectOne_Class_library
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
             {
                 myConnection.Close();
             }
+            return products;
         }
 
         //TODO Add method to add product and get product
+        public int AddProduct(double price, int vattag, int stock, string shortdescription, string longdescription)
+        {
+            int newProductID = 0;
+            //Call method get product to see if it is already existing
+            {
+                SqlConnection myConnection = new SqlConnection(CON_STR);
+                try
+                {
+                    myConnection.Open();
+                    SqlCommand myCommand = new SqlCommand("CreateProduct", myConnection);
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    #region Parameters
+                    SqlParameter addUserID = new SqlParameter("@OutputID", SqlDbType.Int);
+                    addUserID.Direction = ParameterDirection.Output;
+                    SqlParameter addUserName = new SqlParameter("@Username", SqlDbType.VarChar);
+                    addUserName.Value = username;
+                    SqlParameter addPassword = new SqlParameter("@Password", SqlDbType.VarChar);
+                    addPassword.Value = password;
+                    SqlParameter addFirstname = new SqlParameter("@Firstname", SqlDbType.VarChar);
+                    addFirstname.Value = firstname;
+                    SqlParameter addLastname = new SqlParameter("@Lastname", SqlDbType.VarChar);
+                    addLastname.Value = lastname;
+                    SqlParameter addStreet = new SqlParameter("@Street", SqlDbType.VarChar);
+                    addStreet.Value = street;
+                    SqlParameter addZip = new SqlParameter("@Zip", SqlDbType.VarChar);
+                    addZip.Value = zip;
+                    SqlParameter addCity = new SqlParameter("@City", SqlDbType.VarChar);
+                    addCity.Value = city;
+                    SqlParameter addCountry = new SqlParameter("@Country", SqlDbType.VarChar);
+                    addCountry.Value = country;
+                    SqlParameter addPhoneNumber = new SqlParameter("@PhoneNumber", SqlDbType.VarChar);
+                    addPhoneNumber.Value = phonenumber;
+                    SqlParameter addEmail = new SqlParameter("@Email", SqlDbType.VarChar);
+                    addEmail.Value = email;
+                    SqlParameter addBit = new SqlParameter("@IsAdmin", SqlDbType.Bit);
+                    addBit.Value = bit;
 
+                    myCommand.Parameters.Add(addUserID);
+                    myCommand.Parameters.Add(addFirstname);
+                    myCommand.Parameters.Add(addLastname);
+                    myCommand.Parameters.Add(addUserName);
+                    myCommand.Parameters.Add(addPassword);
+                    myCommand.Parameters.Add(addStreet);
+                    myCommand.Parameters.Add(addZip);
+                    myCommand.Parameters.Add(addCity);
+                    myCommand.Parameters.Add(addCountry);
+                    myCommand.Parameters.Add(addPhoneNumber);
+                    myCommand.Parameters.Add(addEmail);
+                    myCommand.Parameters.Add(addBit);
+                    #endregion
+                    myCommand.ExecuteNonQuery();
+                    newProductID = Convert.ToInt32(addUserID.Value);
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    myConnection.Close();
+                }
+            }
+            return newProductID;
+
+
+            //   CREATE PROCEDURE CreateProduct
+            //   @Price money,
+            //@VatTag int,
+            //@Stock int,
+            //@ShortDescription varchar(50),
+            //@LongDescription varchar(1000)
+            //AS
+            //insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription)
+            //values(@Price, @VatTag, @Stock, @ShortDescription, @LongDescription)
+            //GO
+        }
 
     }
-    
+
 }
