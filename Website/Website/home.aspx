@@ -4,7 +4,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
-        <p>SUCUESSFULLY LOGGED IN! WII </p>
-        <asp:TextBox ID="TextBoxUserID" runat="server"></asp:TextBox>
+        <h2>Welcome to our shop!</h2>
+        <asp:Label ID="LabelFirstName" runat="server" Text="Label"></asp:Label>
+        <asp:Label ID="LabelLastName" runat="server" Text="Label"></asp:Label>
     </form>
 </asp:Content>

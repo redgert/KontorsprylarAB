@@ -16,7 +16,8 @@ namespace Website
             if(Session["user"] != null)
             {
                 User tempUser = JsonConvert.DeserializeObject<User>(Session["user"].ToString());
-                TextBoxUserID.Text = tempUser.UserID.ToString();
+                LabelFirstName.Text = tempUser.FirstName.ToString();
+                LabelLastName.Text = tempUser.LastName.ToString();
             }
         }
     }
