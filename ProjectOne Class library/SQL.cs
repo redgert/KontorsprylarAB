@@ -18,64 +18,68 @@ namespace ProjectOne_Class_library
         {
             int newUserID = 0;
 
-            SqlConnection myConnection = new SqlConnection(CON_STR);
-            try
+            User temp = GetUser(username, password);
+            if (temp == null)
             {
-                myConnection.Open();
-                SqlCommand myCommand = new SqlCommand("CreateUser", myConnection);
-                myCommand.CommandType = CommandType.StoredProcedure;
 
-                SqlParameter addUserID = new SqlParameter("@OutputID", SqlDbType.Int);
-                addUserID.Direction = ParameterDirection.Output;
-                SqlParameter addUserName = new SqlParameter("@Username", SqlDbType.VarChar);
-                addUserName.Value = username;
-                SqlParameter addPassword = new SqlParameter("@Password", SqlDbType.VarChar);
-                addPassword.Value = password;
-                SqlParameter addFirstname = new SqlParameter("@Firstname", SqlDbType.VarChar);
-                addFirstname.Value = firstname;
-                SqlParameter addLastname = new SqlParameter("@Lastname", SqlDbType.VarChar);
-                addLastname.Value = lastname;
-                SqlParameter addStreet = new SqlParameter("@Street", SqlDbType.VarChar);
-                addStreet.Value = street;
-                SqlParameter addZip = new SqlParameter("@Zip", SqlDbType.VarChar);
-                addZip.Value = zip;
-                SqlParameter addCity = new SqlParameter("@City", SqlDbType.VarChar);
-                addCity.Value = city;
-                SqlParameter addCountry = new SqlParameter("@Country", SqlDbType.VarChar);
-                addCountry.Value = country;
-                SqlParameter addPhoneNumber = new SqlParameter("@PhoneNumber", SqlDbType.VarChar);
-                addPhoneNumber.Value = phonenumber;
-                SqlParameter addEmail = new SqlParameter("@Email", SqlDbType.VarChar);
-                addEmail.Value = email;
-                SqlParameter addBit = new SqlParameter("@IsAdmin", SqlDbType.Bit);
-                addBit.Value = bit;
+                SqlConnection myConnection = new SqlConnection(CON_STR);
+                try
+                {
+                    myConnection.Open();
+                    SqlCommand myCommand = new SqlCommand("CreateUser", myConnection);
+                    myCommand.CommandType = CommandType.StoredProcedure;
 
-                myCommand.Parameters.Add(addUserID);
-                myCommand.Parameters.Add(addFirstname);
-                myCommand.Parameters.Add(addLastname);
-                myCommand.Parameters.Add(addUserName);
-                myCommand.Parameters.Add(addPassword);
-                myCommand.Parameters.Add(addStreet);
-                myCommand.Parameters.Add(addZip);
-                myCommand.Parameters.Add(addCity);
-                myCommand.Parameters.Add(addCountry);
-                myCommand.Parameters.Add(addPhoneNumber);
-                myCommand.Parameters.Add(addEmail);
-                myCommand.Parameters.Add(addBit);
+                    SqlParameter addUserID = new SqlParameter("@OutputID", SqlDbType.Int);
+                    addUserID.Direction = ParameterDirection.Output;
+                    SqlParameter addUserName = new SqlParameter("@Username", SqlDbType.VarChar);
+                    addUserName.Value = username;
+                    SqlParameter addPassword = new SqlParameter("@Password", SqlDbType.VarChar);
+                    addPassword.Value = password;
+                    SqlParameter addFirstname = new SqlParameter("@Firstname", SqlDbType.VarChar);
+                    addFirstname.Value = firstname;
+                    SqlParameter addLastname = new SqlParameter("@Lastname", SqlDbType.VarChar);
+                    addLastname.Value = lastname;
+                    SqlParameter addStreet = new SqlParameter("@Street", SqlDbType.VarChar);
+                    addStreet.Value = street;
+                    SqlParameter addZip = new SqlParameter("@Zip", SqlDbType.VarChar);
+                    addZip.Value = zip;
+                    SqlParameter addCity = new SqlParameter("@City", SqlDbType.VarChar);
+                    addCity.Value = city;
+                    SqlParameter addCountry = new SqlParameter("@Country", SqlDbType.VarChar);
+                    addCountry.Value = country;
+                    SqlParameter addPhoneNumber = new SqlParameter("@PhoneNumber", SqlDbType.VarChar);
+                    addPhoneNumber.Value = phonenumber;
+                    SqlParameter addEmail = new SqlParameter("@Email", SqlDbType.VarChar);
+                    addEmail.Value = email;
+                    SqlParameter addBit = new SqlParameter("@IsAdmin", SqlDbType.Bit);
+                    addBit.Value = bit;
 
-                myCommand.ExecuteNonQuery();
-                newUserID = Convert.ToInt32(addUserID.Value);
+                    myCommand.Parameters.Add(addUserID);
+                    myCommand.Parameters.Add(addFirstname);
+                    myCommand.Parameters.Add(addLastname);
+                    myCommand.Parameters.Add(addUserName);
+                    myCommand.Parameters.Add(addPassword);
+                    myCommand.Parameters.Add(addStreet);
+                    myCommand.Parameters.Add(addZip);
+                    myCommand.Parameters.Add(addCity);
+                    myCommand.Parameters.Add(addCountry);
+                    myCommand.Parameters.Add(addPhoneNumber);
+                    myCommand.Parameters.Add(addEmail);
+                    myCommand.Parameters.Add(addBit);
 
+                    myCommand.ExecuteNonQuery();
+                    newUserID = Convert.ToInt32(addUserID.Value);
+
+                }
+                catch
+                {
+                    throw;
+                }
+                finally
+                {
+                    myConnection.Close();
+                }
             }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                myConnection.Close();
-            }
-
 
             return newUserID;
         }
@@ -91,7 +95,6 @@ namespace ProjectOne_Class_library
                 SqlCommand myCommand = new SqlCommand("getUser", myConnection);
                 myCommand.CommandType = CommandType.StoredProcedure;
                 //Select all information from the user with the matching username and password
-                //TODO Add parameters to check username and password
                 SqlParameter myUserName = new SqlParameter("@username", SqlDbType.VarChar);
                 myUserName.Value = username;
                 SqlParameter myPassword = new SqlParameter("@password", SqlDbType.VarChar);

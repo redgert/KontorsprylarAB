@@ -59,7 +59,8 @@ Price money NOT NULL,
 VatTag int FOREIGN KEY references Vat(VatID),
 Stock int NOT NULL,
 ShortDescription varchar(50) NOT NULL,
-LongDescription varchar(1000) NOT NULL
+LongDescription varchar(1000) NOT NULL,
+Active bit default 'true' NOT NULL
 );
 
 CREATE TABLE ProductLists
@@ -124,17 +125,22 @@ CREATE PROCEDURE CreateProduct
 @ShortDescription varchar(50),
 @LongDescription varchar(1000)
 AS
-insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription)
-values (@Price, @VatTag, @Stock, @ShortDescription, @LongDescription)
+insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription, Active)
+values (@Price, @VatTag, @Stock, @ShortDescription, @LongDescription, 'true')
 GO
+
+
+CREATE PROCEDURE RemoveProduct
+@ProductID int
+AS
+UPDATE Products set Active = 'false' where ProductID = @ProductID
 
 
 
 
 --TODODODODODODODODO!!!!!!!!!!!!!!-----------------------------------
---create a procedure to remove product
 
---create a procedure to update stock
+--create a procedure to update EVERTHING SEPERATLY!! (Spelling?)
 
 --create a procedure to update userinfo
 ---------------------------------------------------------------------
