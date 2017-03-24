@@ -71,6 +71,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="successlogin.aspx" />
     <Content Include="svc\info.aspx" />
     <Content Include="js\loginJS.js" />
     <Content Include="packages.config" />
@@ -120,6 +121,13 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="successlogin.aspx.cs">
+      <DependentUpon>successlogin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="successlogin.aspx.designer.cs">
+      <DependentUpon>successlogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="svc\info.aspx.cs">
       <DependentUpon>info.aspx</DependentUpon>

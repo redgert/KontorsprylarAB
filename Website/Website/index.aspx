@@ -12,11 +12,7 @@
             <label for="pwd">Password:</label>
             <input type="password" class="form-control" id="pwd">
         </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox">
-                Remember me</label>
-        </div>
-        <button id="submit" type="submit" class="btn btn-default">Submit</button>
+        <button id="buttonsubmit" onclick="GetRequest();">Submit</button>
+        <script src="js/loginJS.js"></script>
     </form>
 </asp:Content>
