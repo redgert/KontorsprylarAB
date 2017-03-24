@@ -13,7 +13,24 @@ namespace Website
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ProjectOne_Class_library.SQL mySQL = new SQL();
+            if (Request["username"] != null && Request["password"] != null)
+            {
+                SQL mySQL = new SQL();
+                var tempuser = mySQL.GetUser(Request["username"], Request["password"]);
+
+                if (tempuser != null)
+                {
+                    infoLiteral.Text = JsonConvert.SerializeObject(tempuser);
+                    //Server.Transfer("/successlogin.aspx");
+                    //Session tempuser
+                    Session["user"] = tempuser.ToString();
+                }
+                else
+                {
+                    infoLiteral.Text = JsonConvert.SerializeObject("Error");
+                }
+            }
+            
         }
     }
 }
