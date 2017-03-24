@@ -114,7 +114,6 @@ namespace ProjectOne_Class_library
                     }
                     catch (Exception)
                     {
-
                         throw;
                     }
                 }
@@ -130,6 +129,33 @@ namespace ProjectOne_Class_library
             }
             //return the created User to be able to use information as session
             return tempUser;
+        }
+
+        public void GetAllProducts()
+        {
+            List<Product> products = new List<Product>();
+
+            SqlConnection myConnection = new SqlConnection();
+            try
+            {
+                myConnection.Open();
+                SqlCommand myCommand = new SqlCommand("SELECT * FROM products", myConnection);
+                SqlDataReader myReader = myCommand.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    products.Add(new Product(Convert.ToInt32(myReader["productID"]), Convert.ToDouble(myReader["price"]), Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), Convert.ToDouble(myReader["vatTag"])));
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
         }
 
         //TODO Add method to add product and get product

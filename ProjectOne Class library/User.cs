@@ -56,9 +56,5 @@ namespace ProjectOne_Class_library
 
         }
 
-        //public override string ToString()
-        //{
-        //    return base.ToString();
-        //}
     }
 }
