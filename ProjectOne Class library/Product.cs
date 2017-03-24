@@ -13,14 +13,16 @@ namespace ProjectOne_Class_library
         public int Stock { get; set; }
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
+        public double VatTag { get; set; }
 
-        public Product(int productID, int price, int stock, string shortDescription, string longDescription)
+        public Product(int productID, int price, int stock, string shortDescription, string longDescription, double vatTag)
         {
             ProductID = productID;
             Price = price;
             Stock = stock;
             ShortDescription = shortDescription;
             LongDescription = longDescription;
+            VatTag = vatTag;
         }
 
     }

@@ -50,5 +50,15 @@ namespace ProjectOne_Class_library
             Email = email;
             IsAdmin = isAdmin;
         }
+
+        public User()
+        {
+
+        }
+
+        //public override string ToString()
+        //{
+        //    return base.ToString();
+        //}
     }
 }
