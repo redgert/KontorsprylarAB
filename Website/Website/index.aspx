@@ -6,13 +6,13 @@
     <form class="form-inline">
         <div class="form-group">
             <label for="text">Username:</label>
-            <input type="text" class="form-control" id="text">
+            <input type="text" class="form-control" id="username">
         </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd">
+            <input type="password" class="form-control" id="password">
         </div>
-        <button id="buttonsubmit" onclick="GetRequest();">Submit</button>
+        <input type="button" id="buttonsubmit" value="Submit" onclick="GetRequest();" />
         <script src="js/loginJS.js"></script>
     </form>
 </asp:Content>

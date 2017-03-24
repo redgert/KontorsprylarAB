@@ -22,6 +22,11 @@ namespace Website
                 {
                     infoLiteral.Text = JsonConvert.SerializeObject(tempuser);
                     //Server.Transfer("/successlogin.aspx");
+                    //Session tempuser
+                }
+                else
+                {
+                    infoLiteral.Text = JsonConvert.SerializeObject("Error");
                 }
             }
             

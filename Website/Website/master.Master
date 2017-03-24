@@ -12,7 +12,7 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
+    
         <div>
             <div class="page-header">
                 <h1>Example Page Header</h1>
@@ -20,6 +20,5 @@
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
         </div>
-    </form>
 </body>
 </html>
