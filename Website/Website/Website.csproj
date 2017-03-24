@@ -71,7 +71,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="adminsida.aspx" />
+    <Content Include="admin.aspx" />
     <Content Include="home.aspx" />
     <Content Include="svc\info.aspx" />
     <Content Include="js\loginJS.js" />
@@ -113,12 +113,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="adminsida.aspx.cs">
-      <DependentUpon>adminsida.aspx</DependentUpon>
+    <Compile Include="admin.aspx.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="adminsida.aspx.designer.cs">
-      <DependentUpon>adminsida.aspx</DependentUpon>
+    <Compile Include="admin.aspx.designer.cs">
+      <DependentUpon>admin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

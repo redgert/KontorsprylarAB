@@ -13,6 +13,7 @@ namespace Website
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Check for Session, which should be parted from null as default.
             if(Session["user"] != null)
             {
                 User tempUser = JsonConvert.DeserializeObject<User>(Session["user"].ToString());

@@ -21,8 +21,7 @@ namespace Website
                 if (tempuser != null)
                 {
                     infoLiteral.Text = JsonConvert.SerializeObject(tempuser);
-                    //Server.Transfer("/successlogin.aspx");
-                    //Session tempuser
+                    //Create session based on user information, all information connected to user is stored in this.
                     Session["user"] = infoLiteral.Text;
                 }
                 else
