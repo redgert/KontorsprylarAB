@@ -131,6 +131,7 @@ namespace ProjectOne_Class_library
             return tempUser;
         }
 
+        //Gets all products that's currently in the database
         public void GetAllProducts()
         {
             List<Product> products = new List<Product>();
