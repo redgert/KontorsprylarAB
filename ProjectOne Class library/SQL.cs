@@ -158,8 +158,7 @@ namespace ProjectOne_Class_library
             }
             return products;
         }
-
-        //TODO Add method to add product and get product
+        //Try to add product, if product already exists or something goes wrong, default return is 0
         public int AddProduct(double price, int vattag, int stock, string shortdescription, string longdescription)
         {
             int newProductID = 0;
@@ -210,20 +209,8 @@ namespace ProjectOne_Class_library
                 }
             }
             return newProductID;
-
-
-            //   CREATE PROCEDURE CreateProduct
-            //   @Price money,
-            //@VatTag int,
-            //@Stock int,
-            //@ShortDescription varchar(50),
-            //@LongDescription varchar(1000)
-            //AS
-            //insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription)
-            //values(@Price, @VatTag, @Stock, @ShortDescription, @LongDescription)
-            //GO
         }
-
+        //Get one single product, if not found, default return will be null
         public Product GetProduct(string shortdescription)
         {
             //Return null as default if product is not existing
