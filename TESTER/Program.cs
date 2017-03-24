@@ -34,7 +34,16 @@ namespace TESTER
             {
                 Console.WriteLine(product.ShortDescription);
             }
-            Console.ReadKey()
+            Console.ReadKey();
+
+            int tempoutput = mySQL.AddProduct(400, 1, 10, "Klocka", "En skinande klocka");
+            Console.WriteLine(tempoutput);
+            Console.ReadKey();
+
+            Product tempProduct = mySQL.GetProduct("Klocka");
+
+            Console.WriteLine(tempProduct.LongDescription);
+            Console.ReadKey();
 
         }
     }
