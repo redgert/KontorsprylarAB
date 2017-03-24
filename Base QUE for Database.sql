@@ -90,6 +90,13 @@ CREATE PROCEDURE CreateUser
 @IsAdmin bit,
 @OutputID int output
 AS
+
+CREATE PROCEDURE GetProduct
+@shortdescription varchar(50)
+AS
+Select * from Products where Products.ShortDescription = @shortdescription
+GO
+
 insert into Users(Username, UserPassword, FirstName, LastName, Street, City, Zip,Country, PhoneNumber, Email, IsAdmin) 
 values (@Username, @PassWord, @FirstName, @LastName, @Street, @City, @Zip, @Country, @PhoneNumber, @Email, @IsAdmin)
 
@@ -99,6 +106,7 @@ GO
 CREATE PROCEDURE getUser
 @Username varchar(50),
 @PassWord varchar(50)
+
 as
 select * from Users, Orders, ProductLists 
 where Users.Username=@username AND Users.UserPassword=@password
