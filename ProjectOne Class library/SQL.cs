@@ -88,9 +88,17 @@ namespace ProjectOne_Class_library
             try
             {
                 myConnection.Open();
+                SqlCommand myCommand = new SqlCommand("getUser", myConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
                 //Select all information from the user with the matching username and password
                 //TODO Add parameters to check username and password
-                SqlCommand myCommand = new SqlCommand($"select * from Users where Users.Username='{username}' AND Users.UserPassword='{password}'", myConnection);
+                SqlParameter myUserName = new SqlParameter("@username", SqlDbType.VarChar);
+                myUserName.Value = username;
+                SqlParameter myPassword = new SqlParameter("@password", SqlDbType.VarChar);
+                myPassword.Value = password;
+
+                myCommand.Parameters.Add(myUserName);
+                myCommand.Parameters.Add(myPassword);
 
                 SqlDataReader myReader;
 
