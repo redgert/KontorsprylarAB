@@ -4,12 +4,12 @@ function GetRequest() {
         done(function (data) {
             console.log(data);
             if (data.IsAdmin == 0) {
-                window.location.href = "/successlogin.aspx"
+                window.location.href = "/home.aspx"
             }
             else if (data.IsAdmin == 1) {
                 window.location.href = "/adminsida.aspx"
             }
-            else if (data == null) {
+            else if (data == "Error") {
                 console.log(data);
                 alert("Wrong username or password");
             }

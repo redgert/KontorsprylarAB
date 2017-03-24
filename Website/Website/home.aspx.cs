@@ -11,7 +11,10 @@ namespace Website
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if(Session["user"] != null)
+            {
+                TextBoxUserID.Text = Session["user"].ToString();
+            }
         }
     }
 }

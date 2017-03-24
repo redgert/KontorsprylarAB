@@ -72,7 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="adminsida.aspx" />
-    <Content Include="successlogin.aspx" />
+    <Content Include="home.aspx" />
     <Content Include="svc\info.aspx" />
     <Content Include="js\loginJS.js" />
     <Content Include="packages.config" />
@@ -130,12 +130,12 @@
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="successlogin.aspx.cs">
-      <DependentUpon>successlogin.aspx</DependentUpon>
+    <Compile Include="home.aspx.cs">
+      <DependentUpon>home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="successlogin.aspx.designer.cs">
-      <DependentUpon>successlogin.aspx</DependentUpon>
+    <Compile Include="home.aspx.designer.cs">
+      <DependentUpon>home.aspx</DependentUpon>
     </Compile>
     <Compile Include="svc\info.aspx.cs">
       <DependentUpon>info.aspx</DependentUpon>

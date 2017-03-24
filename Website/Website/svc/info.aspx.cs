@@ -23,6 +23,7 @@ namespace Website
                     infoLiteral.Text = JsonConvert.SerializeObject(tempuser);
                     //Server.Transfer("/successlogin.aspx");
                     //Session tempuser
+                    Session["user"] = tempuser.ToString();
                 }
                 else
                 {
