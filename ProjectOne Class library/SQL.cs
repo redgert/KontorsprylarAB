@@ -13,7 +13,7 @@ namespace ProjectOne_Class_library
         const string CON_STR = "Data Source=.;Initial Catalog=Sofia;Integrated Security=True";
 
         //Adding new user containing all information needed, by default new user is not admin (bit = 0).
-        public int AddNewUser(string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber=null, string email=null, int bit = 0)
+        public int AddNewUser(string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email, int bit = 0)
         {
             int newUserID = 0;
             //Check if User Exists, If it exists, GetUser() will return a user, not null
@@ -111,7 +111,7 @@ namespace ProjectOne_Class_library
                     {
                         //TODO Add Phonenumber if not Null or default
                         //Create new User based on all information in User Table SQL
-                        tempUser = new User(Convert.ToInt32(myReader["UserID"]), myReader["FirstName"].ToString(), myReader["LastName"].ToString(), myReader["Street"].ToString(), myReader["Zip"].ToString(), myReader["City"].ToString(), myReader["Country"].ToString(), myReader["Email"].ToString(), Convert.ToInt32(myReader["IsAdmin"]));
+                        tempUser = new User(Convert.ToInt32(myReader["UserID"]), myReader["FirstName"].ToString(), myReader["LastName"].ToString(), myReader["Street"].ToString(), myReader["Zip"].ToString(), myReader["City"].ToString(), myReader["Country"].ToString(), myReader["PhoneNumber"].ToString(), myReader["Email"].ToString(), Convert.ToInt32(myReader["IsAdmin"]));
                     }
                     catch (Exception)
                     {
@@ -131,7 +131,7 @@ namespace ProjectOne_Class_library
             //return the created User to be able to use information as session
             return tempUser;
         }
-
+        //Method to save all products in a list, use this to convert into JSON
         public List<Product> GetAllProducts()
         {
             List<Product> products = new List<Product>();
