@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectOne_Class_library
 {
-    class Order
+    public class Order
     {
      
         public int OrderID { get; set; }
@@ -34,11 +34,11 @@ namespace ProjectOne_Class_library
 
         }
 
-        public override string ToString()
-        {
-            return $"OrderID: {OrderID} UserID: {UserID} OrderStatus: {OrderStatus} OrderDate: {OrderDate}";
+        //public override string ToString()
+        //{
+        //    return $"OrderID: {OrderID} UserID: {UserID} OrderStatus: {OrderStatus} OrderDate: {OrderDate}";
 
-        }
+        //}
 
     }
 }

@@ -49,8 +49,14 @@ VatID int identity(1,1) Primary key,
 VatTagMoney money --IMPORTANT TO USE MONEY!!! 
 );
 
+GO
+CREATE PROCEDURE GetOrders
+@UserID int
+AS
+Select * from FullOverView where FullOverView.UserID = @UserID
+GO
 
-
+Execute GetOrders 2
 
 CREATE TABLE Products
 (
