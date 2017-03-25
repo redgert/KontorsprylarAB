@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -167,7 +167,7 @@ namespace ProjectOne_Class_library
         //              string PhoneNumber, string Email, string isAdmin, int OrderID, string OrderStatus, DateTime OrderDate, int VatID, double VatTagMoney,
         //              int ProductID, double Price, int Stock, string ShortDescription, string LongDescription, int UserQuantity, int ProductListID, int ActiveUser)
 
-        static public void GetAllOrders(int UserID) // I made the method static so we can skip to do a instans of our SQL library.
+        public void GetAllOrder(int UserID)
         {
 
             SqlConnection myConnection = new SqlConnection(CON_STR);
@@ -176,26 +176,125 @@ namespace ProjectOne_Class_library
             {
                 myConnection.Open();
 
-                SqlCommand myCommand = new SqlCommand($"Select * from FullOverView where UserID = @UserID", myConnection);  //$"Select * from FullOverView where UserID = @UserID", får tillbaka en rad /userID
+                SqlCommand myCommand = new SqlCommand($"Select * from FullOverView where UserID = @UserID", myConnection);  //$"Select * from FullOverView where UserID = @UserID", f�r tillbaka en rad /userID
 
+                #region Parameters
                 SqlParameter parameterUserID = new SqlParameter("@UserID", SqlDbType.Int);
-
                 parameterUserID.Value = UserID;
+
+                //SqlParameter parameterUsername = new SqlParameter("@Username", SqlDbType.VarChar);
+                //parameterUsername.Value = Username;
+
+                //SqlParameter parameterUserPassword = new SqlParameter("@UserPassword", SqlDbType.VarChar);
+                //parameterUserPassword.Value = UserPassword;
+
+                //SqlParameter parameterFirstName = new SqlParameter("@FirstName", SqlDbType.VarChar);
+                //parameterFirstName.Value = FirstName;
+
+                //SqlParameter parameterLastName = new SqlParameter("@LastName", SqlDbType.VarChar);
+                //parameterLastName.Value = LastName;
+
+                //SqlParameter parameterStreet = new SqlParameter("@Street", SqlDbType.VarChar);
+                //parameterStreet.Value = LastName;
+
+                //SqlParameter parameterZip = new SqlParameter("@Zip", SqlDbType.VarChar);
+                //parameterZip.Value = Zip;
+
+                //SqlParameter parameterCountry = new SqlParameter("@Country", SqlDbType.VarChar);
+                //parameterCountry.Value = Country;
+
+                //SqlParameter parameterPhoneNumber = new SqlParameter("@PhoneNumber", SqlDbType.VarChar);
+                //parameterPhoneNumber.Value = PhoneNumber;
+
+                //SqlParameter parameterEmail = new SqlParameter("@Email", SqlDbType.VarChar);
+                //parameterEmail.Value = Email;
+
+                //SqlParameter parameterisAdmin = new SqlParameter("@isAdmin", SqlDbType.Bit);
+                //parameterisAdmin.Value = isAdmin; 
+
+                //SqlParameter parameterOrderID = new SqlParameter("@OrderID", SqlDbType.Int);
+                //parameterOrderID.Value = OrderID;
+
+                //SqlParameter parameterOrderStatus = new SqlParameter("@OrderStatus", SqlDbType.VarChar);
+                //parameterOrderStatus.Value = OrderStatus;
+
+                //SqlParameter parameterOrderDate = new SqlParameter("@OrderDate", SqlDbType.SmallDateTime);
+                //parameterOrderDate.Value = OrderStatus;
+
+                //SqlParameter parameterVatID = new SqlParameter("@VatID", SqlDbType.Int);
+                //parameterVatID.Value = VatID;
+
+                //SqlParameter parameterVatTagMoney = new SqlParameter("@VatTagMoney", SqlDbType.Money);
+                //parameterVatTagMoney.Value = VatTagMoney;
+
+                //SqlParameter parameterProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                //parameterProductID.Value = ProductID;
+
+                //SqlParameter parameterPrice = new SqlParameter("@Price", SqlDbType.Money); 
+                //parameterPrice.Value = Price;
+
+                //SqlParameter parameterStock = new SqlParameter("@Stock", SqlDbType.Int);
+                //parameterStock.Value = Price;
+
+                //SqlParameter parameterShortDescription = new SqlParameter("@ShortDescription", SqlDbType.VarChar);
+                //parameterShortDescription.Value = ShortDescription;
+
+                //SqlParameter parameterLongDescription = new SqlParameter("@LongDescription", SqlDbType.VarChar);
+                //parameterLongDescription.Value = LongDescription;
+
+                //SqlParameter parameterUserQuantity = new SqlParameter("@UserQuantity", SqlDbType.Int);
+                //parameterUserQuantity.Value = UserQuantity;
+
+                //SqlParameter parameterProductListID = new SqlParameter("@ProductListID", SqlDbType.Int);
+                //parameterProductListID.Value = ProductListID;
+
+                //SqlParameter parameterActiveUser = new SqlParameter("@ActiveUser", SqlDbType.Int);
+                //parameterActiveUser.Value = ActiveUser;
+
+
+
+
+                #endregion
+
                 myCommand.Parameters.Add(parameterUserID);
+                //myCommand.Parameters.Add(parameterUsername);
+                //myCommand.Parameters.Add(parameterUserPassword);
+                //myCommand.Parameters.Add(parameterFirstName);
+                //myCommand.Parameters.Add(parameterLastName);
+                //myCommand.Parameters.Add(parameterStreet);
+                //myCommand.Parameters.Add(parameterZip);
+                //myCommand.Parameters.Add(parameterCountry);
+                //myCommand.Parameters.Add(parameterPhoneNumber);
+                //myCommand.Parameters.Add(parameterisAdmin);
+
+                //myCommand.Parameters.Add(parameterOrderID);
+                //myCommand.Parameters.Add(parameterOrderStatus);
+                //myCommand.Parameters.Add(parameterOrderDate);
+
+                //myCommand.Parameters.Add(parameterVatID);
+                //myCommand.Parameters.Add(parameterVatTagMoney);
+
+                //myCommand.Parameters.Add(parameterProductID);
+                //myCommand.Parameters.Add(parameterPrice);
+                //myCommand.Parameters.Add(parameterStock);
+                //myCommand.Parameters.Add(parameterShortDescription);
+
+                //myCommand.Parameters.Add(parameterUserQuantity);
+                //myCommand.Parameters.Add(parameterProductListID);
+                //myCommand.Parameters.Add(parameterActiveUser);
+
 
                 SqlDataReader reader = myCommand.ExecuteReader();
 
-                List<Order> orders = new List<Order>(); 
-
-                while (reader.Read())
+                while(reader.Read())
                 {
-                    orders.Add(new Order(Convert.ToInt32(reader["OrderID"].ToString()), Convert.ToInt32(reader["UserID"].ToString()), reader["OrderStatus"].ToString(), DateTime.Parse(reader["OrderDate"].ToString())));
+                    Console.WriteLine($"{reader["Username"].ToString()} {reader["UserPassword"].ToString()} {reader["FirstName"].ToString()}");
 
+                    //Console.WriteLine(reader["FirstName"].ToString());
                 }
 
                 reader.Close();
                 myCommand.Dispose();
-
             }
             finally
             {
@@ -204,6 +303,7 @@ namespace ProjectOne_Class_library
             }
 
         }
+
 
 
     }
