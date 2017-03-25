@@ -258,7 +258,7 @@ namespace ProjectOne_Class_library
             return tempProduct;
         }
 
-        static public void GetAllOrders(int UserID)
+        static public List<Order> GetAllOrders(int UserID)
         {
             List<Order> orders = new List<Order>();
      
@@ -268,7 +268,8 @@ namespace ProjectOne_Class_library
             {
                 myConnection.Open();
 
-                SqlCommand myCommand = new SqlCommand($"Select * from FullOverView where UserID = @UserID", myConnection);  
+                SqlCommand myCommand = new SqlCommand("GetOrders", myConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter parameterUserID = new SqlParameter("@UserID", SqlDbType.Int);
 
@@ -289,15 +290,10 @@ namespace ProjectOne_Class_library
                 myReader.Close();
                 myCommand.Dispose();
 
-                foreach (var item in orders)
-                {
-                    Console.WriteLine(item.ToString());
-                }
             }
 
             catch (Exception ex)
             {
-
                 Console.WriteLine(ex.Message);
             }
             finally
@@ -305,7 +301,7 @@ namespace ProjectOne_Class_library
 
                 myConnection.Close();
             }
-
+            return orders;
         }
 
     }
