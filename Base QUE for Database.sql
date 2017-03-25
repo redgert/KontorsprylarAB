@@ -49,14 +49,6 @@ VatID int identity(1,1) Primary key,
 VatTagMoney money --IMPORTANT TO USE MONEY!!! 
 );
 
-GO
-CREATE PROCEDURE GetOrders
-@UserID int
-AS
-Select * from FullOverView where FullOverView.UserID = @UserID
-GO
-
-Execute GetOrders 2
 
 CREATE TABLE Products
 (
@@ -97,16 +89,16 @@ CREATE PROCEDURE CreateUser
 @OutputID int output
 AS
 
-CREATE PROCEDURE GetProduct
-@shortdescription varchar(50)
-AS
-Select * from Products where Products.ShortDescription = @shortdescription
-GO
-
 insert into Users(Username, UserPassword, FirstName, LastName, Street, City, Zip,Country, PhoneNumber, Email, IsAdmin) 
 values (@Username, @PassWord, @FirstName, @LastName, @Street, @City, @Zip, @Country, @PhoneNumber, @Email, @IsAdmin)
 
 set @OutputID = SCOPE_IDENTITY();
+GO
+
+CREATE PROCEDURE GetProduct
+@shortdescription varchar(50)
+AS
+Select * from Products where Products.ShortDescription = @shortdescription
 GO
 
 CREATE PROCEDURE getUser
@@ -137,10 +129,13 @@ CREATE PROCEDURE CreateProduct
 @VatTag int,
 @Stock int,
 @ShortDescription varchar(50),
-@LongDescription varchar(1000)
+@LongDescription varchar(1000),
+@OutputID int output
 AS
 insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription, Active)
 values (@Price, @VatTag, @Stock, @ShortDescription, @LongDescription, 'true')
+
+SET @OutputID = SCOPE_IDENTITY();
 GO
 
 
@@ -174,6 +169,7 @@ Insert into  Users (Username, UserPassword, FirstName, LastName, Street, City, Z
 values ('pattzor','gillarintejava', 'Patrik','Jönsson','Storgatan','Malmö','00000', 'Skåneland', '0702222222','patrik@pattzor.se',0)
 
 
+insert into Vat (VatTagMoney) values (0.25)
 insert into Vat (VatTagMoney) values (0.12)
 --Update Vat set VatTagMoney = 0.12 where VatID = 2
 --GO
@@ -211,5 +207,15 @@ FROM            dbo.Orders INNER JOIN
 GO
 
 Select * from FullOverView
+
+GO
+CREATE PROCEDURE GetOrders
+@UserID int
+AS
+Select * from FullOverView where FullOverView.UserID = @UserID
+GO
+
+Execute GetOrders 2
+
 
 EXECUTE getUser 'redgert','hemligtord'
