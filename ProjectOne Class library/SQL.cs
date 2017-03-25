@@ -13,7 +13,7 @@ namespace ProjectOne_Class_library
         const string CON_STR = "Data Source=.;Initial Catalog=Sofia;Integrated Security=True";
 
         //Adding new user containing all information needed, by default new user is not admin (bit = 0).
-        public int AddNewUser(string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email, int bit = 0)
+        public int AddNewUser(string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber=null, string email=null, int bit = 0)
         {
             int newUserID = 0;
             //Check if User Exists, If it exists, GetUser() will return a user, not null
