@@ -13,7 +13,7 @@ function GetRequest() {
             }
             //If user does not exist, or username and password doesnt match, the JSON object is set to "Error"
             else if (user == "Error") {
-                console.log(data);
+                console.log(user);
                 alert("Wrong username or password");
             }
         });
