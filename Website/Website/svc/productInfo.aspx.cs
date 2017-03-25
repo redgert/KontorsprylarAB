@@ -13,16 +13,13 @@ namespace Website.svc
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
-            List<Product> productList = new List<string>();
-
+            List<Product> productList = new List<Product>();
 
             SQL mySQL = new SQL();
 
-            List<Product> productList = mySQL.GetAllProducts();
+            productList = mySQL.GetAllProducts();
 
-            productInfoLiteral.Text = "";
-
+            productInfoLiteral.Text = JsonConvert.SerializeObject(productList);
         }
     }
 }
