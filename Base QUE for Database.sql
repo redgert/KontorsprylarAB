@@ -59,7 +59,8 @@ Price money NOT NULL,
 VatTag int FOREIGN KEY references Vat(VatID),
 Stock int NOT NULL,
 ShortDescription varchar(50) NOT NULL,
-LongDescription varchar(1000) NOT NULL
+LongDescription varchar(1000) NOT NULL,
+Active bit default 'true' NOT NULL
 );
 
 CREATE TABLE ProductLists
@@ -89,6 +90,13 @@ CREATE PROCEDURE CreateUser
 @IsAdmin bit,
 @OutputID int output
 AS
+
+CREATE PROCEDURE GetProduct
+@shortdescription varchar(50)
+AS
+Select * from Products where Products.ShortDescription = @shortdescription
+GO
+
 insert into Users(Username, UserPassword, FirstName, LastName, Street, City, Zip,Country, PhoneNumber, Email, IsAdmin) 
 values (@Username, @PassWord, @FirstName, @LastName, @Street, @City, @Zip, @Country, @PhoneNumber, @Email, @IsAdmin)
 
@@ -98,6 +106,7 @@ GO
 CREATE PROCEDURE getUser
 @Username varchar(50),
 @PassWord varchar(50)
+
 as
 select * from Users, Orders, ProductLists 
 where Users.Username=@username AND Users.UserPassword=@password
@@ -124,17 +133,22 @@ CREATE PROCEDURE CreateProduct
 @ShortDescription varchar(50),
 @LongDescription varchar(1000)
 AS
-insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription)
-values (@Price, @VatTag, @Stock, @ShortDescription, @LongDescription)
+insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription, Active)
+values (@Price, @VatTag, @Stock, @ShortDescription, @LongDescription, 'true')
 GO
+
+
+CREATE PROCEDURE RemoveProduct
+@ProductID int
+AS
+UPDATE Products set Active = 'false' where ProductID = @ProductID
 
 
 
 
 --TODODODODODODODODO!!!!!!!!!!!!!!-----------------------------------
---create a procedure to remove product
 
---create a procedure to update stock
+--create a procedure to update EVERTHING SEPERATLY!! (Spelling?)
 
 --create a procedure to update userinfo
 ---------------------------------------------------------------------

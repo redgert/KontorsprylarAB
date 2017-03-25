@@ -12,12 +12,11 @@ namespace ProjectOne_Class_library
     {
         const string CON_STR = "Data Source=.;Initial Catalog=Sofia;Integrated Security=True";
 
-        //TODO Call GetUser withint AddNewUser to check if already existing
         //Adding new user containing all information needed, by default new user is not admin (bit = 0).
-        public int AddNewUser(string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email, int bit = 0)
+        public int AddNewUser(string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber=null, string email=null, int bit = 0)
         {
             int newUserID = 0;
-
+            //Check if User Exists, If it exists, GetUser() will return a user, not null
             User temp = GetUser(username, password);
             if (temp == null)
             {
@@ -28,7 +27,7 @@ namespace ProjectOne_Class_library
                     myConnection.Open();
                     SqlCommand myCommand = new SqlCommand("CreateUser", myConnection);
                     myCommand.CommandType = CommandType.StoredProcedure;
-
+                    #region Parameters
                     SqlParameter addUserID = new SqlParameter("@OutputID", SqlDbType.Int);
                     addUserID.Direction = ParameterDirection.Output;
                     SqlParameter addUserName = new SqlParameter("@Username", SqlDbType.VarChar);
@@ -66,10 +65,9 @@ namespace ProjectOne_Class_library
                     myCommand.Parameters.Add(addPhoneNumber);
                     myCommand.Parameters.Add(addEmail);
                     myCommand.Parameters.Add(addBit);
-
+                    #endregion
                     myCommand.ExecuteNonQuery();
                     newUserID = Convert.ToInt32(addUserID.Value);
-
                 }
                 catch
                 {
@@ -80,12 +78,12 @@ namespace ProjectOne_Class_library
                     myConnection.Close();
                 }
             }
-
             return newUserID;
         }
         //Get User with matching username and password
         public User GetUser(string username, string password)
         {
+            //Default value null, returned if not existing or matching username and password
             User tempUser = null;
             SqlConnection myConnection = new SqlConnection(CON_STR);
 
@@ -134,15 +132,15 @@ namespace ProjectOne_Class_library
             return tempUser;
         }
 
-        public void GetAllProducts()
+        public List<Product> GetAllProducts()
         {
             List<Product> products = new List<Product>();
 
-            SqlConnection myConnection = new SqlConnection();
+            SqlConnection myConnection = new SqlConnection(CON_STR);
             try
             {
                 myConnection.Open();
-                SqlCommand myCommand = new SqlCommand("SELECT * FROM products", myConnection);
+                SqlCommand myCommand = new SqlCommand("SELECT * FROM products where Active=1", myConnection);
                 SqlDataReader myReader = myCommand.ExecuteReader();
 
                 while (myReader.Read())
@@ -152,60 +150,113 @@ namespace ProjectOne_Class_library
             }
             catch (Exception)
             {
-
                 throw;
             }
             finally
             {
                 myConnection.Close();
             }
+            return products;
         }
-
-        //TODO Add method to add product and get product
-
-        //public void GetAllOrder(int UserID, string Username, string UserPassword, string FirstName, string LastName, string Street, string Zip, string Country,
-        //              string PhoneNumber, string Email, string isAdmin, int OrderID, string OrderStatus, DateTime OrderDate, int VatID, double VatTagMoney,
-        //              int ProductID, double Price, int Stock, string ShortDescription, string LongDescription, int UserQuantity, int ProductListID, int ActiveUser)
-
-        static public void GetAllOrders(int UserID) // I made the method static so we can skip to do a instans of our SQL library.
+        //Try to add product, if product already exists or something goes wrong, default return is 0
+        public int AddProduct(double price, int vattag, int stock, string shortdescription, string longdescription)
         {
+            int newProductID = 0;
+            //Call method get product to see if it is already existing
+            Product tempproduct = GetProduct(shortdescription);
+            if (tempproduct == null)
+            {
+                {
+                    SqlConnection myConnection = new SqlConnection(CON_STR);
+                    try
+                    {
+                        myConnection.Open();
+                        SqlCommand myCommand = new SqlCommand("CreateProduct", myConnection);
+                        myCommand.CommandType = CommandType.StoredProcedure;
+                        #region Parameters
+                        SqlParameter addProductID = new SqlParameter("@OutputID", SqlDbType.Int);
+                        addProductID.Direction = ParameterDirection.Output;
+                        SqlParameter addProductPrice = new SqlParameter("@Price", SqlDbType.Money);
+                        addProductPrice.Value = price;
+                        SqlParameter addProductVatTag = new SqlParameter("@VatTag", SqlDbType.Int);
+                        addProductVatTag.Value = vattag;
+                        SqlParameter addProductStock = new SqlParameter("@Stock", SqlDbType.Int);
+                        addProductStock.Value = stock;
+                        SqlParameter addShortDescription = new SqlParameter("@ShortDescription", SqlDbType.VarChar);
+                        addShortDescription.Value = shortdescription;
+                        SqlParameter addLongDescription = new SqlParameter("@LongDescription", SqlDbType.VarChar);
+                        addLongDescription.Value = longdescription;
 
+
+                        myCommand.Parameters.Add(addProductPrice);
+                        myCommand.Parameters.Add(addProductID);
+                        myCommand.Parameters.Add(addProductStock);
+                        myCommand.Parameters.Add(addProductVatTag);
+                        myCommand.Parameters.Add(addShortDescription);
+                        myCommand.Parameters.Add(addLongDescription);
+                        #endregion
+                        myCommand.ExecuteNonQuery();
+                        newProductID = Convert.ToInt32(addProductID.Value);
+                    }
+                    catch
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        myConnection.Close();
+                    }
+                }
+            }
+            return newProductID;
+        }
+        //Get one single product, if not found, default return will be null
+        public Product GetProduct(string shortdescription)
+        {
+            //Return null as default if product is not existing
+            Product tempProduct = null;
             SqlConnection myConnection = new SqlConnection(CON_STR);
 
             try
             {
                 myConnection.Open();
+                SqlCommand myCommand = new SqlCommand("GetProduct", myConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
+                //Select all information from the Product with the matching shortdescription
+                SqlParameter myShortDescription = new SqlParameter("@shortdescription", SqlDbType.VarChar);
+                myShortDescription.Value = shortdescription;
 
-                SqlCommand myCommand = new SqlCommand($"Select * from FullOverView where UserID = @UserID", myConnection);  //$"Select * from FullOverView where UserID = @UserID", får tillbaka en rad /userID
+                myCommand.Parameters.Add(myShortDescription);
 
-                SqlParameter parameterUserID = new SqlParameter("@UserID", SqlDbType.Int);
+                SqlDataReader myReader;
 
-                parameterUserID.Value = UserID;
-                myCommand.Parameters.Add(parameterUserID);
+                myReader = myCommand.ExecuteReader();
 
-                SqlDataReader reader = myCommand.ExecuteReader();
-
-                List<Order> orders = new List<Order>(); 
-
-                while (reader.Read())
+                while (myReader.Read())
                 {
-                    orders.Add(new Order(Convert.ToInt32(reader["OrderID"].ToString()), Convert.ToInt32(reader["UserID"].ToString()), reader["OrderStatus"].ToString(), DateTime.Parse(reader["OrderDate"].ToString())));
-
+                    try
+                    {
+                        //Create new Product based on all information in Product Table SQL
+                        tempProduct = new Product(Convert.ToInt32(myReader["ProductID"]), Convert.ToDouble(myReader["Price"]), Convert.ToInt32(myReader["Stock"]), myReader["ShortDescription"].ToString(), myReader["LongDescription"].ToString(), Convert.ToDouble(myReader["VatTag"]));
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
                 }
 
-                reader.Close();
-                myCommand.Dispose();
+            }
+            catch
+            {
 
             }
             finally
             {
-
                 myConnection.Close();
             }
-
+            //return the created Product to be able to use information as session
+            return tempProduct;
         }
-
-
     }
 
 }
