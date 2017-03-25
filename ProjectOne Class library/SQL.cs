@@ -257,6 +257,57 @@ namespace ProjectOne_Class_library
             //return the created Product to be able to use information as session
             return tempProduct;
         }
+
+        static public void GetAllOrders(int UserID)
+        {
+            List<Order> orders = new List<Order>();
+     
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+            try
+            {
+                myConnection.Open();
+
+                SqlCommand myCommand = new SqlCommand($"Select * from FullOverView where UserID = @UserID", myConnection);  
+
+                SqlParameter parameterUserID = new SqlParameter("@UserID", SqlDbType.Int);
+
+                parameterUserID.Value = UserID;
+
+                myCommand.Parameters.Add(parameterUserID);
+
+                SqlDataReader myReader = myCommand.ExecuteReader();
+
+                while (myReader.Read())
+                {
+
+                    orders.Add(new Order(Convert.ToInt32(myReader["ProductID"]), Convert.ToInt32(myReader["UserID"]), myReader["OrderStatus"].ToString(), DateTime.Parse(myReader["OrderDate"].ToString())));
+
+
+                }
+
+                myReader.Close();
+                myCommand.Dispose();
+
+                foreach (var item in orders)
+                {
+                    Console.WriteLine(item.ToString());
+                }
+            }
+
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+
+                myConnection.Close();
+            }
+
+        }
+
     }
 
 }
