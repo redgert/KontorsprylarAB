@@ -74,6 +74,8 @@
   <ItemGroup>
     <Content Include="admin.aspx" />
     <Content Include="home.aspx" />
+    <Content Include="js\ProductsJS.js" />
+    <Content Include="products.aspx" />
     <Content Include="svc\info.aspx" />
     <Content Include="js\loginJS.js" />
     <Content Include="packages.config" />
@@ -138,6 +140,13 @@
     </Compile>
     <Compile Include="home.aspx.designer.cs">
       <DependentUpon>home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="products.aspx.cs">
+      <DependentUpon>products.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="products.aspx.designer.cs">
+      <DependentUpon>products.aspx</DependentUpon>
     </Compile>
     <Compile Include="svc\info.aspx.cs">
       <DependentUpon>info.aspx</DependentUpon>
