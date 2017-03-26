@@ -16,7 +16,7 @@
 
     <div>
         <div class="page-header">
-            <h1>Example Page Header</h1>
+            <h1>Kontorsprylar AB</h1>
         </div>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -24,16 +24,44 @@
                     <a class="navbar-brand" href="home.aspx">KontorsPrylar</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="home.aspx">Home</a></li>
+                    <li><a href="home.aspx">Home</a></li>
                     <li><a href="products.aspx">Products</a></li>
-                    <li><a href="admin.aspx">Admin</a></li>
+                    <li><a href="admin.aspx" id="admin" style="display:none">Admin</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-                    <li><a href="index.aspx"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                    <li id="listLoginButton"><a href="#" id="loginButton" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
                 </ul>
             </div>
         </nav>
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Login</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label for="text">Username:</label>
+                                <input type="text" class="form-control" id="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="pwd">Password:</label>
+                                <input type="password" class="form-control" id="password">
+                            </div>
+                            <%--Submit information and try to log in, wrong info will leave error message--%>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" id="buttonsubmit" onclick="GetRequest();">Login</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
     </div>
