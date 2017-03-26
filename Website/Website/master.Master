@@ -4,22 +4,38 @@
 
 <html>
 <head runat="server">
+    <link href="Content/bootstrap.css" rel="stylesheet" />
     <script src="Scripts/jquery-3.1.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>
-    <link href="Content/bootstrap.css" rel="stylesheet" />
     <script src="js/loginJS.js"></script>
-    <title></title>
+    <title>Kontorsprylar</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    
-        <div>
-            <div class="page-header">
-                <h1>Example Page Header</h1>
-            </div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+
+    <div>
+        <div class="page-header">
+            <h1>Example Page Header</h1>
         </div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="home.aspx">KontorsPrylar</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="home.aspx">Home</a></li>
+                    <li><a href="products.aspx">Products</a></li>
+                    <li><a href="admin.aspx">Admin</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
+                    <li><a href="index.aspx"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                </ul>
+            </div>
+        </nav>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
 </body>
 </html>
