@@ -29,7 +29,7 @@ $(document).ready(function () {
             text: user.FirstName + " " + user.LastName,
             class: 'dropdown-toggle',
             'data-toggle': "dropdown",
-        })).append($('<ul class="dropdown-menu"><li><a href="#">Change information</a></li><li><a href="products.aspx">Order history</a></li><li><a href="#" onclick="EndSession()">Log out</a></li></ul>'));
+        })).append($('<ul class="dropdown-menu"><li><a href="#">Change information</a></li><li><a href="products.aspx">Order history</a></li><li><a href="#" onclick="RemoveUserFromSession()">Log out</a></li></ul>'));
         
         if (user.IsAdmin === 1) {
             $('#adminList').append($('<a/>', {

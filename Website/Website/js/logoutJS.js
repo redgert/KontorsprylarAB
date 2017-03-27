@@ -1,4 +1,11 @@
-﻿function EndSession() {
-    alert("Log out!");
-    window.location.href = 'home.aspx';
-};
+﻿function RemoveUserFromSession() {
+
+    $.getJSON("svc/logOutUser.aspx").
+        done(function (temp) {
+        window.location.href = 'home.aspx';
+        alert("Log out!");
+
+    });
+
+
+}
