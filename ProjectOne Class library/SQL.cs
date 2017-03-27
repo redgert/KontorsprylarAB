@@ -163,8 +163,6 @@ namespace ProjectOne_Class_library
         {
             int newProductID = 0;
             //Call method get product to see if it is already existing
-            Product tempproduct = GetProduct(shortdescription);
-            if (tempproduct == null)
             {
                 {
                     SqlConnection myConnection = new SqlConnection(CON_STR);
@@ -211,7 +209,7 @@ namespace ProjectOne_Class_library
             return newProductID;
         }
         //Get one single product, if not found, default return will be null
-        public Product GetProduct(string shortdescription)
+        public Product GetProduct(int ProductID)
         {
             //Return null as default if product is not existing
             Product tempProduct = null;
@@ -223,10 +221,10 @@ namespace ProjectOne_Class_library
                 SqlCommand myCommand = new SqlCommand("GetProduct", myConnection);
                 myCommand.CommandType = CommandType.StoredProcedure;
                 //Select all information from the Product with the matching shortdescription
-                SqlParameter myShortDescription = new SqlParameter("@shortdescription", SqlDbType.VarChar);
-                myShortDescription.Value = shortdescription;
+                SqlParameter myProductID = new SqlParameter("@ProductID", SqlDbType.VarChar);
+                myProductID.Value = ProductID;
 
-                myCommand.Parameters.Add(myShortDescription);
+                myCommand.Parameters.Add(myProductID);
 
                 SqlDataReader myReader;
 
