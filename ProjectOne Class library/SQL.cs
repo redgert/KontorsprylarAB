@@ -267,6 +267,7 @@ namespace ProjectOne_Class_library
             return newProductID;
         }
         //Get one single product, if not found, default return will be null
+
         public Product GetProduct(int ProductID)
         {
             //Return null as default if product is not existing
@@ -323,17 +324,17 @@ namespace ProjectOne_Class_library
             return tempProduct;
         }
 
-        static public List<Order> GetAllOrders(int UserID)
+        static public List<Order> GetOrder(int UserID)
         {
             List<Order> orders = new List<Order>();
-     
+
             SqlConnection myConnection = new SqlConnection(CON_STR);
 
             try
             {
                 myConnection.Open();
 
-                SqlCommand myCommand = new SqlCommand("GetOrders", myConnection);
+                SqlCommand myCommand = new SqlCommand("GetOrders", myConnection); // Option: Select* from FullOverView where UserID = @UserID
                 myCommand.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter parameterUserID = new SqlParameter("@UserID", SqlDbType.Int);
@@ -368,6 +369,175 @@ namespace ProjectOne_Class_library
             }
             return orders;
         }
+
+        static public void CreateProductList(int OrderID, int ProductID, int Quantity)
+        {
+
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+
+
+            try
+            {
+                myConnection.Open();
+
+                SqlCommand myCommand = new SqlCommand("CreateProductList", myConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter parameterOrderID = new SqlParameter("@OrderID", SqlDbType.Int);
+                parameterOrderID.Value = OrderID;
+
+                SqlParameter parameterProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                parameterProductID.Value = ProductID;
+
+                SqlParameter parameterQuantity = new SqlParameter("@Quantity", SqlDbType.Int);
+                parameterQuantity.Value = Quantity;
+
+                myCommand.Parameters.Add(parameterOrderID);
+                myCommand.Parameters.Add(parameterProductID);
+                myCommand.Parameters.Add(parameterQuantity);
+
+                myCommand.ExecuteNonQuery();
+
+
+            }
+            finally
+            {
+
+                myConnection.Close();
+            }
+
+
+        }
+
+        static public List<ProductList> GetProductList(int ProductListID)
+
+        {
+            SqlConnection myConnetion = new SqlConnection(CON_STR);
+            List<ProductList> productLists = new List<ProductList>();
+
+            try
+            {
+                myConnetion.Open();
+
+                SqlCommand myCommand = new SqlCommand("GetProductList", myConnetion); //TODO lägg in en query!
+                myCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramterProductListID = new SqlParameter("@ProductListID", SqlDbType.Int);
+                paramterProductListID.Value = ProductListID;
+
+                myCommand.Parameters.Add(paramterProductListID);
+
+
+                SqlDataReader myReader = myCommand.ExecuteReader();
+
+
+                while (myReader.Read())
+
+                {
+
+                    productLists.Add(new ProductList(Convert.ToInt32(myReader["ProductListID"]), Convert.ToInt32(myReader["OrderID"]), Convert.ToInt32(myReader["ProductID"]), Convert.ToInt32(myReader["Quantity"])));
+
+
+                }
+
+                myReader.Close();
+                myCommand.Dispose();
+
+
+            }
+            finally
+            {
+
+                myConnetion.Close();
+            }
+
+            return productLists;
+        }
+
+        static public void UpdateProduct(int productID, double price, int vatTag, int stock, string shortDescrip, string longDescrip )
+
+        {
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+            try
+            {
+                myConnection.Open();
+
+                SqlCommand myCommand = new SqlCommand("UpdateProduct", myConnection);
+
+                myCommand.CommandType = CommandType.StoredProcedure;
+
+                #region Parameters
+                SqlParameter parameterProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                parameterProductID.Value = productID;
+
+                SqlParameter parameterPrice = new SqlParameter("@Price", SqlDbType.Money);
+                parameterPrice.Value = price;
+
+                SqlParameter parameterVatTag = new SqlParameter("@VatTag", SqlDbType.Int);
+                parameterVatTag.Value = vatTag;
+
+                SqlParameter parameterStock = new SqlParameter("@Stock", SqlDbType.Int);
+                parameterStock.Value = stock;
+
+                SqlParameter parameterShortDescrip= new SqlParameter("@ShortDescription", SqlDbType.VarChar);
+                parameterShortDescrip.Value = shortDescrip;
+
+                SqlParameter parameterLongDescrip = new SqlParameter("@LongDescription", SqlDbType.VarChar);
+                parameterLongDescrip.Value = longDescrip;
+
+                myCommand.Parameters.Add(parameterProductID);
+                myCommand.Parameters.Add(parameterPrice);
+                myCommand.Parameters.Add(parameterVatTag);
+                myCommand.Parameters.Add(parameterStock);
+                myCommand.Parameters.Add(parameterShortDescrip);
+                myCommand.Parameters.Add(parameterLongDescrip);
+
+                myCommand.ExecuteNonQuery();
+
+
+
+
+
+
+                #endregion
+            }
+            finally
+            {
+
+                myConnection.Close();
+            }
+
+        }
+
+        static public void RemoveProduct (int DeleteProductID)
+
+        {
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+            SqlCommand myCommand = new SqlCommand("RemoveProduct", myConnection);
+            myCommand.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                myConnection.Open();
+
+                SqlParameter parameterDeleteProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                parameterDeleteProductID.Value = DeleteProductID;
+
+                myCommand.Parameters.Add(parameterDeleteProductID);
+
+                myCommand.ExecuteNonQuery();
+            }
+            finally
+            {
+
+                myConnection.Close();
+            }
+
+        }
+
 
     }
 

@@ -25,5 +25,10 @@ namespace ProjectOne_Class_library
             VatTag = vatTag;
         }
 
+        public override string ToString()
+        {
+            return $"ProductID: {ProductID} Price: {Price} Stock: {Stock} ShortDescrp: {ShortDescription} LongDescrp: {LongDescription} VatTag: {VatTag}";
+        }
+
     }
 }
