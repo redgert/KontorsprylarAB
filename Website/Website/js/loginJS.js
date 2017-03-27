@@ -26,6 +26,7 @@ $(document).ready(function () {
     $.getJSON("svc/info.aspx?loggedin=1").done(function (user) {
         console.log(user);
         $('#loginButton').remove();
+        $('#listSignUp').remove();
         $('#listLoginButton').append($('<a/>', {
                     href: '#',
                     text: user.FirstName + " " + user.LastName,
