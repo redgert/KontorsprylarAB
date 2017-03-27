@@ -6,16 +6,12 @@ function GetRequest() {
             console.log(user);
             if (user.IsAdmin === 0) {
                 window.location.href = "/home.aspx";
-                //NEVER MIND THIS BELOW RIGHT NOW
-
             }
             else if (user.IsAdmin === 1) {
                 window.location.href = "/home.aspx";
-                //NEVER MIND THIS BELOW RIGHT NOW
-                $('#admin').removeProp($('display'));
             }
                 //If user does not exist, or username and password doesnt match, the JSON object is set to "Error"
-            else if (user === "Error") {
+            if (user === "Error") {
                 console.log(user);
                 alert("Wrong username or password");
             }
