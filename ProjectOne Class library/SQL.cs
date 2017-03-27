@@ -11,7 +11,6 @@ namespace ProjectOne_Class_library
     public class SQL
     {
         const string CON_STR = "Data Source=.;Initial Catalog=Sofia;Integrated Security=True";
-
         //Adding new user containing all information needed, by default new user is not admin (bit = 0).
         public int AddNewUser(string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email, int bit = 0)
         {
@@ -145,7 +144,16 @@ namespace ProjectOne_Class_library
 
                 while (myReader.Read())
                 {
-                    products.Add(new Product(Convert.ToInt32(myReader["productID"]), Convert.ToDouble(myReader["price"]), Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), Convert.ToDouble(myReader["vatTag"])));
+                    if (Convert.ToInt32(myReader["vatTag"]) == 1)
+                    {
+                        products.Add(new Product(Convert.ToInt32(myReader["productID"]), Convert.ToDouble(myReader["price"]) * 1.12, Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), Convert.ToInt32(myReader["vatTag"])));
+
+                    }
+                    else if (Convert.ToInt32(myReader["vatTag"]) == 2)
+                    {
+                        products.Add(new Product(Convert.ToInt32(myReader["productID"]), Convert.ToDouble(myReader["price"])* 1.25, Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), Convert.ToInt32(myReader["vatTag"])));
+
+                    }
                 }
             }
             catch (Exception)
@@ -156,6 +164,7 @@ namespace ProjectOne_Class_library
             {
                 myConnection.Close();
             }
+
             return products;
         }
         //Try to add product, if product already exists or something goes wrong, default return is 0
@@ -232,10 +241,19 @@ namespace ProjectOne_Class_library
 
                 while (myReader.Read())
                 {
+                    
                     try
                     {
-                        //Create new Product based on all information in Product Table SQL
-                        tempProduct = new Product(Convert.ToInt32(myReader["ProductID"]), Convert.ToDouble(myReader["Price"]), Convert.ToInt32(myReader["Stock"]), myReader["ShortDescription"].ToString(), myReader["LongDescription"].ToString(), Convert.ToDouble(myReader["VatTag"]));
+                        if (Convert.ToInt32(myReader["VatTag"]) == 1)
+                        {
+                            //Create new Product based on all information in Product Table SQL
+                            tempProduct = new Product(Convert.ToInt32(myReader["ProductID"]), Convert.ToDouble(myReader["Price"])* 1.12, Convert.ToInt32(myReader["Stock"]), myReader["ShortDescription"].ToString(), myReader["LongDescription"].ToString(), Convert.ToInt32(myReader["VatTag"]));
+                        }
+                        else if (Convert.ToInt32(myReader["VatTag"]) == 2)
+                        {
+                            //Create new Product based on all information in Product Table SQL
+                            tempProduct = new Product(Convert.ToInt32(myReader["ProductID"]), Convert.ToDouble(myReader["Price"])* 1.25, Convert.ToInt32(myReader["Stock"]), myReader["ShortDescription"].ToString(), myReader["LongDescription"].ToString(), Convert.ToInt32(myReader["VatTag"]));
+                        }
                     }
                     catch (Exception)
                     {

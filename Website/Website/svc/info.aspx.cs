@@ -29,7 +29,6 @@ namespace Website
                     infoLiteral.Text = JsonConvert.SerializeObject("Error");
                 }
             }
-            
         }
     }
 }
