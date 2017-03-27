@@ -174,9 +174,8 @@ GO
 
 --TODODODODODODODODO!!!!!!!!!!!!!!-----------------------------------
 
---create a procedure to update EVERTHING SEPERATLY!! (Spelling?)
-
 --create a procedure to update userinfo
+
 ---------------------------------------------------------------------
 
 
@@ -235,6 +234,8 @@ GO
 Select * from FullOverView
 
 GO
+
+
 CREATE PROCEDURE GetOrders
 @UserID int
 AS
