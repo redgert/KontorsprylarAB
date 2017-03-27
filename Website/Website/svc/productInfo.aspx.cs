@@ -13,13 +13,22 @@ namespace Website.svc
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<Product> productList = new List<Product>();
-
             SQL mySQL = new SQL();
 
-            productList = mySQL.GetAllProducts();
+            if (Request["prodid"] != null)
+            {
+                Product myProduct = mySQL.GetProduct(Convert.ToInt32(Request["prodid"]));
+                productInfoLiteral.Text = JsonConvert.SerializeObject(myProduct);
+            }
+            else
+            {
+                List<Product> productList = new List<Product>();
 
-            productInfoLiteral.Text = JsonConvert.SerializeObject(productList);
+                productList = mySQL.GetAllProducts();
+
+                productInfoLiteral.Text = JsonConvert.SerializeObject(productList);
+            }
+            
         }
     }
 }

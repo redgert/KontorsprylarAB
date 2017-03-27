@@ -26,7 +26,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="home.aspx">Home</a></li>
                     <li><a href="products.aspx">Products</a></li>
-                    <li><a href="admin.aspx" id="admin" style="display:none">Admin</a></li>
+                    <li id="adminList"></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" data-toggle="modal" data-target="#signUpModal"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>

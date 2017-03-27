@@ -11,9 +11,8 @@ namespace Website
             //Check for Session, which should be parted from null as default.
             if(Session["user"] != null)
             {
-                User tempUser = JsonConvert.DeserializeObject<User>(Session["user"].ToString());
-                LabelFirstName.Text = tempUser.FirstName.ToString();
-                LabelLastName.Text = tempUser.LastName.ToString();
+                SQL mySQL = new SQL();
+                User tempUser = mySQL.GetUser(Session["user"].ToString());
             }
         }
     }

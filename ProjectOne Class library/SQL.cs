@@ -79,6 +79,55 @@ namespace ProjectOne_Class_library
             }
             return newUserID;
         }
+
+        public User GetUser(string id)
+        {
+            User tempUser = null;
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+            try
+            {
+                myConnection.Open();
+                SqlCommand myCommand = new SqlCommand("GetUserByID", myConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
+                //Select all information from the user with the matching username and password
+                SqlParameter myUserID = new SqlParameter("@UserID", SqlDbType.VarChar);
+                myUserID.Value = Convert.ToInt32(id);
+                
+
+                myCommand.Parameters.Add(myUserID);
+
+                SqlDataReader myReader;
+
+                myReader = myCommand.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    try
+                    {
+                        //TODO Add Phonenumber if not Null or default
+                        //Create new User based on all information in User Table SQL
+                        tempUser = new User(Convert.ToInt32(myReader["UserID"]), myReader["FirstName"].ToString(), myReader["LastName"].ToString(), myReader["Street"].ToString(), myReader["Zip"].ToString(), myReader["City"].ToString(), myReader["Country"].ToString(), myReader["PhoneNumber"].ToString(), myReader["Email"].ToString(), Convert.ToInt32(myReader["IsAdmin"]));
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                }
+
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            //return the created User to be able to use information as session
+            return tempUser;
+        }
+
         //Get User with matching username and password
         public User GetUser(string username, string password)
         {
@@ -172,8 +221,6 @@ namespace ProjectOne_Class_library
         {
             int newProductID = 0;
             //Call method get product to see if it is already existing
-            Product tempproduct = GetProduct(shortdescription);
-            if (tempproduct == null)
             {
                 {
                     SqlConnection myConnection = new SqlConnection(CON_STR);
@@ -220,7 +267,7 @@ namespace ProjectOne_Class_library
             return newProductID;
         }
         //Get one single product, if not found, default return will be null
-        public Product GetProduct(string shortdescription)
+        public Product GetProduct(int ProductID)
         {
             //Return null as default if product is not existing
             Product tempProduct = null;
@@ -232,10 +279,10 @@ namespace ProjectOne_Class_library
                 SqlCommand myCommand = new SqlCommand("GetProduct", myConnection);
                 myCommand.CommandType = CommandType.StoredProcedure;
                 //Select all information from the Product with the matching shortdescription
-                SqlParameter myShortDescription = new SqlParameter("@shortdescription", SqlDbType.VarChar);
-                myShortDescription.Value = shortdescription;
+                SqlParameter myProductID = new SqlParameter("@ProductID", SqlDbType.VarChar);
+                myProductID.Value = ProductID;
 
-                myCommand.Parameters.Add(myShortDescription);
+                myCommand.Parameters.Add(myProductID);
 
                 SqlDataReader myReader;
 

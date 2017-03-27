@@ -169,14 +169,45 @@ where
 GO
 
 
+CREATE PROCEDURE UpdateUser
+@UserID int,
+@Username nvarchar(50),
+@PassWord nvarchar(50),
+@FirstName nvarchar(50),
+@LastName nvarchar(50),
+@Street nvarchar(50),
+@City nvarchar(50),
+@Zip nvarchar(50),
+@Country nvarchar(50),
+@PhoneNumber nvarchar(50),
+@Email nvarchar(50),
+@IsAdmin bit
+AS
+Update
+	Users
+set
+	Username = ISNULL(@Username, Username),
+	UserPassword = ISNULL(@Password, UserPassword),
+	FirstName = ISNULL(@FirstName, FirstName),
+	LastName = ISNULL(@LastName, LastName),
+	Street = ISNULL(@Street, Street),
+	City = ISNULL(@City, City),
+	Zip = ISNULL(@Zip, Zip),
+	Country = ISNULL(@Country, Country),
+	PhoneNumber = ISNULL(@PhoneNumber, PhoneNumber),
+	Email = ISNULL(@Email, Email),
+	isAdmin = ISNULL(@IsAdmin, isAdmin)
+where
+	UserID = @UserID
+
+GO
 
 
 
 --TODODODODODODODODO!!!!!!!!!!!!!!-----------------------------------
 
---create a procedure to update EVERTHING SEPERATLY!! (Spelling?)
-
 --create a procedure to update userinfo
+
 ---------------------------------------------------------------------
 
 
@@ -235,6 +266,8 @@ GO
 Select * from FullOverView
 
 GO
+
+
 CREATE PROCEDURE GetOrders
 @UserID int
 AS
