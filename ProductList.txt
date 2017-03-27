@@ -1,0 +1,177 @@
+        static public void CreateProductList(int OrderID , int ProductID, int Quantity) 
+        {
+
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+     
+
+            try
+            {
+                myConnection.Open();
+
+                SqlCommand myCommand = new SqlCommand("CreateProductList", myConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter parameterOrderID = new SqlParameter("@OrderID", SqlDbType.Int);
+                parameterOrderID.Value = OrderID;
+
+                SqlParameter parameterProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                parameterProductID.Value = ProductID;
+
+                SqlParameter parameterQuantity = new SqlParameter("@Quantity", SqlDbType.Int);
+                parameterQuantity.Value = Quantity;
+
+                myCommand.Parameters.Add(parameterOrderID);
+                myCommand.Parameters.Add(parameterProductID);
+                myCommand.Parameters.Add(parameterQuantity);
+
+                myCommand.ExecuteNonQuery();
+
+
+            }
+            finally 
+            {
+
+                myConnection.Close();
+            }
+
+
+        }
+*******************************************************************************************************************************************
+
+
+        static public List <ProductList> GetProductList (int ProductListID)
+
+        {
+            SqlConnection myConnetion = new SqlConnection(CON_STR);
+            List<ProductList> productLists = new List<ProductList>();
+
+            try
+            {
+                myConnetion.Open();
+
+                SqlCommand myCommand = new SqlCommand("GetProductList", myConnetion); //TODO lägg in en query!
+                myCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramterProductListID = new SqlParameter("@ProductListID", SqlDbType.Int);
+                paramterProductListID.Value = ProductListID;
+
+                myCommand.Parameters.Add(paramterProductListID);
+
+
+                SqlDataReader myReader = myCommand.ExecuteReader();
+
+
+                while (myReader.Read())
+
+                {
+
+                    productLists.Add(new ProductList(Convert.ToInt32(myReader["ProductListID"]), Convert.ToInt32(myReader["OrderID"]), Convert.ToInt32(myReader["ProductID"]), Convert.ToInt32(myReader["Quantity"])));
+
+                   
+                }
+
+                myReader.Close();
+                myCommand.Dispose();
+
+
+            }
+            finally
+            {
+
+                myConnetion.Close();
+            }
+
+            return productLists;
+        }
+
+****************************************************************************************************************'
+
+**GET ALLORDERS ****
+
+
+        static public List<Order> GetAllOrders(int UserID)
+        {
+            List<Order> orders = new List<Order>();
+
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+            try
+            {
+                myConnection.Open();
+
+                SqlCommand myCommand = new SqlCommand("GetOrders", myConnection); // Option: Select* from FullOverView where UserID = @UserID
+                myCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter parameterUserID = new SqlParameter("@UserID", SqlDbType.Int);
+
+                parameterUserID.Value = UserID;
+
+                myCommand.Parameters.Add(parameterUserID);
+
+                SqlDataReader myReader = myCommand.ExecuteReader();
+
+                while (myReader.Read())
+                {
+
+                    orders.Add(new Order(Convert.ToInt32(myReader["ProductID"]), Convert.ToInt32(myReader["UserID"]), myReader["OrderStatus"].ToString(), DateTime.Parse(myReader["OrderDate"].ToString())));
+
+
+                }
+
+                myReader.Close();
+                myCommand.Dispose();
+
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+
+                myConnection.Close();
+            }
+            return orders;
+        }
+
+************************************************************************************************************************************************
+
+***Class ProductList ****
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProjectOne_Class_library
+{
+    public class ProductList
+    {
+        public int ProductListID { get; set; }
+        public int  OrderID { get; set; }
+        public int ProductID { get; set; }
+        public int Quantity { get; set; }
+
+
+        public ProductList(int ProductListID, int OrderID, int ProductID, int Quantity )
+        {
+            this.ProductListID = ProductListID;
+            this.OrderID = OrderID;
+            this.ProductID = ProductID;
+            this.Quantity = Quantity;
+        }
+
+        public override string ToString()
+        {
+            return $"ProductListID: {ProductListID} OrderID: {OrderID} ProductID: {ProductID} Quantity: {Quantity} ";
+
+        }
+
+    }
+}
+
+************************************************************************************************************************************************
+

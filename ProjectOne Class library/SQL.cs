@@ -12,6 +12,8 @@ namespace ProjectOne_Class_library
     {
         const string CON_STR = "Data Source=.;Initial Catalog=Sofia;Integrated Security=True";
 
+
+
         //Adding new user containing all information needed, by default new user is not admin (bit = 0).
         public int AddNewUser(string username, string password, string firstname, string lastname, string street, string zip, string city, string country, string phonenumber, string email, int bit = 0)
         {
@@ -238,6 +240,8 @@ namespace ProjectOne_Class_library
                     {
                         //Create new Product based on all information in Product Table SQL
                         tempProduct = new Product(Convert.ToInt32(myReader["ProductID"]), Convert.ToDouble(myReader["Price"]), Convert.ToInt32(myReader["Stock"]), myReader["ShortDescription"].ToString(), myReader["LongDescription"].ToString(), Convert.ToDouble(myReader["VatTag"]));
+
+        
                     }
                     catch (Exception)
                     {
@@ -258,17 +262,17 @@ namespace ProjectOne_Class_library
             return tempProduct;
         }
 
-        static public List<Order> GetAllOrders(int UserID)
+        static public List<Order> GetOrder(int UserID)
         {
             List<Order> orders = new List<Order>();
-     
+
             SqlConnection myConnection = new SqlConnection(CON_STR);
 
             try
             {
                 myConnection.Open();
 
-                SqlCommand myCommand = new SqlCommand("GetOrders", myConnection);
+                SqlCommand myCommand = new SqlCommand("GetOrders", myConnection); // Option: Select* from FullOverView where UserID = @UserID
                 myCommand.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter parameterUserID = new SqlParameter("@UserID", SqlDbType.Int);
@@ -303,6 +307,92 @@ namespace ProjectOne_Class_library
             }
             return orders;
         }
+
+        static public void CreateProductList(int OrderID , int ProductID, int Quantity) 
+        {
+
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+     
+
+            try
+            {
+                myConnection.Open();
+
+                SqlCommand myCommand = new SqlCommand("CreateProductList", myConnection);
+                myCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter parameterOrderID = new SqlParameter("@OrderID", SqlDbType.Int);
+                parameterOrderID.Value = OrderID;
+
+                SqlParameter parameterProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                parameterProductID.Value = ProductID;
+
+                SqlParameter parameterQuantity = new SqlParameter("@Quantity", SqlDbType.Int);
+                parameterQuantity.Value = Quantity;
+
+                myCommand.Parameters.Add(parameterOrderID);
+                myCommand.Parameters.Add(parameterProductID);
+                myCommand.Parameters.Add(parameterQuantity);
+
+                myCommand.ExecuteNonQuery();
+
+
+            }
+            finally 
+            {
+
+                myConnection.Close();
+            }
+
+
+        }
+
+        static public List <ProductList> GetProductList (int ProductListID)
+
+        {
+            SqlConnection myConnetion = new SqlConnection(CON_STR);
+            List<ProductList> productLists = new List<ProductList>();
+
+            try
+            {
+                myConnetion.Open();
+
+                SqlCommand myCommand = new SqlCommand("GetProductList", myConnetion); //TODO lägg in en query!
+                myCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter paramterProductListID = new SqlParameter("@ProductListID", SqlDbType.Int);
+                paramterProductListID.Value = ProductListID;
+
+                myCommand.Parameters.Add(paramterProductListID);
+
+
+                SqlDataReader myReader = myCommand.ExecuteReader();
+
+
+                while (myReader.Read())
+
+                {
+
+                    productLists.Add(new ProductList(Convert.ToInt32(myReader["ProductListID"]), Convert.ToInt32(myReader["OrderID"]), Convert.ToInt32(myReader["ProductID"]), Convert.ToInt32(myReader["Quantity"])));
+
+                   
+                }
+
+                myReader.Close();
+                myCommand.Dispose();
+
+
+            }
+            finally
+            {
+
+                myConnetion.Close();
+            }
+
+            return productLists;
+        }
+ 
 
     }
 

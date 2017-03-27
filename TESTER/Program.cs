@@ -11,20 +11,27 @@ namespace TESTER
     {
         static void Main(string[] args)
         {
+
+
+            List<Order> myList = SQL.GetOrder(2);
+
+            foreach (var order in myList)
+            {
+                Console.WriteLine(order.ToString());
+            }
+
+
+
             SQL mySQL = new SQL();
             User myUser = mySQL.GetUser("pattzor", "gillarintejava");
 
-            List<Order> myList = SQL.GetAllOrders(2);
 
-            //foreach (var order in myList)
-            //{
-            //    Console.WriteLine(order);
-            //}
             Console.ReadKey();
             Console.WriteLine(myUser.FirstName);
             Console.ReadKey();
 
             List<Product> testList = mySQL.GetAllProducts();
+
 
             foreach (var product in testList)
             {
