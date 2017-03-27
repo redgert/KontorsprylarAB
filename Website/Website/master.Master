@@ -8,6 +8,7 @@
     <script src="Scripts/jquery-3.1.1.js"></script>
     <script src="Scripts/bootstrap.js"></script>
     <script src="js/loginJS.js"></script>
+    <script src="js/logoutJS.js"></script>
     <title>Kontorsprylar</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
