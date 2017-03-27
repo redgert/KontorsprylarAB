@@ -110,6 +110,13 @@ select * from Users, Orders, ProductLists
 where Users.Username=@username AND Users.UserPassword=@password
 Go
 
+CREATE PROCEDURE GetUserByID
+@UserID int
+AS
+Select * from Users, Orders, ProductLists
+where Users.UserID = @UserID
+GO
+
 CREATE PROCEDURE CreateOrder
 --@OrderID int,
 @UserID int,
@@ -278,26 +285,3 @@ Execute GetOrders 2
 
 
 EXECUTE getUser 'redgert','hemligtord'
-
-GO
-CREATE PROCEDURE CreateProductList
-@OrderID int,
-@ProductID int,
-@Quantity int
-
-
-as
-insert into ProductLists (OrderID,ProductID,Quantity)
-values (@OrderID,@ProductID, @Quantity)
-
-GO
-
-
-CREATE PROCEDURE GetProductList
-@ProductListID int
-
-AS
-
-Select * from FullOverView where FullOverView.ProductListID = ProductListID
-
-GO
