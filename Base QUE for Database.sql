@@ -143,6 +143,31 @@ CREATE PROCEDURE RemoveProduct
 @ProductID int
 AS
 UPDATE Products set Active = 'false' where ProductID = @ProductID
+GO
+
+
+CREATE PROCEDURE UpdateProduct
+@ProductID int,
+@Price money,
+@VatTag int,
+@Stock int,
+@ShortDescription varchar(50),
+@LongDescription varchar(1000)
+AS
+UPDATE
+	Products
+set
+	Price = ISNULL(@Price, Price),
+	VatTag = ISNULL(@VatTag, VatTag),
+	Stock = ISNULL(@Stock, Stock),
+	ShortDescription = ISNULL(@ShortDescription, ShortDescription),
+	LongDescription = ISNULL(@LongDescription, LongDescription)
+where
+	ProductID = @ProductID
+
+--Select * from Products where ProductID = @ProductID
+GO
+
 
 
 
@@ -183,7 +208,7 @@ insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) v
 insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (3500,0,1,'HP-skärm','väldigt medelmåttig skärm från HP')
 insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (2000,2,1,'HP-skrivare','totalt värdelös skrivare från HP')
 
-insert into ProductLists (OrderID, ProductID, Quantity) values (1, 1, 2) --Price should be automatic
+insert into ProductLists (OrderID, ProductID, Quantity) values (1, 1, 2)
 
 
 
@@ -197,7 +222,8 @@ GO
 
 CREATE VIEW [dbo].[FullOverView]
 AS
-SELECT        dbo.Products.*, dbo.Vat.*, dbo.Users.*, dbo.ProductLists.ProductListID, dbo.ProductLists.Quantity, dbo.Orders.OrderID, dbo.Orders.OrderStatus, dbo.Orders.OrderDate
+SELECT        dbo.Products.*, dbo.Vat.*, dbo.Users.UserID, dbo.Users.FirstName, dbo.Users.LastName, dbo.Users.Street, dbo.Users.Zip, dbo.Users.City, dbo.Users.Country, dbo.Users.PhoneNumber, dbo.Users.Email,
+ dbo.Users.isAdmin, dbo.ProductLists.ProductListID, dbo.ProductLists.Quantity, dbo.Orders.OrderID, dbo.Orders.OrderStatus, dbo.Orders.OrderDate
 FROM            dbo.Orders INNER JOIN
                          dbo.ProductLists ON dbo.Orders.OrderID = dbo.ProductLists.OrderID INNER JOIN
                          dbo.Products ON dbo.ProductLists.ProductID = dbo.Products.ProductID INNER JOIN
