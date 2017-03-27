@@ -13,23 +13,29 @@ namespace Website
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            SQL mySQL = new SQL();
             if (Request["username"] != null && Request["password"] != null)
             {
-                SQL mySQL = new SQL();
+                
                 var tempuser = mySQL.GetUser(Request["username"], Request["password"]);
 
                 if (tempuser != null)
                 {
                     infoLiteral.Text = JsonConvert.SerializeObject(tempuser);
                     //Create session based on user information, all information connected to user is stored in this.
-                    Session["user"] = infoLiteral.Text;
+                    Session["user"] = tempuser.UserID;
                 }
                 else
                 {
                     infoLiteral.Text = JsonConvert.SerializeObject("Error");
                 }
             }
-            
+
+            if(Request["loggedin"] != null && Session["user"] != null)
+            {
+                var tempuser = mySQL.GetUser(Session["user"].ToString());
+                infoLiteral.Text = JsonConvert.SerializeObject(tempuser);
+            }
         }
     }
 }

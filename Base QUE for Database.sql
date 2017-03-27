@@ -49,14 +49,6 @@ VatID int identity(1,1) Primary key,
 VatTagMoney money --IMPORTANT TO USE MONEY!!! 
 );
 
-GO
-CREATE PROCEDURE GetOrders
-@UserID int
-AS
-Select * from FullOverView where FullOverView.UserID = @UserID
-GO
-
-Execute GetOrders 2
 
 CREATE TABLE Products
 (
@@ -97,16 +89,16 @@ CREATE PROCEDURE CreateUser
 @OutputID int output
 AS
 
-CREATE PROCEDURE GetProduct
-@shortdescription varchar(50)
-AS
-Select * from Products where Products.ShortDescription = @shortdescription
-GO
-
 insert into Users(Username, UserPassword, FirstName, LastName, Street, City, Zip,Country, PhoneNumber, Email, IsAdmin) 
 values (@Username, @PassWord, @FirstName, @LastName, @Street, @City, @Zip, @Country, @PhoneNumber, @Email, @IsAdmin)
 
 set @OutputID = SCOPE_IDENTITY();
+GO
+
+CREATE PROCEDURE GetProduct
+@ProductID int
+AS
+Select * from Products where Products.ProductID = @ProductID
 GO
 
 CREATE PROCEDURE getUser
@@ -117,6 +109,13 @@ as
 select * from Users, Orders, ProductLists 
 where Users.Username=@username AND Users.UserPassword=@password
 Go
+
+CREATE PROCEDURE GetUserByID
+@UserID int
+AS
+Select * from Users, Orders, ProductLists
+where Users.UserID = @UserID
+GO
 
 CREATE PROCEDURE CreateOrder
 --@OrderID int,
@@ -137,10 +136,13 @@ CREATE PROCEDURE CreateProduct
 @VatTag int,
 @Stock int,
 @ShortDescription varchar(50),
-@LongDescription varchar(1000)
+@LongDescription varchar(1000),
+@OutputID int output
 AS
 insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription, Active)
 values (@Price, @VatTag, @Stock, @ShortDescription, @LongDescription, 'true')
+
+SET @OutputID = SCOPE_IDENTITY();
 GO
 
 
@@ -148,19 +150,88 @@ CREATE PROCEDURE RemoveProduct
 @ProductID int
 AS
 UPDATE Products set Active = 'false' where ProductID = @ProductID
+GO
 
 
+CREATE PROCEDURE UpdateProduct
+@ProductID int,
+@Price money,
+@VatTag int,
+@Stock int,
+@ShortDescription varchar(50),
+@LongDescription varchar(1000)
+AS
+UPDATE
+	Products
+set
+	Price = ISNULL(@Price, Price),
+	VatTag = ISNULL(@VatTag, VatTag),
+	Stock = ISNULL(@Stock, Stock),
+	ShortDescription = ISNULL(@ShortDescription, ShortDescription),
+	LongDescription = ISNULL(@LongDescription, LongDescription)
+where
+	ProductID = @ProductID
+
+--Select * from Products where ProductID = @ProductID
+GO
 
 
---TODODODODODODODODO!!!!!!!!!!!!!!-----------------------------------
+CREATE PROCEDURE UpdateUser
+@UserID int,
+@Username nvarchar(50),
+@PassWord nvarchar(50),
+@FirstName nvarchar(50),
+@LastName nvarchar(50),
+@Street nvarchar(50),
+@City nvarchar(50),
+@Zip nvarchar(50),
+@Country nvarchar(50),
+@PhoneNumber nvarchar(50),
+@Email nvarchar(50),
+@IsAdmin bit
+AS
+Update
+	Users
+set
+	Username = ISNULL(@Username, Username),
+	UserPassword = ISNULL(@Password, UserPassword),
+	FirstName = ISNULL(@FirstName, FirstName),
+	LastName = ISNULL(@LastName, LastName),
+	Street = ISNULL(@Street, Street),
+	City = ISNULL(@City, City),
+	Zip = ISNULL(@Zip, Zip),
+	Country = ISNULL(@Country, Country),
+	PhoneNumber = ISNULL(@PhoneNumber, PhoneNumber),
+	Email = ISNULL(@Email, Email),
+	isAdmin = ISNULL(@IsAdmin, isAdmin)
+where
+	UserID = @UserID
 
---create a procedure to update EVERTHING SEPERATLY!! (Spelling?)
+GO
 
---create a procedure to update userinfo
----------------------------------------------------------------------
+CREATE PROCEDURE CreateProductList
+@OrderID int,
+@ProductID int,
+@Quantity int
 
 
+as
+insert into ProductLists (OrderID,ProductID,Quantity)
+values (@OrderID,@ProductID, @Quantity)
 
+GO
+
+
+CREATE PROCEDURE GetProductList
+@ProductListID int
+
+AS
+
+Select * from FullOverView where FullOverView.ProductListID = ProductListID
+
+GO
+
+------------------------------------------------------
 
 
 
@@ -174,6 +245,7 @@ Insert into  Users (Username, UserPassword, FirstName, LastName, Street, City, Z
 values ('pattzor','gillarintejava', 'Patrik','Jönsson','Storgatan','Malmö','00000', 'Skåneland', '0702222222','patrik@pattzor.se',0)
 
 
+insert into Vat (VatTagMoney) values (0.25)
 insert into Vat (VatTagMoney) values (0.12)
 --Update Vat set VatTagMoney = 0.12 where VatID = 2
 --GO
@@ -187,7 +259,7 @@ insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) v
 insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (3500,0,1,'HP-skärm','väldigt medelmåttig skärm från HP')
 insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (2000,2,1,'HP-skrivare','totalt värdelös skrivare från HP')
 
-insert into ProductLists (OrderID, ProductID, Quantity) values (1, 1, 2) --Price should be automatic
+insert into ProductLists (OrderID, ProductID, Quantity) values (1, 1, 2)
 
 
 
@@ -201,7 +273,8 @@ GO
 
 CREATE VIEW [dbo].[FullOverView]
 AS
-SELECT        dbo.Products.*, dbo.Vat.*, dbo.Users.*, dbo.ProductLists.ProductListID, dbo.ProductLists.Quantity, dbo.Orders.OrderID, dbo.Orders.OrderStatus, dbo.Orders.OrderDate
+SELECT        dbo.Products.*, dbo.Vat.*, dbo.Users.UserID, dbo.Users.FirstName, dbo.Users.LastName, dbo.Users.Street, dbo.Users.Zip, dbo.Users.City, dbo.Users.Country, dbo.Users.PhoneNumber, dbo.Users.Email,
+ dbo.Users.isAdmin, dbo.ProductLists.ProductListID, dbo.ProductLists.Quantity, dbo.Orders.OrderID, dbo.Orders.OrderStatus, dbo.Orders.OrderDate
 FROM            dbo.Orders INNER JOIN
                          dbo.ProductLists ON dbo.Orders.OrderID = dbo.ProductLists.OrderID INNER JOIN
                          dbo.Products ON dbo.ProductLists.ProductID = dbo.Products.ProductID INNER JOIN
@@ -212,4 +285,26 @@ GO
 
 Select * from FullOverView
 
+GO
+
+
+CREATE PROCEDURE GetOrders
+@UserID int
+AS
+Select * from FullOverView where FullOverView.UserID = @UserID
+GO
+
+Execute GetOrders 2
+
+GO
+
 EXECUTE getUser 'redgert','hemligtord'
+
+
+AS
+
+Select * from FullOverView where FullOverView.ProductListID = ProductListID
+
+GO
+
+Execute GetProductList 1
