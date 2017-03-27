@@ -96,9 +96,9 @@ set @OutputID = SCOPE_IDENTITY();
 GO
 
 CREATE PROCEDURE GetProduct
-@shortdescription varchar(50)
+@ProductID int
 AS
-Select * from Products where Products.ShortDescription = @shortdescription
+Select * from Products where Products.ProductID = @ProductID
 GO
 
 CREATE PROCEDURE getUser
