@@ -144,7 +144,16 @@ namespace ProjectOne_Class_library
 
                 while (myReader.Read())
                 {
-                    products.Add(new Product(Convert.ToInt32(myReader["productID"]), Convert.ToDouble(myReader["price"]), Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), Convert.ToDouble(myReader["vatTag"])));
+                    if (Convert.ToInt32(myReader["vatTag"]) == 1)
+                    {
+                        products.Add(new Product(Convert.ToInt32(myReader["productID"]), Convert.ToDouble(myReader["price"]) * 1.12, Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), Convert.ToInt32(myReader["vatTag"])));
+
+                    }
+                    else if (Convert.ToInt32(myReader["vatTag"]) == 2)
+                    {
+                        products.Add(new Product(Convert.ToInt32(myReader["productID"]), Convert.ToDouble(myReader["price"])* 1.25, Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), Convert.ToInt32(myReader["vatTag"])));
+
+                    }
                 }
             }
             catch (Exception)
@@ -155,6 +164,7 @@ namespace ProjectOne_Class_library
             {
                 myConnection.Close();
             }
+
             return products;
         }
         //Try to add product, if product already exists or something goes wrong, default return is 0
