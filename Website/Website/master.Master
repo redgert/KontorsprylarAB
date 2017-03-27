@@ -102,6 +102,7 @@
                                 <label for="text">City:</label>
                                 <input type="text" class="form-control" id="newCity">
                             </div>
+
                             <%--Submit information and try to log in, wrong info will leave error message--%>
                         </form>
                     </div>

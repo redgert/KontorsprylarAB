@@ -5,7 +5,10 @@ $(document).ready(function () {
     $.getJSON("/svc/productInfo.aspx").done(function (product) {
         console.log(product);
         product.forEach(function (data) {
-            var $myRow = $('<div/>', { class: 'container' });
+            var $myRow = $('<div/>', {
+                class: 'container',
+                style: "width: 100px; height: 100px; background-image: url('" + data.URL + "'); background-size: cover; margin-bottom: 10px;"
+            });
             $('#Products').append($myRow);
             console.log(data);
 
@@ -17,7 +20,7 @@ $(document).ready(function () {
                 'data-html': true,
                 text: data.ShortDescription,
                 'data-trigger': "focus",
-                style: "text-decoration: none;"
+                style: "text-decoration: none; font-size: 20px;"
             }));
             $('[data-toggle="popover"]').popover();
         });

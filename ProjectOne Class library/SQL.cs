@@ -195,12 +195,12 @@ namespace ProjectOne_Class_library
                 {
                     if (Convert.ToInt32(myReader["vatTag"]) == 1)
                     {
-                        products.Add(new Product(Convert.ToInt32(myReader["productID"]), Math.Round(Convert.ToDouble(myReader["price"]) * 1.12, 2), Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), Convert.ToInt32(myReader["vatTag"])));
+                        products.Add(new Product(Convert.ToInt32(myReader["productID"]), Math.Round(Convert.ToDouble(myReader["price"]) * 1.12, 2), Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), myReader["URL"].ToString(), Convert.ToInt32(myReader["vatTag"])));
 
                     }
                     else if (Convert.ToInt32(myReader["vatTag"]) == 2)
                     {
-                        products.Add(new Product(Convert.ToInt32(myReader["productID"]), Math.Round(Convert.ToDouble(myReader["price"])* 1.25, 2), Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), Convert.ToInt32(myReader["vatTag"])));
+                        products.Add(new Product(Convert.ToInt32(myReader["productID"]), Math.Round(Convert.ToDouble(myReader["price"])* 1.25, 2), Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), myReader["URL"].ToString(), Convert.ToInt32(myReader["vatTag"])));
 
                     }
                 }
@@ -217,7 +217,7 @@ namespace ProjectOne_Class_library
             return products;
         }
         //Try to add product, if product already exists or something goes wrong, default return is 0
-        public int AddProduct(double price, int vattag, int stock, string shortdescription, string longdescription)
+        public int AddProduct(double price, int vattag, int stock, string shortdescription, string longdescription, string url)
         {
             int newProductID = 0;
             //Call method get product to see if it is already existing
@@ -242,7 +242,8 @@ namespace ProjectOne_Class_library
                         addShortDescription.Value = shortdescription;
                         SqlParameter addLongDescription = new SqlParameter("@LongDescription", SqlDbType.VarChar);
                         addLongDescription.Value = longdescription;
-
+                        SqlParameter addURL = new SqlParameter("@URL", SqlDbType.VarChar);
+                        addURL.Value = url;
 
                         myCommand.Parameters.Add(addProductPrice);
                         myCommand.Parameters.Add(addProductID);
@@ -250,6 +251,7 @@ namespace ProjectOne_Class_library
                         myCommand.Parameters.Add(addProductVatTag);
                         myCommand.Parameters.Add(addShortDescription);
                         myCommand.Parameters.Add(addLongDescription);
+                        myCommand.Parameters.Add(addURL);
                         #endregion
                         myCommand.ExecuteNonQuery();
                         newProductID = Convert.ToInt32(addProductID.Value);
@@ -296,12 +298,12 @@ namespace ProjectOne_Class_library
                         if (Convert.ToInt32(myReader["VatTag"]) == 1)
                         {
                             //Create new Product based on all information in Product Table SQL
-                            tempProduct = new Product(Convert.ToInt32(myReader["ProductID"]), Math.Round(Convert.ToDouble(myReader["Price"])* 1.12, 2), Convert.ToInt32(myReader["Stock"]), myReader["ShortDescription"].ToString(), myReader["LongDescription"].ToString(), Convert.ToInt32(myReader["VatTag"]));
+                            tempProduct = new Product(Convert.ToInt32(myReader["ProductID"]), Math.Round(Convert.ToDouble(myReader["Price"])* 1.12, 2), Convert.ToInt32(myReader["Stock"]), myReader["ShortDescription"].ToString(), myReader["LongDescription"].ToString(), myReader["URL"].ToString(), Convert.ToInt32(myReader["VatTag"]));
                         }
                         else if (Convert.ToInt32(myReader["VatTag"]) == 2)
                         {
                             //Create new Product based on all information in Product Table SQL
-                            tempProduct = new Product(Convert.ToInt32(myReader["ProductID"]), Math.Round(Convert.ToDouble(myReader["Price"])* 1.25, 2), Convert.ToInt32(myReader["Stock"]), myReader["ShortDescription"].ToString(), myReader["LongDescription"].ToString(), Convert.ToInt32(myReader["VatTag"]));
+                            tempProduct = new Product(Convert.ToInt32(myReader["ProductID"]), Math.Round(Convert.ToDouble(myReader["Price"])* 1.25, 2), Convert.ToInt32(myReader["Stock"]), myReader["ShortDescription"].ToString(), myReader["LongDescription"].ToString(), myReader["URL"].ToString(), Convert.ToInt32(myReader["VatTag"]));
                         }
                     }
                     catch (Exception)
