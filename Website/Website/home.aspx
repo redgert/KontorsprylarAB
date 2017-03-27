@@ -6,7 +6,5 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
         <h2>Welcome to our shop!</h2>
-        <asp:Label ID="LabelFirstName" runat="server" Text=""></asp:Label>
-        <asp:Label ID="LabelLastName" runat="server" Text=""></asp:Label>
     </form>
 </asp:Content>
