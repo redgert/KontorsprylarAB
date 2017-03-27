@@ -8,7 +8,7 @@ function GetRequest() {
                 window.location.href = "/home.aspx";
             }
             else if (user.IsAdmin === 1) {
-                window.location.href = "/home.aspx";
+                window.location.href = "/admin.aspx";
             }
                 //If user does not exist, or username and password doesnt match, the JSON object is set to "Error"
             if (user === "Error") {
