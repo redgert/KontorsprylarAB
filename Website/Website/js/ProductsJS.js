@@ -15,7 +15,8 @@ $(document).ready(function () {
                 title: data.ShortDescription,
                 'data-content': data.LongDescription,
                 text: data.ShortDescription,
-                'data-trigger': "focus"
+                'data-trigger': "focus",
+                style: "text-decoration: none;"
             }));
             $('[data-toggle="popover"]').popover();
         });
