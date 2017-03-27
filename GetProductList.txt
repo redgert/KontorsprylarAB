@@ -1,0 +1,37 @@
+        static public List<ProductList> GetProductList (Product)
+        {
+
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+            List<ProductList> productList = new List<ProductList>();
+
+            try
+            {
+                myConnection.Open();
+
+                SqlCommand myCommand = new SqlCommand("Select* from FullOverView where UserID = @OrderID ", myConnection);
+
+                SqlDataReader myReader = myCommand.ExecuteReader();
+               
+                SqlParameter parameterUserID = new SqlParameter("@OrderID", SqlDbType.Int);
+                parameterUserID.Value = Quantity;
+
+                myCommand.Parameters.Add(parameterUserID);
+
+                while (myReader.Read())
+                {
+                    productList.Add(new ProductList(Convert.ToInt32(myReader["ProductListID"]), Convert.ToInt32(myReader["OrderID"]), Convert.ToInt32(myReader["ProductID"]), Convert.ToInt32(myReader["Quantity"])));
+                }
+
+                myReader.Close();
+                myCommand.Dispose();
+
+            }
+            finally
+            {
+
+                myConnection.Close();
+            }
+
+            return productList;
+        }

@@ -168,6 +168,7 @@ insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) v
 insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (2000,2,1,'HP-skrivare','totalt värdelös skrivare från HP')
 
 insert into ProductLists (OrderID, ProductID, Quantity) values (1, 1, 2)
+insert into ProductLists (OrderID, ProductID, Quantity) values (1, 1, 2)
 
 
 
@@ -193,3 +194,39 @@ GO
 Select * from FullOverView
 stri
 EXECUTE getUser 'redgert','hemligtord'
+
+GO
+CREATE PROCEDURE GetOrders
+@UserID int
+AS
+Select * from FullOverView where FullOverView.UserID = @UserID
+GO
+
+GO
+
+--Alex Codes!
+
+CREATE PROCEDURE CreateProductList
+@OrderID int,
+@ProductID int,
+@Quantity int
+
+
+as
+insert into ProductLists (OrderID,ProductID,Quantity)
+values (@OrderID,@ProductID, @Quantity)
+
+GO
+
+
+CREATE PROCEDURE GetProductList
+@ProductListID int
+
+AS
+
+Select * from FullOverView where FullOverView.ProductListID = ProductListID
+
+GO
+
+Execute GetProductList 1
+
