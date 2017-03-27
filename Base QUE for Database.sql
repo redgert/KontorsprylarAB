@@ -209,16 +209,29 @@ where
 
 GO
 
+CREATE PROCEDURE CreateProductList
+@OrderID int,
+@ProductID int,
+@Quantity int
 
 
---TODODODODODODODODO!!!!!!!!!!!!!!-----------------------------------
+as
+insert into ProductLists (OrderID,ProductID,Quantity)
+values (@OrderID,@ProductID, @Quantity)
 
---create a procedure to update userinfo
-
----------------------------------------------------------------------
+GO
 
 
+CREATE PROCEDURE GetProductList
+@ProductListID int
 
+AS
+
+Select * from FullOverView where FullOverView.ProductListID = ProductListID
+
+GO
+
+------------------------------------------------------
 
 
 
@@ -283,5 +296,15 @@ GO
 
 Execute GetOrders 2
 
+GO
 
 EXECUTE getUser 'redgert','hemligtord'
+
+
+AS
+
+Select * from FullOverView where FullOverView.ProductListID = ProductListID
+
+GO
+
+Execute GetProductList 1
