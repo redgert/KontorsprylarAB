@@ -24,8 +24,19 @@ namespace Website.svc
                 if (Session["myCart"] != null)
                 {
                     cartProducts = (List<Product>)Session["myCart"];
-
-                    cartProducts.Add(myProduct);
+                    bool exist = false;
+                    foreach (var item in cartProducts)
+                    {
+                        if (item.ProductID == myProduct.ProductID)
+                        {
+                            exist = true;
+                            break;
+                        }
+                    }
+                    if(!exist)
+                    {
+                        cartProducts.Add(myProduct);
+                    }
 
                     Session["myCart"] = cartProducts;
                 }
