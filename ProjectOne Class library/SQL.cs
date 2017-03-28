@@ -530,7 +530,7 @@ namespace ProjectOne_Class_library
             }
         }
 
-        static public void UpdateProduct(int productID, double price, int vatTag, int stock, string shortDescrip, string longDescrip )
+        static public void UpdateProduct(int productID, double price, int stock, string shortDescrip, string longDescrip, string url, int vatTag)
 
         {
             SqlConnection myConnection = new SqlConnection(CON_STR);
