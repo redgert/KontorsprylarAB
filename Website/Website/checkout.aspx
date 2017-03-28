@@ -5,6 +5,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="table-responsive">
         <asp:table id="checkOutTable" cssclass="table table-responsive" runat="server"></asp:table>
-        <asp:Button ID="Button1" runat="server" Text="Submit Order" />
+        <asp:Button ID="Button1" runat="server" Text="Submit Order"/>
     </div>
 </asp:Content>

@@ -107,14 +107,14 @@ CREATE PROCEDURE getUser
 @PassWord varchar(50)
 
 as
-select * from Users, Orders, ProductLists 
+select * from Users
 where Users.Username=@username AND Users.UserPassword=@password
 Go
 
 CREATE PROCEDURE GetUserByID
 @UserID int
 AS
-Select * from Users, Orders, ProductLists
+Select * from Users
 where Users.UserID = @UserID
 GO
 
