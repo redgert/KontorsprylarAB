@@ -217,7 +217,7 @@ namespace ProjectOne_Class_library
             return products;
         }
         //Try to add product, if product already exists or something goes wrong, default return is 0
-        public int AddProduct(double price, int vattag, int stock, string shortdescription, string longdescription, string url)
+        public int AddProduct(double price, int stock, string shortdescription, string longdescription, string url, int vattag)
         {
             int newProductID = 0;
             //Call method get product to see if it is already existing
