@@ -202,10 +202,11 @@ AS
 Select * from FullOverView where FullOverView.UserID = @UserID
 GO
 
-GO
 
 --Alex Codes!
 
+
+GO
 CREATE PROCEDURE CreateProductList
 @OrderID int,
 @ProductID int,
@@ -229,4 +230,6 @@ Select * from FullOverView where FullOverView.ProductListID = ProductListID
 GO
 
 Execute GetProductList 1
+
+
 

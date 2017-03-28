@@ -1,0 +1,55 @@
+  static public void UpdateProduct(int productID, double price, int vatTag, int stock, string shortDescrip, string longDescrip )
+
+        {
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+            try
+            {
+                myConnection.Open();
+
+                SqlCommand myCommand = new SqlCommand("UpdateProduct", myConnection);
+
+                myCommand.CommandType = CommandType.StoredProcedure;
+
+                #region Parameters
+                SqlParameter parameterProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                parameterProductID.Value = productID;
+
+                SqlParameter parameterPrice = new SqlParameter("@Price", SqlDbType.Money);
+                parameterPrice.Value = price;
+
+                SqlParameter parameterVatTag = new SqlParameter("@VatTag", SqlDbType.Int);
+                parameterVatTag.Value = vatTag;
+
+                SqlParameter parameterStock = new SqlParameter("@Stock", SqlDbType.Int);
+                parameterStock.Value = stock;
+
+                SqlParameter parameterShortDescrip= new SqlParameter("@ShortDescription", SqlDbType.VarChar);
+                parameterShortDescrip.Value = shortDescrip;
+
+                SqlParameter parameterLongDescrip = new SqlParameter("@LongDescription", SqlDbType.VarChar);
+                parameterLongDescrip.Value = longDescrip;
+
+                myCommand.Parameters.Add(parameterProductID);
+                myCommand.Parameters.Add(parameterPrice);
+                myCommand.Parameters.Add(parameterVatTag);
+                myCommand.Parameters.Add(parameterStock);
+                myCommand.Parameters.Add(parameterShortDescrip);
+                myCommand.Parameters.Add(parameterLongDescrip);
+
+                myCommand.ExecuteNonQuery();
+
+
+
+
+
+
+                #endregion
+            }
+            finally
+            {
+
+                myConnection.Close();
+            }
+
+        }

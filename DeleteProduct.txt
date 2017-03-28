@@ -1,0 +1,28 @@
+
+
+        static public void RemoveProduct (int DeleteProductID)
+
+        {
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+            SqlCommand myCommand = new SqlCommand("RemoveProduct", myConnection);
+            myCommand.CommandType = CommandType.StoredProcedure;
+
+            try
+            {
+                myConnection.Open();
+
+                SqlParameter parameterDeleteProductID = new SqlParameter("@ProductID", SqlDbType.Int);
+                parameterDeleteProductID.Value = DeleteProductID;
+
+                myCommand.Parameters.Add(parameterDeleteProductID);
+
+                myCommand.ExecuteNonQuery();
+            }
+            finally
+            {
+
+                myConnection.Close();
+            }
+
+        }

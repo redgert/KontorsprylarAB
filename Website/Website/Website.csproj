@@ -74,6 +74,13 @@
   <ItemGroup>
     <Content Include="admin.aspx" />
     <Content Include="home.aspx" />
+    <Content Include="img\bible.png" />
+    <Content Include="img\gem.jpg" />
+    <Content Include="img\HPprinter.png" />
+    <Content Include="img\HPscreen.jpg" />
+    <Content Include="img\pen.png" />
+    <Content Include="js\adminJS.js" />
+    <Content Include="js\logoutJS.js" />
     <Content Include="js\ProductsJS.js" />
     <Content Include="products.aspx" />
     <Content Include="svc\info.aspx" />
@@ -112,6 +119,7 @@
     <Content Include="Scripts\jquery-3.1.1.min.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.js" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="svc\logOutUser.aspx" />
     <Content Include="svc\productInfo.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -155,6 +163,13 @@
       <DependentUpon>master.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="svc\logOutUser.aspx.cs">
+      <DependentUpon>logOutUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="svc\logOutUser.aspx.designer.cs">
+      <DependentUpon>logOutUser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="svc\productInfo.aspx.cs">
       <DependentUpon>productInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
