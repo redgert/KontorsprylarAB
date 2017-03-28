@@ -11,7 +11,6 @@ $(document).ready(function () {
                 })
                 $('#tableBody').append($newRow)
                 for (var j = 0; j < $keys.length; j++) {
-                    console.log(product[i][$keys[j]])
                     $newRow.append($('<TD/>', {
                         text: product[i][$keys[j]],
                         id: product[i][$keys[0]] + $keys[j]
@@ -90,9 +89,7 @@ function UpdateProduct(id) {
     productArray.push($longdesc);
     productArray.push($url);
     productArray.push($vat);
-
-    console.log(productArray);
-    console.log($id + " " + $price);
+    
     $('#' + id + 'row').children().remove();
     var $newTD = $('<TD/>', {
         text: $id
@@ -132,6 +129,7 @@ function UpdateOldProduct(id) {
         "&shortDesc=" + $shortdesc + "&longDesc=" + $longdesc +
         "&url=" + $url + "&vatTag=" + $vat).done(function (data) {
             console.log(data);
+            window.location.href = "/admin.aspx";
         })
 }
 
