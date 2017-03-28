@@ -1,4 +1,5 @@
-﻿
+﻿/// <reference path="C:\KontorsprylarAB\Website\Website\Scripts/jquery-2.1.0-vsdoc.js" />
+
 //Request url to info.aspx based on information in textboxes on start page
 function GetRequest(username, password) {
     $.getJSON("svc/info.aspx?username=" + username + "&password=" + password).
@@ -71,3 +72,24 @@ function FormSubmit()
         });
     }
 }
+
+$(document).ready(function () {
+    $.getJSON("svc/svc_cart.aspx?product=1").done(function (productList) {
+        console.log(productList);
+        productList.forEach(function (product) {
+            console.log(product);
+            var $newLi = ($('<li/>', {
+                text: product.ShortDescription,
+                style: "font-size: 20px; text-align: left;"
+            }))
+            $('#productDropDown').prepend($newLi)
+
+            $newLi.append($('<p/>', {
+                text: product.Price
+            }))
+        });
+
+        $("#listShopCart").addClass("open");
+        $("#listShopCart").attr("aria-expanded", "true");
+    })
+})

@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin.aspx" />
+    <Content Include="checkout.aspx" />
     <Content Include="css\myStyle.css" />
     <Content Include="home.aspx" />
     <Content Include="img\bible.png" />
@@ -83,6 +84,7 @@
     <Content Include="img\pen.png" />
     <Content Include="js\adminJS.js" />
     <Content Include="js\changeinformationJS.js" />
+    <Content Include="js\cartJS.js" />
     <Content Include="js\logoutJS.js" />
     <Content Include="js\ProductsJS.js" />
     <Content Include="products.aspx" />
@@ -124,6 +126,7 @@
     <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="svc\logOutUser.aspx" />
     <Content Include="svc\productInfo.aspx" />
+    <Content Include="svc\svc_cart.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +136,13 @@
     </Compile>
     <Compile Include="admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="checkout.aspx.cs">
+      <DependentUpon>checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="checkout.aspx.designer.cs">
+      <DependentUpon>checkout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -179,6 +189,13 @@
     </Compile>
     <Compile Include="svc\productInfo.aspx.designer.cs">
       <DependentUpon>productInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="svc\svc_cart.aspx.cs">
+      <DependentUpon>svc_cart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="svc\svc_cart.aspx.designer.cs">
+      <DependentUpon>svc_cart.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

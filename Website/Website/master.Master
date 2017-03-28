@@ -16,7 +16,6 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-
     <div>
         <div class="page-header">
             <img class="img-responsive" src="img/logo.png" alt="Logo">
@@ -41,10 +40,8 @@
                         <li id="listLoginButton"><a href="#" id="loginButton" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
                         <li class="dropdown" id="listShopCart">
                             <a class="dropdown-toggle" id="shopCart" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-shopping-cart"></span><span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Page 1-1</a></li>
-                                <li><a href="#">Page 1-2</a></li>
-                                <li><a href="#">Page 1-3</a></li>
+                            <ul class="dropdown-menu" id="productDropDown">
+                                <li><a href="#">Go to Checkout</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -233,6 +230,30 @@
         <%--SLUT TESTMODAL--%>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
+    </div>
+    <div>
+        <footer class="navbar-fixed-bottom">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 class="label-big">Kontorsprylar AB</h1>
+                        <p style="color:aliceblue">Location: Häftapparatsgatan 7, 961 91 Gemträsk</p>
+                        <p style="color:aliceblue">Phonenumber: 90510</p>
+                        <p style="color:aliceblue">Mail address: Kalle@kontorsprylar.se</p>
+                    </div>
+                    <!--Second column-->
+                    <div class="col-md-6">
+                        <h2 class="label-big">Links</h2>
+                        <ul>
+                            <li><a href="https://www.facebook.com/KontorsprylarAB/" style="color:aliceblue">Facebook</a></li>
+                            <li><a href="http://www.instagram.com" style="color:aliceblue">instagram</a></li>
+                            <li><a href="http://www.twitter.com" style="color:aliceblue">twitter</a></li>
+                            <li><a href="https://www.google.se/maps/place/961+91+Gemtr%C3%A4sk/@65.872383,22.0057485,14z/data=!4m5!3m4!1s0x45d5f4cb0c661d85:0x422054ce4e05f724!8m2!3d65.873611!4d22.0207045" style="color:aliceblue">Google Maps</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 </body>
 </html>

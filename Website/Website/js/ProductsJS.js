@@ -69,8 +69,29 @@ $(document).ready(function () {
 
 function BuyProduct(productID) {
     console.log(productID);
-    $.getJSON("svc/productInfo.aspx?prodid=" + productID).done(function (data) {
-        console.log(data);
+    $.getJSON("svc/svc_cart.aspx?prodid=" + productID).done(function (data) {
+        $.getJSON("svc/svc_cart.aspx?product=1").done(function (productList) {
+            console.log(productList);
+            $('#productDropDown').empty()
+            productList.forEach(function (product) {
+                console.log(product);
+                var $newLi = ($('<li/>', {
+                    text: product.ShortDescription,
+                    style: "font-size: 20px; text-align: left;"
+                }))
+                $('#productDropDown').prepend($newLi)
+
+                $newLi.append($('<p/>', {
+                    text: product.Price
+                }))
+            });
+            
+           
+            $('#productDropDown').append('<li><a href="checkout.aspx">Checkout</a></li>');
+
+            $("#listShopCart").addClass("open");
+            $("#listShopCart").attr("aria-expanded", "true");
+        })
     });
 }
 

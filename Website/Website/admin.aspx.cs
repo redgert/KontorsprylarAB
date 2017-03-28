@@ -12,6 +12,7 @@ namespace Website
     public partial class adminsida : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
+
         {
             SQL mySQL = new SQL();
             if(Session["user"] != null)
