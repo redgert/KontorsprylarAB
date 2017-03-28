@@ -28,7 +28,7 @@ namespace Website
                     TableCell cell2 = new TableCell();
                     cell2.Text = item.Price.ToString();
                     myRow.Controls.Add(cell2);
-
+                    
                     checkOutTable.Controls.Add(myRow);
                 }
             }

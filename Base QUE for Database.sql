@@ -182,8 +182,6 @@ GO
 
 CREATE PROCEDURE UpdateUser
 @UserID int,
-@Username nvarchar(50),
-@PassWord nvarchar(50),
 @FirstName nvarchar(50),
 @LastName nvarchar(50),
 @Street nvarchar(50),
@@ -197,8 +195,6 @@ AS
 Update
 	Users
 set
-	Username = ISNULL(@Username, Username),
-	UserPassword = ISNULL(@Password, UserPassword),
 	FirstName = ISNULL(@FirstName, FirstName),
 	LastName = ISNULL(@LastName, LastName),
 	Street = ISNULL(@Street, Street),
