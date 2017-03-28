@@ -72,7 +72,7 @@ Quantity int NOT NULL
 
 GO
 
-
+select * from ProductLists
 
 CREATE PROCEDURE CreateUser
 
@@ -222,15 +222,17 @@ values (@OrderID,@ProductID, @Quantity)
 GO
 
 
-CREATE PROCEDURE GetProductList
-@ProductListID int
+ALTER PROCEDURE GetProductList
+@OrderID int
 
 AS
 
-Select * from FullOverView where FullOverView.ProductListID = ProductListID
+Select * from ProductLists where ProductLists.OrderID = @OrderID
 
 GO
 
+select * from Orders
+EXECUTE GetProductList 11
 ------------------------------------------------------
 
 
@@ -291,9 +293,9 @@ GO
 CREATE PROCEDURE GetOrders
 @UserID int
 AS
-Select * from FullOverView where FullOverView.UserID = @UserID
+Select * from Orders where Orders.UserID = @UserID
 GO
-
+select * from Orders
 Execute GetOrders 2
 
 GO
