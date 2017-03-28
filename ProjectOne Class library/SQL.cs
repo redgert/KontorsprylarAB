@@ -555,6 +555,54 @@ namespace ProjectOne_Class_library
 
         }
 
+        static public int CreateOrder(int userid)
+        {
+            int orderID = 0;
+
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+            try
+            {
+                           
+                myConnection.Open();
+
+                SqlCommand myCommand = new SqlCommand("CreateOrder", myConnection); // Option: Select* from FullOverView where UserID = @UserID
+                myCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter parameterUserID = new SqlParameter("@UserID", SqlDbType.Int);
+                parameterUserID.Value = userid;
+                SqlParameter parameterStatus = new SqlParameter("@OrderStatus", SqlDbType.VarChar);
+                parameterStatus.Value = "Received";
+                SqlParameter newOrderDate = new SqlParameter("@OrderDate", SqlDbType.SmallDateTime);
+                newOrderDate.Value = DateTime.Today;
+                SqlParameter newOrderID = new SqlParameter("@OutputOrderID", SqlDbType.Int);
+                newOrderID.Direction = ParameterDirection.Output;
+
+                myCommand.Parameters.Add(parameterUserID);
+                myCommand.Parameters.Add(parameterStatus);
+                myCommand.Parameters.Add(newOrderDate);
+                myCommand.Parameters.Add(newOrderID);
+
+                myCommand.ExecuteNonQuery();
+
+                orderID = Convert.ToInt32(newOrderID);
+
+                myCommand.Dispose();
+
+            }
+
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            return orderID;
+        }
+       
+
 
     }
 
