@@ -9,6 +9,7 @@
     <script src="Scripts/bootstrap.js"></script>
     <script src="js/loginJS.js"></script>
     <script src="js/logoutJS.js"></script>
+    <link href="css/myStyle.css" rel="stylesheet" />
     <title>Kontorsprylar</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
