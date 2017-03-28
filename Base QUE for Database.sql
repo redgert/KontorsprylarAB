@@ -58,6 +58,7 @@ VatTag int FOREIGN KEY references Vat(VatID),
 Stock int NOT NULL,
 ShortDescription varchar(50) NOT NULL,
 LongDescription varchar(1000) NOT NULL,
+URL varchar(100) NOT NULL,
 Active bit default 'true' NOT NULL
 );
 
@@ -106,14 +107,14 @@ CREATE PROCEDURE getUser
 @PassWord varchar(50)
 
 as
-select * from Users, Orders, ProductLists 
+select * from Users
 where Users.Username=@username AND Users.UserPassword=@password
 Go
 
 CREATE PROCEDURE GetUserByID
 @UserID int
 AS
-Select * from Users, Orders, ProductLists
+Select * from Users
 where Users.UserID = @UserID
 GO
 
@@ -137,10 +138,11 @@ CREATE PROCEDURE CreateProduct
 @Stock int,
 @ShortDescription varchar(50),
 @LongDescription varchar(1000),
+@URL varchar(100) NOT NULL,
 @OutputID int output
 AS
-insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription, Active)
-values (@Price, @VatTag, @Stock, @ShortDescription, @LongDescription, 'true')
+insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription, URL, Active)
+values (@Price, @VatTag, @Stock, @ShortDescription, @LongDescription, @URL, 'true')
 
 SET @OutputID = SCOPE_IDENTITY();
 GO
@@ -159,7 +161,8 @@ CREATE PROCEDURE UpdateProduct
 @VatTag int,
 @Stock int,
 @ShortDescription varchar(50),
-@LongDescription varchar(1000)
+@LongDescription varchar(1000),
+@URL varchar(100)
 AS
 UPDATE
 	Products
@@ -168,7 +171,8 @@ set
 	VatTag = ISNULL(@VatTag, VatTag),
 	Stock = ISNULL(@Stock, Stock),
 	ShortDescription = ISNULL(@ShortDescription, ShortDescription),
-	LongDescription = ISNULL(@LongDescription, LongDescription)
+	LongDescription = ISNULL(@LongDescription, LongDescription),
+	URL = ISNULL(@URL, URL)
 where
 	ProductID = @ProductID
 
@@ -178,8 +182,6 @@ GO
 
 CREATE PROCEDURE UpdateUser
 @UserID int,
-@Username nvarchar(50),
-@PassWord nvarchar(50),
 @FirstName nvarchar(50),
 @LastName nvarchar(50),
 @Street nvarchar(50),
@@ -193,8 +195,6 @@ AS
 Update
 	Users
 set
-	Username = ISNULL(@Username, Username),
-	UserPassword = ISNULL(@Password, UserPassword),
 	FirstName = ISNULL(@FirstName, FirstName),
 	LastName = ISNULL(@LastName, LastName),
 	Street = ISNULL(@Street, Street),
