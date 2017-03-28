@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Newtonsoft.Json;
 
 namespace Website.svc
 {
@@ -12,7 +13,7 @@ namespace Website.svc
         protected void Page_Load(object sender, EventArgs e)
         {
             //Remove this when the Logout-method is changed from JSON to something else...
-            logOutUserLiteral.Text = "temporary, unecessary text";
+            logOutUserLiteral.Text = JsonConvert.SerializeObject("ok");
 
             Session["user"] = null;
         }
