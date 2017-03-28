@@ -17,7 +17,7 @@
 
     <div>
         <div class="page-header">
-            <h1>Kontorsprylar AB</h1>
+            <img class="img-responsive" src="img/logo.png" alt="Logo">
         </div>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
