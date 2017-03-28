@@ -69,8 +69,9 @@ $(document).ready(function () {
 
 function BuyProduct(productID) {
     console.log(productID);
-    $.getJSON("svc/productInfo.aspx?prodid=" + productID).done(function (data) {
+    $.getJSON("svc/svc_cart.aspx?prodid=" + productID).done(function (data) {
         console.log(data);
+        window.location.href = "/products.aspx";
     });
 }
 
