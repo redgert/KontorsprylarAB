@@ -627,7 +627,7 @@ namespace ProjectOne_Class_library
                            
                 myConnection.Open();
 
-                SqlCommand myCommand = new SqlCommand("CreateOrder", myConnection); // Option: Select* from FullOverView where UserID = @UserID
+                SqlCommand myCommand = new SqlCommand("CreateOrder", myConnection);
                 myCommand.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter parameterUserID = new SqlParameter("@UserID", SqlDbType.Int);
