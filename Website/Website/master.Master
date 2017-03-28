@@ -159,9 +159,7 @@
                 </div>
             </div>
         </div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
-    </div>
+        </div>
     <div>
         <footer class="navbar-fixed-bottom">
             <div class="container-fluid">
@@ -186,5 +184,7 @@
             </div>
         </footer>
     </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
 </body>
 </html>
