@@ -469,7 +469,7 @@ namespace ProjectOne_Class_library
             return productLists;
         }
 
-        static public void UpdateProduct(int productID, double price, int vatTag, int stock, string shortDescrip, string longDescrip )
+        static public void UpdateProduct(int productID, double price, int stock, string shortDescrip, string longDescrip, string url, int vatTag)
 
         {
             SqlConnection myConnection = new SqlConnection(CON_STR);
@@ -500,6 +500,8 @@ namespace ProjectOne_Class_library
 
                 SqlParameter parameterLongDescrip = new SqlParameter("@LongDescription", SqlDbType.VarChar);
                 parameterLongDescrip.Value = longDescrip;
+                SqlParameter parameterURL = new SqlParameter("@URL", SqlDbType.VarChar);
+                parameterURL.Value = url;
 
                 myCommand.Parameters.Add(parameterProductID);
                 myCommand.Parameters.Add(parameterPrice);
@@ -507,6 +509,7 @@ namespace ProjectOne_Class_library
                 myCommand.Parameters.Add(parameterStock);
                 myCommand.Parameters.Add(parameterShortDescrip);
                 myCommand.Parameters.Add(parameterLongDescrip);
+                myCommand.Parameters.Add(parameterURL);
 
                 myCommand.ExecuteNonQuery();
 

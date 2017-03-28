@@ -23,5 +23,6 @@
         </div>
         <button class="btn btn-default" onclick="AddProduct();">Add Product</button>
     </div>
+    <script src="Scripts/tablesorter/jquery.tablesorter.combined.js"></script>
     <script src="js/adminJS.js"></script>
 </asp:Content>
