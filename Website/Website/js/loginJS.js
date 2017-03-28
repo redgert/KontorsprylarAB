@@ -38,3 +38,26 @@ $(document).ready(function () {
         }
     })
 })
+
+function FormSubmit()
+{
+    var Password = $("#newPassword").val();
+    var Password2 = $("#newPasswordAgain").val();
+
+    if (Password != Password2) {
+        alert("FU");
+    }
+    else {
+        var Username = $("#newUsername").val();
+        var Firstname = $("#newFirstName").val();
+        var Lastname = $("#newLastName").val();
+        var Street = $("#newStreet").val();
+        var Zip = $("#newZip").val();
+        var City = $("#newCity").val();
+        var Country = $("#newCountry").val();
+        var Phonenumber = $("#newPhoneNumber").val();
+        var Email = $("#newEmail").val();
+        $.getJSON("svc/info.aspx?CreateUser=1", { "Username": Username, "Password": Password, "Password2": Password2, "Firstname": Firstname, "Lastname": Lastname, "Street": Street, "Zip": Zip, "City": City, "Country": Country, "Phonenumber": Phonenumber, "Email": Email })
+        //.done(function (data) { alert(data); });
+    }
+}

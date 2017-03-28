@@ -23,10 +23,10 @@ UserPassword varchar(50) NOT NULL,
 FirstName varchar(50) NOT NULL,
 LastName varchar(50) NOT NULL,
 Street varchar(50) NOT NULL,
-Zip varchar(50) NOT NULL, --CHECK (Zip LIKE '[0-9][0-9][0-9][0-9][0-9]'),
+Zip varchar(50) NOT NULL CHECK (Zip LIKE '[0-9][0-9][0-9][0-9][0-9]'),
 City varchar(50) NOT NULL,
 Country varchar(50) NOT NULL,
-PhoneNumber varchar(50), --CHECK (PhoneNumber LIKE '[0][7][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+PhoneNumber varchar(50) CHECK (PhoneNumber LIKE '[0][7][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 Email varchar(50),
 isAdmin bit NOT NULL
 );
@@ -209,40 +209,27 @@ where
 
 GO
 
-CREATE PROCEDURE CreateProductList
-@OrderID int,
-@ProductID int,
-@Quantity int
 
 
-as
-insert into ProductLists (OrderID,ProductID,Quantity)
-values (@OrderID,@ProductID, @Quantity)
+--TODODODODODODODODO!!!!!!!!!!!!!!-----------------------------------
 
-GO
+--create a procedure to update userinfo
+
+---------------------------------------------------------------------
 
 
-CREATE PROCEDURE GetProductList
-@ProductListID int
 
-AS
-
-Select * from FullOverView where FullOverView.ProductListID = ProductListID
-
-GO
-
-------------------------------------------------------
 
 
 
 Insert into  Users (Username, UserPassword, FirstName, LastName, Street, City, Zip, Country, PhoneNumber, Email, IsAdmin) 
 values ('KungG','Gurra16', 'Karl Gustav','Bernadotte','Slottet','Stockholm','11111', 'Sweden', '0701111111','Kalle@kungahuset.se',0)
 Insert into  Users (Username, UserPassword, FirstName, LastName, Street, City, Zip, Country, PhoneNumber, Email, IsAdmin) 
-values ('Redgert','hemligtord', 'Niklas','Redgert','HagendalsvÃ¤gen 15D','Kumla','69231', 'Sweden', '0702862125','niklas@redgert.com',1)
+values ('Redgert','hemligtord', 'Niklas','Redgert','Hagendalsvägen 15D','Kumla','69231', 'Sweden', '0702862125','niklas@redgert.com',1)
 Insert into  Users (Username, UserPassword, FirstName, LastName, Street, City, Zip, Country, PhoneNumber, Email, IsAdmin) 
-values ('Ichurep','lÃ¶senord', 'Alexander','Arana','VirebergsvÃ¤gen 5','Stockholm','16931', 'Sweden', '0763353850','arana.alexander@gmail.com',1)
+values ('Ichurep','lösenord', 'Alexander','Arana','Virebergsvägen 5','Stockholm','16931', 'Sweden', '0763353850','arana.alexander@gmail.com',1)
 Insert into  Users (Username, UserPassword, FirstName, LastName, Street, City, Zip, Country, PhoneNumber, Email, IsAdmin) 
-values ('pattzor','gillarintejava', 'Patrik','JÃ¶nsson','Storgatan','MalmÃ¶','00000', 'SkÃ¥neland', '0702222222','patrik@pattzor.se',0)
+values ('pattzor','gillarintejava', 'Patrik','Jönsson','Storgatan','Malmö','00000', 'Skåneland', '0702222222','patrik@pattzor.se',0)
 
 
 insert into Vat (VatTagMoney) values (0.25)
@@ -253,11 +240,11 @@ insert into Vat (VatTagMoney) values (0.12)
 insert into Orders (UserID, OrderStatus, OrderDate) values (2, 'Received', '2017-03-24 11:09:05')
 
 
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (150,30,2,'Bibeln','VÃ¤rldens mest sÃ¥lda bok, men typ den minst lÃ¤sta')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (10,5000,1,'BlÃ¥tt gem','dÃ¥ligt, blÃ¥tt plastgem')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (25,300,1,'RÃ¶d penna','RÃ¶d transparant penna')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (3500,0,1,'HP-skÃ¤rm','vÃ¤ldigt medelmÃ¥ttig skÃ¤rm frÃ¥n HP')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (2000,2,1,'HP-skrivare','totalt vÃ¤rdelÃ¶s skrivare frÃ¥n HP')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (150,30,2,'Bibeln','Världens mest sålda bok, men typ den minst lästa')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (10,5000,1,'Blått gem','dåligt, blått plastgem')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (25,300,1,'Röd penna','Röd transparant penna')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (3500,0,1,'HP-skärm','väldigt medelmåttig skärm från HP')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (2000,2,1,'HP-skrivare','totalt värdelös skrivare från HP')
 
 insert into ProductLists (OrderID, ProductID, Quantity) values (1, 1, 2)
 
@@ -296,15 +283,5 @@ GO
 
 Execute GetOrders 2
 
-GO
 
 EXECUTE getUser 'redgert','hemligtord'
-
-
-AS
-
-Select * from FullOverView where FullOverView.ProductListID = ProductListID
-
-GO
-
-Execute GetProductList 1
