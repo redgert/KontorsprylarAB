@@ -72,7 +72,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-default" id="buttonsubmit" onclick="GetRequest();">Login</button>
+                        <button type="button" class="btn btn-default" id="buttonsubmit" onclick="PrepareRequest();">Login</button>
                     </div>
                 </div>
             </div>
@@ -91,33 +91,72 @@
                                 <label for="text">Username:</label>
                                 <input type="text" class="form-control" id="newUsername">
                             </div>
+                            <br />
+                            <br />
                             <div class="form-group">
                                 <label for="pwd">Password:</label>
                                 <input type="password" class="form-control" id="newPassword">
                             </div>
+                            <br />
+                            <br />
                             <div class="form-group">
                                 <label for="pwd">Re-enter your Password:</label>
                                 <input type="password" class="form-control" id="newPasswordAgain">
                             </div>
+                            <br />
+                            <br />
                             <div class="form-group">
                                 <label for="text">First Name:</label>
                                 <input type="text" class="form-control" id="newFirstName">
                             </div>
+                            <br />
+                            <br />
                             <div class="form-group">
                                 <label for="text">Last Name:</label>
                                 <input type="text" class="form-control" id="newLastName">
                             </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label for="text">Street:</label>
+                                <input type="text" class="form-control" id="newStreet">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label for="text">Zip:</label>
+                                <input type="text" class="form-control" id="newZip">
+                            </div>
+                            <br />
+                            <br />
                             <div class="form-group">
                                 <label for="text">City:</label>
                                 <input type="text" class="form-control" id="newCity">
                             </div>
-
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label for="text">Country:</label>
+                                <input type="text" class="form-control" id="newCountry">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label for="text">Phonenumber:</label>
+                                <input type="text" class="form-control" id="newPhoneNumber">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label for="text">Email:</label>
+                                <input type="text" class="form-control" id="newEmail">
+                            </div>
                             <%--Submit information and try to log in, wrong info will leave error message--%>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-default" id="buttonRegister" onclick="">Login</button>
+                        <button type="button" class="btn btn-default" id="buttonRegister" onclick="FormSubmit()">Create</button>
                     </div>
                 </div>
             </div>

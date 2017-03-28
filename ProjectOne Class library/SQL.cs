@@ -26,29 +26,41 @@ namespace ProjectOne_Class_library
                     myConnection.Open();
                     SqlCommand myCommand = new SqlCommand("CreateUser", myConnection);
                     myCommand.CommandType = CommandType.StoredProcedure;
+
                     #region Parameters
                     SqlParameter addUserID = new SqlParameter("@OutputID", SqlDbType.Int);
                     addUserID.Direction = ParameterDirection.Output;
+
                     SqlParameter addUserName = new SqlParameter("@Username", SqlDbType.VarChar);
                     addUserName.Value = username;
+
                     SqlParameter addPassword = new SqlParameter("@Password", SqlDbType.VarChar);
                     addPassword.Value = password;
+
                     SqlParameter addFirstname = new SqlParameter("@Firstname", SqlDbType.VarChar);
                     addFirstname.Value = firstname;
+
                     SqlParameter addLastname = new SqlParameter("@Lastname", SqlDbType.VarChar);
                     addLastname.Value = lastname;
+
                     SqlParameter addStreet = new SqlParameter("@Street", SqlDbType.VarChar);
                     addStreet.Value = street;
+
                     SqlParameter addZip = new SqlParameter("@Zip", SqlDbType.VarChar);
                     addZip.Value = zip;
+
                     SqlParameter addCity = new SqlParameter("@City", SqlDbType.VarChar);
                     addCity.Value = city;
+
                     SqlParameter addCountry = new SqlParameter("@Country", SqlDbType.VarChar);
                     addCountry.Value = country;
+
                     SqlParameter addPhoneNumber = new SqlParameter("@PhoneNumber", SqlDbType.VarChar);
                     addPhoneNumber.Value = phonenumber;
+
                     SqlParameter addEmail = new SqlParameter("@Email", SqlDbType.VarChar);
                     addEmail.Value = email;
+
                     SqlParameter addBit = new SqlParameter("@IsAdmin", SqlDbType.Bit);
                     addBit.Value = bit;
 
@@ -217,7 +229,7 @@ namespace ProjectOne_Class_library
             return products;
         }
         //Try to add product, if product already exists or something goes wrong, default return is 0
-        public int AddProduct(double price, int vattag, int stock, string shortdescription, string longdescription, string url)
+        public int AddProduct(double price, int stock, string shortdescription, string longdescription, string url, int vattag)
         {
             int newProductID = 0;
             //Call method get product to see if it is already existing

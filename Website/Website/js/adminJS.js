@@ -52,8 +52,18 @@ function AddProduct() {
 };
 
 function AddNewProduct() {
-    console.log($('#input1').val())
-    $.getJSON("svc/productInfo.aspx?price=" + $('#input1').val() + " ")
-
-    //double price, int vattag, int stock, string shortdescription, string longdescription, string url
+    console.log($('#input0').val())
+    $.getJSON("svc/productInfo.aspx?price=" + $('#input0').val() + "&stock=" + $('#input1').val() +
+        "&shortDesc=" + $('#input2').val() + "&longDesc=" + $('#input3').val() +
+        "&url=" + $('#input4').val() + "&vatTag=" + $('#input5').val()).done(function (data) {
+            console.log(data);
+            window.location.href = "/admin.aspx";
+        })
 };
+
+function RemoveProduct(id) {
+    $.getJSON("svc/productInfo.aspx?action=remove&prodid=" + id).done(function (data) {
+        console.log(data);
+        window.location.href = "/admin.aspx";
+    })
+}
