@@ -253,11 +253,11 @@ insert into Vat (VatTagMoney) values (0.12)
 insert into Orders (UserID, OrderStatus, OrderDate) values (2, 'Received', '2017-03-24 11:09:05')
 
 
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (150,30,2,'Bibeln','Världens mest sålda bok, men typ den minst lästa')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (10,5000,1,'Blått gem','dåligt, blått plastgem')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (25,300,1,'Röd penna','Röd transparant penna')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (3500,0,1,'HP-skärm','väldigt medelmåttig skärm från HP')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription) values (2000,2,1,'HP-skrivare','totalt värdelös skrivare från HP')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (150,30,2,'Bibeln','Världens mest sålda bok, men typ den minst lästa', '/img/bible.png')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (10,5000,1,'Blått gem','dåligt, blått plastgem', '/img/gem.jpg')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (25,300,1,'Röd penna','Röd transparant penna', '/img/HPprinter.png')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (3500,0,1,'HP-skärm','väldigt medelmåttig skärm från HP', '/img/HPscreen.jpg')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (2000,2,1,'HP-skrivare','totalt värdelös skrivare från HP', '/img/pen.png')
 
 insert into ProductLists (OrderID, ProductID, Quantity) values (1, 1, 2)
 
