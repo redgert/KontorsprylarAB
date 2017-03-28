@@ -73,11 +73,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin.aspx" />
+    <Content Include="css\myStyle.css" />
     <Content Include="home.aspx" />
     <Content Include="img\bible.png" />
     <Content Include="img\gem.jpg" />
     <Content Include="img\HPprinter.png" />
     <Content Include="img\HPscreen.jpg" />
+    <Content Include="img\logo.png" />
     <Content Include="img\pen.png" />
     <Content Include="js\adminJS.js" />
     <Content Include="js\cartJS.js" />
@@ -189,7 +191,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="css\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>

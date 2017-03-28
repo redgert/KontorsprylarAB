@@ -1,8 +1,8 @@
 ﻿/// <reference path="C:\KontorsprylarAB\Website\Website\Scripts/jquery-2.1.0-vsdoc.js" />
 
 //Request url to info.aspx based on information in textboxes on start page
-function GetRequest() {
-    $.getJSON("svc/info.aspx?username=" + $("#username").val() + "&password=" + $("#password").val()).
+function GetRequest(username, password) {
+    $.getJSON("svc/info.aspx?username=" + username + "&password=" + password).
         done(function (user) {
             console.log(user);
             if (user.IsAdmin === 0) {
@@ -17,6 +17,13 @@ function GetRequest() {
                 alert("Wrong username or password");
             }
         });
+}
+
+function PrepareRequest() {
+    var username = $('#username').val();
+    var password = $('#password').val();
+
+    GetRequest(username, password)
 }
 
 $(document).ready(function () {
@@ -39,6 +46,33 @@ $(document).ready(function () {
             }));
         }
     })
+})
+
+function FormSubmit()
+{
+    var Password = $("#newPassword").val();
+    var Password2 = $("#newPasswordAgain").val();
+
+    if (Password != Password2) {
+        alert("Wrong password");
+    }
+    else {
+        var Username = $("#newUsername").val();
+        var Firstname = $("#newFirstName").val();
+        var Lastname = $("#newLastName").val();
+        var Street = $("#newStreet").val();
+        var Zip = $("#newZip").val();
+        var City = $("#newCity").val();
+        var Country = $("#newCountry").val();
+        var Phonenumber = $("#newPhoneNumber").val();
+        var Email = $("#newEmail").val();
+        $.getJSON("svc/info.aspx?CreateUser=1", { "Username": Username, "Password": Password, "Password2": Password2, "Firstname": Firstname, "Lastname": Lastname, "Street": Street, "Zip": Zip, "City": City, "Country": Country, "Phonenumber": Phonenumber, "Email": Email })
+        .done(function (data) {
+            console.log(data);
+            GetRequest(Username, Password);
+        });
+    }
+}
 })
 
 $(document).ready(function () {
