@@ -58,7 +58,6 @@ VatTag int FOREIGN KEY references Vat(VatID),
 Stock int NOT NULL,
 ShortDescription varchar(50) NOT NULL,
 LongDescription varchar(1000) NOT NULL,
-URL varchar(100) NOT NULL,
 Active bit default 'true' NOT NULL
 );
 
@@ -138,11 +137,10 @@ CREATE PROCEDURE CreateProduct
 @Stock int,
 @ShortDescription varchar(50),
 @LongDescription varchar(1000),
-@URL varchar(100),
 @OutputID int output
 AS
-insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription, URL, Active)
-values (@Price, @VatTag, @Stock, @ShortDescription, @LongDescription, @URL, 'true')
+insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription, Active)
+values (@Price, @VatTag, @Stock, @ShortDescription, @LongDescription, 'true')
 
 SET @OutputID = SCOPE_IDENTITY();
 GO
@@ -161,8 +159,7 @@ CREATE PROCEDURE UpdateProduct
 @VatTag int,
 @Stock int,
 @ShortDescription varchar(50),
-@LongDescription varchar(1000),
-@URL varchar(100)
+@LongDescription varchar(1000)
 AS
 UPDATE
 	Products
@@ -171,8 +168,7 @@ set
 	VatTag = ISNULL(@VatTag, VatTag),
 	Stock = ISNULL(@Stock, Stock),
 	ShortDescription = ISNULL(@ShortDescription, ShortDescription),
-	LongDescription = ISNULL(@LongDescription, LongDescription),
-	URL = ISNULL(@URL, URL)
+	LongDescription = ISNULL(@LongDescription, LongDescription)
 where
 	ProductID = @ProductID
 
