@@ -36,6 +36,27 @@ namespace Website
                 var tempuser = mySQL.GetUser(Session["user"].ToString());
                 infoLiteral.Text = JsonConvert.SerializeObject(tempuser);
             }
+
+            if (Request["CreateUser"] != null)
+            {
+                var userName = Request["UserName"] != null ? Request["Username"] : "";
+                var password = Request["Password"] != null ? Request["Password"] : "";
+                //var password2 = Request["Password2"] != null ? Request["Password2"] : "";
+                var firstName = Request["Firstname"] != null ? Request["Firstname"] : "";
+                var lastName = Request["Lastname"] != null ? Request["Lastname"] : "";
+                var street = Request["Street"] != null ? Request["Street"] : "";
+                var zip = Request["Zip"] != null ? Request["Zip"] : "";
+                var city = Request["City"] != null ? Request["City"] : "";
+                var country = Request["Country"] != null ? Request["Country"] : "";
+                var phoneNumber = Request["Phonenumber"] != null ? Request["Phonenumber"] : "";
+                var email = Request["Email"] != null ? Request["Email"] : "";
+                int isAdmin = 0;
+
+                SQL sql = new SQL();
+                sql.AddNewUser(userName, password, firstName, lastName, street, zip, city, country, phoneNumber, email, isAdmin);
+
+                //infoLiteral.Text = JsonConvert.SerializeObject(userName);
+            }
         }
     }
 }
