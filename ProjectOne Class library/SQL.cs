@@ -469,7 +469,68 @@ namespace ProjectOne_Class_library
             return productLists;
         }
 
-        static public void UpdateProduct(int productID, double price, int stock, string shortDescrip, string longDescrip, string url, int vatTag)
+        public void UpdateUser(int userID, string firstName, string lastName, string street, string city, string zip, string country, string phoneNumber, string email)
+        {
+            SqlConnection myConnection = new SqlConnection(CON_STR);
+
+            try
+            {
+                myConnection.Open();
+
+                SqlCommand myCommand = new SqlCommand("UpdateUser", myConnection);
+
+                myCommand.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter parameterUserID = new SqlParameter("@UserID", SqlDbType.Int);
+                parameterUserID.Value = userID;
+                myCommand.Parameters.Add(parameterUserID);
+
+                SqlParameter parameterFirstName = new SqlParameter("@FirstName", SqlDbType.VarChar);
+                parameterFirstName.Value = firstName;
+                myCommand.Parameters.Add(parameterFirstName);
+
+                SqlParameter parameterLastName = new SqlParameter("@Lastname", SqlDbType.VarChar);
+                parameterLastName.Value = lastName;
+                myCommand.Parameters.Add(parameterLastName);
+
+                SqlParameter parameterStreet = new SqlParameter("@Street", SqlDbType.VarChar);
+                parameterStreet.Value = street;
+                myCommand.Parameters.Add(parameterStreet);
+
+                SqlParameter parameterCity = new SqlParameter("@City", SqlDbType.VarChar);
+                parameterCity.Value = city;
+                myCommand.Parameters.Add(parameterCity);
+
+                SqlParameter parameterZip = new SqlParameter("@Zip", SqlDbType.VarChar);
+                parameterZip.Value = zip;
+                myCommand.Parameters.Add(parameterZip);
+
+                SqlParameter parameterCountry = new SqlParameter("@Country", SqlDbType.VarChar);
+                parameterCountry.Value = country;
+                myCommand.Parameters.Add(parameterCountry);
+
+                SqlParameter parameterPhoneNumber = new SqlParameter("@PhoneNumber", SqlDbType.VarChar);
+                parameterPhoneNumber.Value = phoneNumber;
+                myCommand.Parameters.Add(parameterPhoneNumber);
+
+                SqlParameter parameterEmail = new SqlParameter("@Email", SqlDbType.VarChar);
+                parameterEmail.Value = email;
+                myCommand.Parameters.Add(parameterEmail);
+
+                myCommand.ExecuteNonQuery();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+        }
+
+        static public void UpdateProduct(int productID, double price, int vatTag, int stock, string shortDescrip, string longDescrip )
 
         {
             SqlConnection myConnection = new SqlConnection(CON_STR);

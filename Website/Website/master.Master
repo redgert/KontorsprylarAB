@@ -9,6 +9,7 @@
     <script src="Scripts/bootstrap.js"></script>
     <script src="js/loginJS.js"></script>
     <script src="js/logoutJS.js"></script>
+    <script src="js/changeinformationJS.js"></script>
     <link href="css/myStyle.css" rel="stylesheet" />
     <title>Kontorsprylar</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -159,7 +160,77 @@
                 </div>
             </div>
         </div>
+        <%--TESTMODAL--%>
+        <div class="modal fade" id="changeUserInformationModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Change settings</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label for="text">First Name:</label>
+                                <input type="text" class="form-control" id="changeFirstName">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label for="text">Last Name:</label>
+                                <input type="text" class="form-control" id="changeLastName">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label for="text">Street:</label>
+                                <input type="text" class="form-control" id="changeStreet">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label for="text">Zip:</label>
+                                <input type="text" class="form-control" id="changeZip">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label for="text">City:</label>
+                                <input type="text" class="form-control" id="changeCity">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label for="text">Country:</label>
+                                <input type="text" class="form-control" id="changeCountry">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label for="text">Phonenumber:</label>
+                                <input type="text" class="form-control" id="changePhoneNumber">
+                            </div>
+                            <br />
+                            <br />
+                            <div class="form-group">
+                                <label for="text">Email:</label>
+                                <input type="text" class="form-control" id="changeEmail">
+                            </div>
+                            <%--Submit information and try to log in, wrong info will leave error message--%>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" id="buttonChangeInformation" onclick="FormChangesSubmit()">Change</button>
+                    </div>
+                </div>
+            </div>
         </div>
+        <%--SLUT TESTMODAL--%>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
     <div>
         <footer class="navbar-fixed-bottom">
             <div class="container-fluid">

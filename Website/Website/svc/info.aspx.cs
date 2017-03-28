@@ -50,12 +50,27 @@ namespace Website
                 var country = Request["Country"] != null ? Request["Country"] : "";
                 var phoneNumber = Request["Phonenumber"] != null ? Request["Phonenumber"] : "";
                 var email = Request["Email"] != null ? Request["Email"] : "";
-                int isAdmin = 0;
+                int isAdmin = Convert.ToInt32(Session["user"]);
 
                 SQL sql = new SQL();
                 sql.AddNewUser(userName, password, firstName, lastName, street, zip, city, country, phoneNumber, email, isAdmin);
 
                 //infoLiteral.Text = JsonConvert.SerializeObject(userName);
+            }
+
+            if (Request["UpdateUser"] != null)
+            {
+                var firstName = Request["Firstname"] != null ? Request["Firstname"] : "";
+                var lastName = Request["Lastname"] != null ? Request["Lastname"] : "";
+                var street = Request["Street"] != null ? Request["Street"] : "";
+                var zip = Request["Zip"] != null ? Request["Zip"] : "";
+                var city = Request["City"] != null ? Request["City"] : "";
+                var country = Request["Country"] != null ? Request["Country"] : "";
+                var phoneNumber = Request["Phonenumber"] != null ? Request["Phonenumber"] : "";
+                var email = Request["Email"] != null ? Request["Email"] : "";
+                var userID = 10;  // Via Session?
+
+                mySQL.UpdateUser(userID, firstName, lastName, street, city, zip, country, phoneNumber, email);
             }
         }
     }
