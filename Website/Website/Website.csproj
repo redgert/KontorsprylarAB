@@ -79,6 +79,7 @@
     <Content Include="img\HPprinter.png" />
     <Content Include="img\HPscreen.jpg" />
     <Content Include="img\pen.png" />
+    <Content Include="js\adminJS.js" />
     <Content Include="js\logoutJS.js" />
     <Content Include="js\ProductsJS.js" />
     <Content Include="products.aspx" />
