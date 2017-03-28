@@ -73,7 +73,6 @@ function FormSubmit()
         });
     }
 }
-})
 
 $(document).ready(function () {
     $.getJSON("svc/svc_cart.aspx?product=1").done(function (productList) {
