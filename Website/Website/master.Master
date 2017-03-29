@@ -42,7 +42,6 @@
                         <li class="dropdown" id="listShopCart">
                             <a class="dropdown-toggle" id="shopCart" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-shopping-cart"></span><span class="caret"></span></a>
                             <ul class="dropdown-menu" id="productDropDown">
-                                <li><a href="#">Go to Checkout</a></li>
                             </ul>
                         </li>
                     </ul>

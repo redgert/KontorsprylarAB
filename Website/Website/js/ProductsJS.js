@@ -86,7 +86,6 @@ function BuyProduct(productID) {
                 }))
             });
             
-           
             $('#productDropDown').append('<li><a href="checkout.aspx">Checkout</a></li>');
 
             $("#listShopCart").addClass("open");
