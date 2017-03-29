@@ -207,12 +207,12 @@ namespace ProjectOne_Class_library
                 {
                     if (Convert.ToInt32(myReader["vatTag"]) == 1)
                     {
-                        products.Add(new Product(Convert.ToInt32(myReader["productID"]), Math.Round(Convert.ToDouble(myReader["price"]) * 1.12, 2), Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), myReader["URL"].ToString(), Convert.ToInt32(myReader["vatTag"])));
+                        products.Add(new Product(Convert.ToInt32(myReader["productID"]), Math.Round(Convert.ToDouble(myReader["price"]) * 1.25, 2), Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), myReader["URL"].ToString(), Convert.ToInt32(myReader["vatTag"])));
 
                     }
                     else if (Convert.ToInt32(myReader["vatTag"]) == 2)
                     {
-                        products.Add(new Product(Convert.ToInt32(myReader["productID"]), Math.Round(Convert.ToDouble(myReader["price"])* 1.25, 2), Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), myReader["URL"].ToString(), Convert.ToInt32(myReader["vatTag"])));
+                        products.Add(new Product(Convert.ToInt32(myReader["productID"]), Math.Round(Convert.ToDouble(myReader["price"])* 1.12, 2), Convert.ToInt32(myReader["stock"]), myReader["shortDescription"].ToString(), myReader["longDescription"].ToString(), myReader["URL"].ToString(), Convert.ToInt32(myReader["vatTag"])));
 
                     }
                 }

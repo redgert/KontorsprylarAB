@@ -39,8 +39,9 @@ namespace Website
                 {
                     totCost += Convert.ToDouble(ourProdList[i].Price * quantity[i]);
                 }
-
-                LabelPrice.Text = totCost.ToString() + " Kr";
+                LabelVat.Text = "Vat " + (totCost * 0.25).ToString();
+                LabelPrice.Text = "Total Cost " + totCost.ToString() + " Kr";
+                
             }
             else
             {
