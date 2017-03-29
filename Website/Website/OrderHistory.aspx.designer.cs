@@ -10,33 +10,24 @@
 namespace Website {
     
     
-    public partial class payment {
+    public partial class OrderHistory {
         
         /// <summary>
-        /// LabelPrice control.
+        /// myForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelPrice;
+        protected global::System.Web.UI.HtmlControls.HtmlForm myForm;
         
         /// <summary>
-        /// LabelVat control.
+        /// orderHistoryTable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelVat;
-        
-        /// <summary>
-        /// Button1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Table orderHistoryTable;
     }
 }
