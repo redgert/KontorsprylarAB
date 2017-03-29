@@ -39,8 +39,14 @@ namespace Website
                 {
                     totCost += Convert.ToDouble(ourProdList[i].Price * quantity[i]);
                 }
+                string myString = totCost.ToString() + " KR";
 
                 LabelPrice.Text = totCost.ToString() + " Kr";
+            }
+            else
+            {
+                LabelPrice.Text = "YOU MUST LOG IN";
+                Button1.Text = "DONT CLICK ME";
             }
         }
 
