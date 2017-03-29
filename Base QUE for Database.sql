@@ -251,11 +251,12 @@ insert into Vat (VatTagMoney) values (0.12)
 --insert into Orders (UserID, OrderStatus, OrderDate) values (2, 'Received', '2017-03-24 11:09:05')
 
 
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (150,30,2,'Bibeln','Världens mest sålda bok, men typ den minst lästa', '/img/bible.png')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (10,5000,1,'Blått gem','dåligt, blått plastgem', '/img/gem.jpg')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (25,300,1,'Röd penna','Röd transparant penna', '/img/HPprinter.png')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (3500,0,1,'HP-skärm','väldigt medelmåttig skärm från HP', '/img/HPscreen.jpg')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (2000,2,1,'HP-skrivare','totalt värdelös skrivare från HP', '/img/pen.png')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (150,30,2,'The Bible','The worlds most famous book, but probably the least read', '/img/bible.png')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (10,5000,1,'Blue clip','A really bad, blue plastic clip', '/img/gem.jpg')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (25,300,1,'Red pen','A red transparent pen', '/img/pen.png')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (3500,0,1,'HP-screen','A very mediocre screen from HP', '/img/HPscreen.jpg')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (2000,2,1,'HP-printer','Completely useless printer from HP, it might work.', '/img/HPprinter.png')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (200, 20, 1, 'Disc', 'A great disc to play around with at the office', '/img/disc.png')
 
 --insert into ProductLists (OrderID, ProductID, Quantity) values (1, 11, 2)
 
