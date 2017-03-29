@@ -4,8 +4,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
-        <asp:Label ID="LabelPrice" CssClass="col-sm-1" runat="server" Text="Label" Font-Size="X-Large"></asp:Label>
-        <asp:Label ID="LabelVat" CssClass="col-sm-1" Font-Size="X-Large" runat="server">LabelVat</asp:Label>
+        <asp:Label ID="LabelPrice" CssClass="col-sm-2" runat="server" Text="Label" Font-Size="X-Large"></asp:Label>
+        <asp:Label ID="LabelVat" CssClass="col-sm-2" Font-Size="X-Large" runat="server">LabelVat</asp:Label>
         <asp:Button ID="Button1" CssClass="btn btn-default" runat="server" Text="Proceed to Payment" OnClick="Button1_Click" />
     </form>
 </asp:Content>
