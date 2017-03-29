@@ -25,11 +25,14 @@ function FormChangesSubmit() {
     var country = $("#changeCountry").val();
     var phoneNumber = $("#changePhoneNumber").val();
     var email = $("#changeEmail").val();
+    alert("I am an alert box!");
 
 
     $.getJSON("svc/info.aspx?UpdateUser=1", { "Firstname": firstName, "Lastname": lastName, "Street": street, "City": city, "Zip": zip, "Country": country, "Phonenumber": phoneNumber, "Email": email })
      .done(function (data) {
          console.log(data);
-
      })
 }
+
+
+
