@@ -72,8 +72,6 @@ Quantity int NOT NULL
 
 GO
 
-select * from ProductLists
-
 CREATE PROCEDURE CreateUser
 
 @Username nvarchar(50),
@@ -138,7 +136,7 @@ CREATE PROCEDURE CreateProduct
 @Stock int,
 @ShortDescription varchar(50),
 @LongDescription varchar(1000),
-@URL varchar(100) NOT NULL,
+@URL varchar(100),
 @OutputID int output
 AS
 insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription, URL, Active)
@@ -222,7 +220,7 @@ values (@OrderID,@ProductID, @Quantity)
 GO
 
 
-ALTER PROCEDURE GetProductList
+CREATE PROCEDURE GetProductList
 @OrderID int
 
 AS
@@ -231,8 +229,6 @@ Select * from ProductLists where ProductLists.OrderID = @OrderID
 
 GO
 
-select * from Orders
-EXECUTE GetProductList 11
 ------------------------------------------------------
 
 
@@ -252,7 +248,7 @@ insert into Vat (VatTagMoney) values (0.12)
 --Update Vat set VatTagMoney = 0.12 where VatID = 2
 --GO
 
-insert into Orders (UserID, OrderStatus, OrderDate) values (2, 'Received', '2017-03-24 11:09:05')
+--insert into Orders (UserID, OrderStatus, OrderDate) values (2, 'Received', '2017-03-24 11:09:05')
 
 
 insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (150,30,2,'Bibeln','Världens mest sålda bok, men typ den minst lästa', '/img/bible.png')
@@ -261,10 +257,10 @@ insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,UR
 insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (3500,0,1,'HP-skärm','väldigt medelmåttig skärm från HP', '/img/HPscreen.jpg')
 insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (2000,2,1,'HP-skrivare','totalt värdelös skrivare från HP', '/img/pen.png')
 
-insert into ProductLists (OrderID, ProductID, Quantity) values (1, 11, 2)
+--insert into ProductLists (OrderID, ProductID, Quantity) values (1, 11, 2)
 
 
-
+select * from ProductLists where ProductLists.OrderID = 1
 select * from  Users
 select* from Orders
 select * from Products
@@ -285,7 +281,7 @@ FROM            dbo.Orders INNER JOIN
 
 GO
 
-Select * from FullOverView
+--Select * from FullOverView
 
 GO
 
@@ -298,12 +294,3 @@ GO
 select * from Orders
 Execute GetOrders 2
 GO
-
-EXECUTE getUser 'redgert','hemligtord'
-
-AS
-Select * from FullOverView where FullOverView.ProductListID = ProductListID
-
-GO
-
-Execute GetProductList 1
