@@ -18,7 +18,8 @@
 <body>
     <div>
         <div class="page-header">
-            <a href="home.aspx"><img class="img-responsive" src="img/logo.png" alt="Logo"></a>
+            <a href="home.aspx">
+                <img class="img-responsive" src="img/logo.png" alt="Logo"></a>
         </div>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -29,11 +30,11 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="home.aspx">Home</a>
-                    <a class="navbar-brand" href="home.aspx">About us</a>
+                    <a class="navbar-brand" href="products.aspx">Products</a>
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
-                        <li><a class="navbar-brand" href="products.aspx">Products</a></li>
+                        <li><a class="navbar-brand" href="home.aspx">About us</a></li>
                         <li id="adminList"></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
@@ -231,24 +232,24 @@
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
     </div>
-    <div style="padding-bottom:400px">
-        <footer class="navbar-fixed-bottom">
+    <div style="padding-bottom: 400px">
+        <footer class="navbar-fixed-bottom" style="max-height: 165px;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
                         <h1 class="label-big">Kontorsprylar AB</h1>
-                        <p style="color:aliceblue">Location: Häftapparatsgatan 7, 961 91 Gemträsk</p>
-                        <p style="color:aliceblue">Phonenumber: 90510</p>
-                        <p style="color:aliceblue">Mail address: Kalle@kontorsprylar.se</p>
+                        <p style="color: aliceblue">Location: Häftapparatsgatan 7, 961 91 Gemträsk</p>
+                        <p style="color: aliceblue">Phonenumber: 90510</p>
+                        <p style="color: aliceblue">Mail address: Kalle@kontorsprylar.se</p>
                     </div>
                     <!--Second column-->
                     <div class="col-md-6">
                         <h2 class="label-big">Links</h2>
                         <ul>
-                            <li><a href="https://www.facebook.com/KontorsprylarAB/" style="color:aliceblue">Facebook</a></li>
-                            <li><a href="http://www.instagram.com" style="color:aliceblue">instagram</a></li>
-                            <li><a href="http://www.twitter.com" style="color:aliceblue">twitter</a></li>
-                            <li><a href="https://www.google.se/maps/place/961+91+Gemtr%C3%A4sk/@65.872383,22.0057485,14z/data=!4m5!3m4!1s0x45d5f4cb0c661d85:0x422054ce4e05f724!8m2!3d65.873611!4d22.0207045" style="color:aliceblue">Google Maps</a></li>
+                            <li><a href="https://www.facebook.com/KontorsprylarAB/" style="color: aliceblue">Facebook</a></li>
+                            <li><a href="http://www.instagram.com" style="color: aliceblue">instagram</a></li>
+                            <li><a href="http://www.twitter.com" style="color: aliceblue">twitter</a></li>
+                            <li><a href="https://www.google.se/maps/place/961+91+Gemtr%C3%A4sk/@65.872383,22.0057485,14z/data=!4m5!3m4!1s0x45d5f4cb0c661d85:0x422054ce4e05f724!8m2!3d65.873611!4d22.0207045" style="color: aliceblue">Google Maps</a></li>
                         </ul>
                     </div>
                 </div>

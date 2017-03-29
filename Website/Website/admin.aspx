@@ -9,7 +9,7 @@
                 <thead>
                     <tr>
                         <th>Product ID</th>
-                        <th>Price</th>
+                        <th>Price Inc Vat</th>
                         <th>Stock</th>
                         <th>Short Description</th>
                         <th>Long Description</th>

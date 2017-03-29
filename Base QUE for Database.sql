@@ -264,12 +264,7 @@ insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,UR
 --insert into ProductLists (OrderID, ProductID, Quantity) values (1, 11, 2)
 
 
-select * from ProductLists where ProductLists.OrderID = 1
-select * from  Users
-select* from Orders
-select * from Products
-select * from Vat
-select p.Price as Pris, (Price + Price*v.VatTagMoney) as PrisMedMoms  from Products as p, Vat as v where p.VatTag=v.VatID
+
 
 GO
 
@@ -285,10 +280,11 @@ FROM            dbo.Orders INNER JOIN
 
 GO
 
---Select * from FullOverView
-
-GO
-
-
-
-
+select * from ProductLists where ProductLists.OrderID = 1
+select * from ProductLists where ProductLists.OrderID = 3
+select * from ProductLists where ProductLists.OrderID = 2
+select * from  Users
+select* from Orders
+select * from Products
+select * from Vat
+select p.Price as Pris, (Price + Price*v.VatTagMoney) as PrisMedMoms  from Products as p, Vat as v where p.VatTag=v.VatID

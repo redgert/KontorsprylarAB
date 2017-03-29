@@ -7,6 +7,10 @@ $(document).ready(function () {
         var counter = 0;
         var $myRow;
         product.forEach(function (data) {
+            $('#Products').append('<div id="modal' + data.ProductID + '" class="modal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal- title">' + data.ShortDescription + '</h4></div>' +
+                '<div class="modal-body"><form class="form-inline"><div class="form-group"><img src="' + data.URL + '" class = "img-responsive" style="max-height: 400px; max-width: 100%;"></img></div></br><div class="form-group">' +
+                '<label style="font-size: 20px;">' + data.LongDescription + '</label></div></br><label style="font-size: 20px;">' + "Kr " + data.Price + '</label></br><div class="form-group"><button class="btn btn-default" onclick= BuyProduct(' + data.ProductID + ');>Buy now</button></div></form></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div');
+            
             if (counter % 3 === 0 || counter === 0) {
                 $myRow = $('<div/>', {
                     class: 'row',
@@ -15,6 +19,7 @@ $(document).ready(function () {
 
                 $('#Products').append($myRow);
             }
+            
             console.log(data);
 
             var $myColumn = $('<div/>', {
@@ -25,16 +30,14 @@ $(document).ready(function () {
 
             $($myColumn).append($('<p/>', {
                 text: data.ShortDescription,
-                style: "font-size: 25px; font-weight: bold; width: 100%; text-align: left; margin-bottom: 20px;"
+                style: "font-size: 25px; font-weight: bold; width: 100%; text-align: left; margin-bottom: 30px; "
             }));
 
             var $myHref = $('<a/>', {
                 href: '#',
-                'data-toggle': "popover",
                 title: data.ShortDescription,
-                'data-content': "<div><p>" + data.LongDescription + "</p><p>" + data.Price + " SEK</p><button type='button' class='btn btn-default' onClick='BuyProduct(" + data.ProductID + ");'>Add To Chart</button> </div>",
-                'data-html': true,
-                'data-trigger': "focus",
+                'data-toggle': "modal",
+                'data-target': '#modal' + data.ProductID,
                 style: "text-decoration: none; font-size: 25px; color: black;"
             });
 
@@ -45,22 +48,25 @@ $(document).ready(function () {
                 class: "img-responsive",
                 style: "max-height: 250px; max-width: 100%;"
             }))
-            $('[data-toggle="popover"]').popover();
 
             var $myButton = $('<button/>', {
                 class: "btn btn-default",
                 text: 'Add To Chart  ',
-                onclick: 'BuyProduct(' + data.ProductID + ')'
+                onclick: 'BuyProduct(' + data.ProductID + ')',
             });
 
             $myButton.append($('<span/>', {
                 class: "glyphicon glyphicon-shopping-cart"
             }));
-
-            $($myColumn).append($myButton);
+            
             $($myColumn).append($('<p/>', {
                 text: "Kr " + data.Price,
                 style: "font-size: 25px;"
+            }))
+            $($myColumn).append($myButton);
+            $($myColumn).append($('<p/>', {
+                text: "",
+                style: "margin-bottom: 50px; border-bottom-style: solid;"
             }))
             counter++;
         });
@@ -82,7 +88,7 @@ function BuyProduct(productID) {
                 $('#productDropDown').prepend($newLi)
 
                 $newLi.append($('<p/>', {
-                    text: product.Price
+                    text: "Kr " + product.Price
                 }))
             });
             

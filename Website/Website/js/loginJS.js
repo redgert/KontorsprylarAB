@@ -37,7 +37,7 @@ $(document).ready(function () {
             text: user.FirstName + " " + user.LastName,
             class: 'dropdown-toggle',
             'data-toggle': "dropdown",
-        })).append($('<ul class="dropdown-menu"><li><a href="#" data-toggle="modal" data-target="#changeUserInformationModal" onclick="ChangeUserInformation()">Change information</a></li><li><a href="products.aspx">Order history</a></li><li><a href="#" onclick="RemoveUserFromSession()">Log out</a></li></ul>'));
+        })).append($('<ul class="dropdown-menu"><li><a href="#" data-toggle="modal" data-target="#changeUserInformationModal" onclick="ChangeUserInformation()">Change information</a></li><li><a href="OrderHistory.aspx">Order history</a></li><li><a href="#" onclick="RemoveUserFromSession()">Log out</a></li></ul>'));
         if (user.IsAdmin === 1) {
             $('#adminList').append($('<a/>', {
                 text: 'Admin',
@@ -85,7 +85,7 @@ $(document).ready(function () {
             $('#productDropDown').prepend($newLi)
 
             $newLi.append($('<p/>', {
-                text: product.Price
+                text: "Kr " + product.Price
             }))
         });
         $('#productDropDown').append('<li><a href="checkout.aspx">Checkout</a></li>');

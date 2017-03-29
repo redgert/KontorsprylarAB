@@ -132,7 +132,7 @@ function RemoveProduct(id) {
 
 function UpdateProduct(id) {
     var $id = $('#' + id + 'ProductID').text();
-    var $price = $('#' + id + 'Price').text();
+    var $price = (parseFloat($('#' + id + 'Price').text()) / 1.25);
     var $stock = $('#' + id + 'Stock').text();
     var $shortdesc = $('#' + id + 'ShortDescription').text();
     var $longdesc = $('#' + id + 'LongDescription').text();
