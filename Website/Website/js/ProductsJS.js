@@ -9,7 +9,7 @@ $(document).ready(function () {
         product.forEach(function (data) {
             $('#Products').append('<div id="modal' + data.ProductID + '" class="modal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal- title">' + data.ShortDescription + '</h4></div>' +
                 '<div class="modal-body"><form class="form-inline"><div class="form-group"><img src="' + data.URL + '" class = "img-responsive" style="max-height: 400px; max-width: 100%;"></img></div></br><div class="form-group">' +
-                '<label style="font-size: 20px;">' + data.LongDescription + '</label></div></br><label style="font-size: 20px;">' + data.Price + '</label></br><div class="form-group"><button class="btn btn-default" onclick= BuyProduct(' + data.ProductID + ');>Buy now</button></div></form></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div');
+                '<label style="font-size: 20px;">' + data.LongDescription + '</label></div></br><label style="font-size: 20px;">' + "Kr " + data.Price + '</label></br><div class="form-group"><button class="btn btn-default" onclick= BuyProduct(' + data.ProductID + ');>Buy now</button></div></form></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div></div');
             
             if (counter % 3 === 0 || counter === 0) {
                 $myRow = $('<div/>', {
@@ -88,7 +88,7 @@ function BuyProduct(productID) {
                 $('#productDropDown').prepend($newLi)
 
                 $newLi.append($('<p/>', {
-                    text: product.Price
+                    text: "Kr " + product.Price
                 }))
             });
             

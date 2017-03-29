@@ -85,7 +85,7 @@ $(document).ready(function () {
             $('#productDropDown').prepend($newLi)
 
             $newLi.append($('<p/>', {
-                text: product.Price
+                text: "Kr " + product.Price
             }))
         });
         $('#productDropDown').append('<li><a href="checkout.aspx">Checkout</a></li>');
