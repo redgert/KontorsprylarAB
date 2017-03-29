@@ -61,14 +61,72 @@ function AddNewProduct() {
         "&shortDesc=" + $('#input2').val() + "&longDesc=" + $('#input3').val() +
         "&url=" + $('#input4').val() + "&vatTag=" + $('#input5').val()).done(function (data) {
             console.log(data);
-            window.location.href = "/admin.aspx";
+            $.getJSON("svc/productInfo.aspx")
+                .done(function (product) {
+                    $('#tableBody').empty()
+                    var $keys = Object.keys(product[0]);
+
+                    for (var i = 0; i < product.length; i++) {
+                        var $newRow = $('<TR/>', {
+                            id: product[i][$keys[0]] + "row"
+                        })
+                        $('#tableBody').append($newRow)
+                        for (var j = 0; j < $keys.length; j++) {
+                            $newRow.append($('<TD/>', {
+                                text: product[i][$keys[j]],
+                                id: product[i][$keys[0]] + $keys[j]
+                            }));
+                        }
+                        var $newTD = $('<TD/>')
+                        $newRow.append($newTD)
+                        $newTD.append($('<button/>', {
+                            text: 'Update Product',
+                            onClick: 'UpdateProduct(' + product[i][$keys[0]] + ');',
+                            style: "margin: 2px; width: 80%"
+                        }));
+                        $newTD.append($('<button/>', {
+                            text: 'Remove Product',
+                            style: "margin: 2px; width: 80%;",
+                            onClick: 'RemoveProduct(' + product[i][$keys[0]] + ');'
+                        }));
+                    }
+                });
         })
 };
 
 function RemoveProduct(id) {
     $.getJSON("svc/productInfo.aspx?action=remove&removeid=" + id).done(function (data) {
         console.log(data);
-        window.location.href = "/admin.aspx";
+        $.getJSON("svc/productInfo.aspx")
+            .done(function (product) {
+                $('#tableBody').empty()
+                var $keys = Object.keys(product[0]);
+
+                for (var i = 0; i < product.length; i++) {
+                    var $newRow = $('<TR/>', {
+                        id: product[i][$keys[0]] + "row"
+                    })
+                    $('#tableBody').append($newRow)
+                    for (var j = 0; j < $keys.length; j++) {
+                        $newRow.append($('<TD/>', {
+                            text: product[i][$keys[j]],
+                            id: product[i][$keys[0]] + $keys[j]
+                        }));
+                    }
+                    var $newTD = $('<TD/>')
+                    $newRow.append($newTD)
+                    $newTD.append($('<button/>', {
+                        text: 'Update Product',
+                        onClick: 'UpdateProduct(' + product[i][$keys[0]] + ');',
+                        style: "margin: 2px; width: 80%"
+                    }));
+                    $newTD.append($('<button/>', {
+                        text: 'Remove Product',
+                        style: "margin: 2px; width: 80%;",
+                        onClick: 'RemoveProduct(' + product[i][$keys[0]] + ');'
+                    }));
+                }
+            });
     })
 }
 
@@ -129,7 +187,36 @@ function UpdateOldProduct(id) {
         "&shortDesc=" + $shortdesc + "&longDesc=" + $longdesc +
         "&url=" + $url + "&vatTag=" + $vat).done(function (data) {
             console.log(data);
-            window.location.href = "/admin.aspx";
+            $.getJSON("svc/productInfo.aspx")
+                .done(function (product) {
+                    $('#tableBody').empty()
+                    var $keys = Object.keys(product[0]);
+
+                    for (var i = 0; i < product.length; i++) {
+                        var $newRow = $('<TR/>', {
+                            id: product[i][$keys[0]] + "row"
+                        })
+                        $('#tableBody').append($newRow)
+                        for (var j = 0; j < $keys.length; j++) {
+                            $newRow.append($('<TD/>', {
+                                text: product[i][$keys[j]],
+                                id: product[i][$keys[0]] + $keys[j]
+                            }));
+                        }
+                        var $newTD = $('<TD/>')
+                        $newRow.append($newTD)
+                        $newTD.append($('<button/>', {
+                            text: 'Update Product',
+                            onClick: 'UpdateProduct(' + product[i][$keys[0]] + ');',
+                            style: "margin: 2px; width: 80%"
+                        }));
+                        $newTD.append($('<button/>', {
+                            text: 'Remove Product',
+                            style: "margin: 2px; width: 80%;",
+                            onClick: 'RemoveProduct(' + product[i][$keys[0]] + ');'
+                        }));
+                    }
+                });
         })
 }
 

@@ -128,6 +128,7 @@
     <Content Include="svc\logOutUser.aspx" />
     <Content Include="svc\productInfo.aspx" />
     <Content Include="svc\svc_cart.aspx" />
+    <Content Include="thankyou.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +205,13 @@
     </Compile>
     <Compile Include="svc\svc_cart.aspx.designer.cs">
       <DependentUpon>svc_cart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="thankyou.aspx.cs">
+      <DependentUpon>thankyou.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="thankyou.aspx.designer.cs">
+      <DependentUpon>thankyou.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

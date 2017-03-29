@@ -18,7 +18,6 @@ namespace Website.svc
             if (Request["prodid"] != null)
             {
                 Product myProduct = mySQL.GetProduct(Convert.ToInt32(Request["prodid"]));
-                ; //Varför?
                 List<Product> cartProducts;
 
                 if (Session["myCart"] != null)
