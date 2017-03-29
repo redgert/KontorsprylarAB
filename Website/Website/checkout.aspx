@@ -7,6 +7,6 @@
         <div class="table-responsive">
             <asp:Table ID="checkOutTable" CssClass="table table-responsive" runat="server"></asp:Table>
         </div>
-        <asp:Button ID="myButton" runat="server" Text="Place order" />
+        <asp:Button ID="myButton" runat="server" Text="Place order" OnClick="myButton_Click" />
     </form>
 </asp:Content>

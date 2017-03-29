@@ -11,6 +11,7 @@ namespace Website
     public partial class checkout : System.Web.UI.Page
     {
         private List<Product> cartProducts;
+        TextBox myTextBox;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,7 +31,7 @@ namespace Website
             //        }
             //    }
             //}
-
+            
             if (Session["myCart"] != null)
             {
                 cartProducts = (List<Product>)Session["myCart"];
@@ -65,9 +66,9 @@ namespace Website
                     myRow.Controls.Add(cell4);
 
                     TableCell cell5 = new TableCell();
-                    TextBox myTextBox = new TextBox();
+                    myTextBox = new TextBox();
                     myTextBox.Text = "5";
-                    myTextBox.ID = "prodTextBox_" + item.ProductID;
+                    myTextBox.ID = item.ProductID.ToString();
                     cell5.Controls.Add(myTextBox);
                     myRow.Controls.Add(cell5);
 
@@ -75,6 +76,25 @@ namespace Website
                 }
 
             }
+        }
+
+        protected void myButton_Click(object sender, EventArgs e)
+        {
+            if (Session["user"] != null)
+            {
+                int orderID = SQL.CreateOrder(Convert.ToInt32(Session["user"]));
+                int antal = 0;
+                foreach (var item in cartProducts)
+                {
+                    if(Request.Params["ctl00$ContentPlaceHolder1$" + item.ProductID] != null)
+                    {
+                        antal = Convert.ToInt32(Request.Params["ctl00$ContentPlaceHolder1$" + item.ProductID]);
+                    }
+
+                    SQL.CreateProductList(orderID, Convert.ToInt32(item.ProductID), antal);
+                }
+            }
+            Response.Redirect("payment.aspx");
         }
     }
 }
