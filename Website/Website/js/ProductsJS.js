@@ -25,7 +25,7 @@ $(document).ready(function () {
 
             $($myColumn).append($('<p/>', {
                 text: data.ShortDescription,
-                style: "font-size: 25px; font-weight: bold; width: 100%; text-align: left; margin-bottom: 20px;"
+                style: "font-size: 25px; font-weight: bold; width: 100%; text-align: left; margin-bottom: 30px; "
             }));
 
             var $myHref = $('<a/>', {
@@ -50,17 +50,21 @@ $(document).ready(function () {
             var $myButton = $('<button/>', {
                 class: "btn btn-default",
                 text: 'Add To Chart  ',
-                onclick: 'BuyProduct(' + data.ProductID + ')'
+                onclick: 'BuyProduct(' + data.ProductID + ')',
             });
 
             $myButton.append($('<span/>', {
                 class: "glyphicon glyphicon-shopping-cart"
             }));
-
-            $($myColumn).append($myButton);
+            
             $($myColumn).append($('<p/>', {
                 text: "Kr " + data.Price,
                 style: "font-size: 25px;"
+            }))
+            $($myColumn).append($myButton);
+            $($myColumn).append($('<p/>', {
+                text: "",
+                style: "margin-bottom: 50px; border-bottom-style: solid;"
             }))
             counter++;
         });
@@ -86,7 +90,6 @@ function BuyProduct(productID) {
                 }))
             });
             
-           
             $('#productDropDown').append('<li><a href="checkout.aspx">Checkout</a></li>');
 
             $("#listShopCart").addClass("open");

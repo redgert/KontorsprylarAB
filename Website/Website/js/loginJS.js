@@ -88,8 +88,6 @@ $(document).ready(function () {
                 text: product.Price
             }))
         });
-
-        $("#listShopCart").addClass("open");
-        $("#listShopCart").attr("aria-expanded", "true");
+        $('#productDropDown').append('<li><a href="checkout.aspx">Checkout</a></li>');
     })
 })

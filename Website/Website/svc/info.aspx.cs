@@ -68,7 +68,7 @@ namespace Website
                 var country = Request["Country"] != null ? Request["Country"] : "";
                 var phoneNumber = Request["Phonenumber"] != null ? Request["Phonenumber"] : "";
                 var email = Request["Email"] != null ? Request["Email"] : "";
-                var userID = 10;  // Via Session?
+                var userID = Convert.ToInt32(Session["user"]);
 
                 mySQL.UpdateUser(userID, firstName, lastName, street, city, zip, country, phoneNumber, email);
             }

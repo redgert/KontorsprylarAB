@@ -72,8 +72,6 @@ Quantity int NOT NULL
 
 GO
 
-select * from ProductLists
-
 CREATE PROCEDURE CreateUser
 
 @Username nvarchar(50),
@@ -138,7 +136,7 @@ CREATE PROCEDURE CreateProduct
 @Stock int,
 @ShortDescription varchar(50),
 @LongDescription varchar(1000),
-@URL varchar(100) NOT NULL,
+@URL varchar(100),
 @OutputID int output
 AS
 insert into Products(Price, VatTag, Stock, ShortDescription, LongDescription, URL, Active)
@@ -189,8 +187,7 @@ CREATE PROCEDURE UpdateUser
 @Zip nvarchar(50),
 @Country nvarchar(50),
 @PhoneNumber nvarchar(50),
-@Email nvarchar(50),
-@IsAdmin bit
+@Email nvarchar(50)
 AS
 Update
 	Users
@@ -202,8 +199,7 @@ set
 	Zip = ISNULL(@Zip, Zip),
 	Country = ISNULL(@Country, Country),
 	PhoneNumber = ISNULL(@PhoneNumber, PhoneNumber),
-	Email = ISNULL(@Email, Email),
-	isAdmin = ISNULL(@IsAdmin, isAdmin)
+	Email = ISNULL(@Email, Email)
 where
 	UserID = @UserID
 
@@ -222,7 +218,7 @@ values (@OrderID,@ProductID, @Quantity)
 GO
 
 
-ALTER PROCEDURE GetProductList
+CREATE PROCEDURE GetProductList
 @OrderID int
 
 AS
@@ -230,9 +226,12 @@ AS
 Select * from ProductLists where ProductLists.OrderID = @OrderID
 
 GO
+CREATE PROCEDURE GetOrders
+@UserID int
+AS
+Select * from Orders where Orders.UserID = @UserID
+GO
 
-select * from Orders
-EXECUTE GetProductList 11
 ------------------------------------------------------
 
 
@@ -252,24 +251,20 @@ insert into Vat (VatTagMoney) values (0.12)
 --Update Vat set VatTagMoney = 0.12 where VatID = 2
 --GO
 
-insert into Orders (UserID, OrderStatus, OrderDate) values (2, 'Received', '2017-03-24 11:09:05')
+--insert into Orders (UserID, OrderStatus, OrderDate) values (2, 'Received', '2017-03-24 11:09:05')
 
 
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (150,30,2,'Bibeln','Världens mest sålda bok, men typ den minst lästa', '/img/bible.png')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (10,5000,1,'Blått gem','dåligt, blått plastgem', '/img/gem.jpg')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (25,300,1,'Röd penna','Röd transparant penna', '/img/HPprinter.png')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (3500,0,1,'HP-skärm','väldigt medelmåttig skärm från HP', '/img/HPscreen.jpg')
-insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (2000,2,1,'HP-skrivare','totalt värdelös skrivare från HP', '/img/pen.png')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (150,30,2,'The Bible','The worlds most famous book, but probably the least read', '/img/bible.png')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (10,5000,1,'Blue clip','A really bad, blue plastic clip', '/img/gem.jpg')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (25,300,1,'Red pen','A red transparent pen', '/img/pen.png')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (3500,0,1,'HP-screen','A very mediocre screen from HP', '/img/HPscreen.jpg')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (2000,2,1,'HP-printer','Completely useless printer from HP, it might work.', '/img/HPprinter.png')
+insert into Products (Price, Stock, VatTag, ShortDescription, LongDescription,URL) values (200, 20, 1, 'Disc', 'A great disc to play around with at the office', '/img/disc.png')
 
-insert into ProductLists (OrderID, ProductID, Quantity) values (1, 11, 2)
+--insert into ProductLists (OrderID, ProductID, Quantity) values (1, 11, 2)
 
 
 
-select * from  Users
-select* from Orders
-select * from Products
-select * from Vat
-select p.Price as Pris, (Price + Price*v.VatTagMoney) as PrisMedMoms  from Products as p, Vat as v where p.VatTag=v.VatID
 
 GO
 
@@ -285,25 +280,11 @@ FROM            dbo.Orders INNER JOIN
 
 GO
 
-Select * from FullOverView
-
-GO
-
-
-CREATE PROCEDURE GetOrders
-@UserID int
-AS
-Select * from Orders where Orders.UserID = @UserID
-GO
-select * from Orders
-Execute GetOrders 2
-GO
-
-EXECUTE getUser 'redgert','hemligtord'
-
-AS
-Select * from FullOverView where FullOverView.ProductListID = ProductListID
-
-GO
-
-Execute GetProductList 1
+select * from ProductLists where ProductLists.OrderID = 1
+select * from ProductLists where ProductLists.OrderID = 3
+select * from ProductLists where ProductLists.OrderID = 2
+select * from  Users
+select* from Orders
+select * from Products
+select * from Vat
+select p.Price as Pris, (Price + Price*v.VatTagMoney) as PrisMedMoms  from Products as p, Vat as v where p.VatTag=v.VatID

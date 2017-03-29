@@ -19,7 +19,7 @@ namespace Website
                 List<ProductList> prodList = new List<ProductList>();
                 SQL mySQL = new SQL();
                 User myUser = mySQL.GetUser(Session["user"].ToString());
-
+                
                 var myList = SQL.GetOrder(myUser.UserID);
 
                 foreach (var item in myList)
@@ -27,18 +27,33 @@ namespace Website
                     prodList = SQL.GetProductList(item.OrderID);
                 }
 
+                List<int> quantity = new List<int>();
+
                 foreach (var product in prodList)
                 {
                     ourProdList.Add(mySQL.GetProduct(product.ProductID));
+                    quantity.Add(product.Quantity);
                 }
 
-                foreach (var price in ourProdList)
+                for (int i = 0; i < ourProdList.Count; i++)
                 {
-                    totCost += Convert.ToDouble(price.Price);
+                    totCost += Convert.ToDouble(ourProdList[i].Price * quantity[i]);
                 }
+                string myString = totCost.ToString() + " KR";
 
-                LabelPrice.Text = totCost.ToString();
+                LabelPrice.Text = totCost.ToString() + " Kr";
             }
+            else
+            {
+                LabelPrice.Text = "YOU MUST LOG IN";
+                Button1.Text = "DONT CLICK ME";
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Session["myCart"] = null;
+            Response.Redirect("thankyou.aspx");
         }
     }
 }
