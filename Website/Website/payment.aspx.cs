@@ -40,7 +40,7 @@ namespace Website
                     totCost += Convert.ToDouble(ourProdList[i].Price * quantity[i]);
                 }
 
-                LabelPrice.Text = totCost.ToString();
+                LabelPrice.Text = totCost.ToString() + " Kr";
             }
         }
 
