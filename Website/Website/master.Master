@@ -232,7 +232,7 @@
         </asp:ContentPlaceHolder>
     </div>
     <div style="padding-bottom:400px">
-        <footer class="navbar-fixed-bottom">
+        <footer class="navbar-fixed-bottom" style="max-height:165px;">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
