@@ -187,8 +187,7 @@ CREATE PROCEDURE UpdateUser
 @Zip nvarchar(50),
 @Country nvarchar(50),
 @PhoneNumber nvarchar(50),
-@Email nvarchar(50),
-@IsAdmin bit
+@Email nvarchar(50)
 AS
 Update
 	Users
@@ -200,8 +199,7 @@ set
 	Zip = ISNULL(@Zip, Zip),
 	Country = ISNULL(@Country, Country),
 	PhoneNumber = ISNULL(@PhoneNumber, PhoneNumber),
-	Email = ISNULL(@Email, Email),
-	isAdmin = ISNULL(@IsAdmin, isAdmin)
+	Email = ISNULL(@Email, Email)
 where
 	UserID = @UserID
 
@@ -227,6 +225,11 @@ AS
 
 Select * from ProductLists where ProductLists.OrderID = @OrderID
 
+GO
+CREATE PROCEDURE GetOrders
+@UserID int
+AS
+Select * from Orders where Orders.UserID = @UserID
 GO
 
 ------------------------------------------------------
@@ -287,11 +290,5 @@ GO
 GO
 
 
-CREATE PROCEDURE GetOrders
-@UserID int
-AS
-Select * from Orders where Orders.UserID = @UserID
-GO
-select * from Orders
-Execute GetOrders 2
-GO
+
+
