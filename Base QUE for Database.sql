@@ -295,14 +295,11 @@ Select * from FullOverView where FullOverView.UserID = @UserID
 GO
 
 Execute GetOrders 2
-
 GO
 
 EXECUTE getUser 'redgert','hemligtord'
 
-
 AS
-
 Select * from FullOverView where FullOverView.ProductListID = ProductListID
 
 GO
