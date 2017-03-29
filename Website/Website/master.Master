@@ -231,7 +231,7 @@
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
     </div>
-    <div>
+    <div style="padding-bottom:400px">
         <footer class="navbar-fixed-bottom">
             <div class="container-fluid">
                 <div class="row">

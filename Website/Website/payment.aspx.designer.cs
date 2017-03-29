@@ -10,33 +10,24 @@
 namespace Website {
     
     
-    public partial class checkout {
+    public partial class payment {
         
         /// <summary>
-        /// myForm control.
+        /// LabelPrice control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm myForm;
+        protected global::System.Web.UI.WebControls.Label LabelPrice;
         
         /// <summary>
-        /// checkOutTable control.
+        /// Button1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table checkOutTable;
-        
-        /// <summary>
-        /// myButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button myButton;
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }

@@ -362,7 +362,7 @@ namespace ProjectOne_Class_library
                 while (myReader.Read())
                 {
 
-                    orders.Add(new Order(Convert.ToInt32(myReader["ProductID"]), Convert.ToInt32(myReader["UserID"]), myReader["OrderStatus"].ToString(), DateTime.Parse(myReader["OrderDate"].ToString())));
+                    orders.Add(new Order(Convert.ToInt32(myReader["OrderID"]), Convert.ToInt32(myReader["UserID"]), myReader["OrderStatus"].ToString(), DateTime.Parse(myReader["OrderDate"].ToString())));
 
 
                 }
@@ -437,7 +437,7 @@ namespace ProjectOne_Class_library
                 SqlCommand myCommand = new SqlCommand("GetProductList", myConnetion); //TODO lägg in en query!
                 myCommand.CommandType = CommandType.StoredProcedure;
 
-                SqlParameter paramterProductListID = new SqlParameter("@ProductListID", SqlDbType.Int);
+                SqlParameter paramterProductListID = new SqlParameter("@OrderID", SqlDbType.Int);
                 paramterProductListID.Value = ProductListID;
 
                 myCommand.Parameters.Add(paramterProductListID);
@@ -627,7 +627,7 @@ namespace ProjectOne_Class_library
                            
                 myConnection.Open();
 
-                SqlCommand myCommand = new SqlCommand("CreateOrder", myConnection); // Option: Select* from FullOverView where UserID = @UserID
+                SqlCommand myCommand = new SqlCommand("CreateOrder", myConnection);
                 myCommand.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter parameterUserID = new SqlParameter("@UserID", SqlDbType.Int);
@@ -635,7 +635,7 @@ namespace ProjectOne_Class_library
                 SqlParameter parameterStatus = new SqlParameter("@OrderStatus", SqlDbType.VarChar);
                 parameterStatus.Value = "Received";
                 SqlParameter newOrderDate = new SqlParameter("@OrderDate", SqlDbType.SmallDateTime);
-                newOrderDate.Value = DateTime.Today;
+                newOrderDate.Value = DateTime.Today.ToShortDateString();
                 SqlParameter newOrderID = new SqlParameter("@OutputOrderID", SqlDbType.Int);
                 newOrderID.Direction = ParameterDirection.Output;
 
@@ -646,9 +646,8 @@ namespace ProjectOne_Class_library
 
                 myCommand.ExecuteNonQuery();
 
-                orderID = Convert.ToInt32(newOrderID);
-
                 myCommand.Dispose();
+                orderID = Convert.ToInt32(newOrderID.Value);
 
             }
 

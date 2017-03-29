@@ -87,6 +87,7 @@
     <Content Include="js\cartJS.js" />
     <Content Include="js\logoutJS.js" />
     <Content Include="js\ProductsJS.js" />
+    <Content Include="payment.aspx" />
     <Content Include="products.aspx" />
     <Content Include="svc\info.aspx" />
     <Content Include="js\loginJS.js" />
@@ -153,6 +154,13 @@
     </Compile>
     <Compile Include="home.aspx.designer.cs">
       <DependentUpon>home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="payment.aspx.cs">
+      <DependentUpon>payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="payment.aspx.designer.cs">
+      <DependentUpon>payment.aspx</DependentUpon>
     </Compile>
     <Compile Include="products.aspx.cs">
       <DependentUpon>products.aspx</DependentUpon>
